@@ -701,16 +701,14 @@ const setupInteractions = () => {
 };
 
 const init = () => {
-  // Remove any pre-submitted feedback cards that might exist in localStorage.
-  // This targets the “submitted feedback … Ayush” content the user wants gone.
-  try {
-    localStorage.removeItem(FEEDBACK_STORAGE_KEY);
-  } catch {
-    // ignore
-  }
+  // NOTE: do not wipe incoming requests/feedback here.
+  // The page should keep what visitors submitted so you can review it.
 
   renderClientFeedback();
   setupClientFeedback();
+
+  setupRequestsInbox();
+
 
   renderSkills();
   renderServices();
@@ -725,4 +723,168 @@ const init = () => {
   window.addEventListener('scroll', updateNavbarAndProgress);
 };
 
+const CONTACT_STORAGE_KEY = 'contact_requests_v1';
+
+const escapeHtmlForRequests = str => String(str)
+  .replaceAll('&', '&amp;')
+  .replaceAll('<', '<')
+  .replaceAll('>', '>')
+  .replaceAll('"', '"')
+  .replaceAll("'", '&#039;');
+
+const setupRequestsInbox = () => {
+  const latestContactCard = q('#latestContactCard');
+  const latestContactEmpty = q('#latestContactEmpty');
+  const latestFeedbackCard = q('#latestFeedbackCard');
+  const latestFeedbackEmpty = q('#latestFeedbackEmpty');
+  const clearBtn = q('#requestsClearBtn');
+
+  if (!latestContactCard || !latestFeedbackCard) return;
+
+  const loadContact = () => {
+    try {
+      const raw = localStorage.getItem(CONTACT_STORAGE_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const saveContact = items => {
+    try {
+      localStorage.setItem(CONTACT_STORAGE_KEY, JSON.stringify(items));
+    } catch {
+      // ignore
+    }
+  };
+
+  const formatContactCard = item => {
+    const created = new Date(item.createdAt || Date.now()).toLocaleString();
+    const msg = escapeHtmlForRequests(item.message);
+
+    return `
+      <div class="requests-row"><div class="requests-k">Name</div><div class="requests-v">${escapeHtmlForRequests(item.firstName || '')} ${escapeHtmlForRequests(item.lastName || '')}</div></div>
+      <div class="requests-row"><div class="requests-k">Email</div><div class="requests-v">${escapeHtmlForRequests(item.email || '')}</div></div>
+      <div class="requests-row"><div class="requests-k">Service</div><div class="requests-v">${escapeHtmlForRequests(item.service || '')}</div></div>
+      <div class="requests-row"><div class="requests-k">Budget</div><div class="requests-v">${escapeHtmlForRequests(item.budget || '')}</div></div>
+      <div class="requests-row"><div class="requests-k">Message</div><div class="requests-v">${msg}</div></div>
+      <div class="requests-row"><div class="requests-k">When</div><div class="requests-v">${escapeHtmlForRequests(created)}</div></div>
+    `;
+  };
+
+  const formatFeedbackCard = item => {
+    const created = new Date(item.createdAt || Date.now()).toLocaleString();
+    return `
+      <div class="requests-row"><div class="requests-k">Name</div><div class="requests-v">${escapeHtmlForRequests(item.name || '')}</div></div>
+      <div class="requests-row"><div class="requests-k">Role</div><div class="requests-v">${escapeHtmlForRequests(item.role || '')}</div></div>
+      <div class="requests-row"><div class="requests-k">Rating</div><div class="requests-v">${escapeHtmlForRequests(item.rating || '')} / 5</div></div>
+      <div class="requests-row"><div class="requests-k">Feedback</div><div class="requests-v">${escapeHtmlForRequests(item.message || '')}</div></div>
+      <div class="requests-row"><div class="requests-k">When</div><div class="requests-v">${escapeHtmlForRequests(created)}</div></div>
+    `;
+  };
+
+  const render = () => {
+    const contactAll = loadContact();
+    const latestContact = contactAll[contactAll.length - 1];
+
+    if (latestContact) {
+      latestContactEmpty && (latestContactEmpty.style.display = 'none');
+      latestContactCard.innerHTML = formatContactCard(latestContact);
+    } else {
+      latestContactCard.innerHTML = '';
+      latestContactEmpty && (latestContactEmpty.style.display = 'block');
+    }
+
+    const feedbackAll = loadFeedback();
+    const latestFeedback = feedbackAll[feedbackAll.length - 1];
+
+    if (latestFeedback) {
+      latestFeedbackEmpty && (latestFeedbackEmpty.style.display = 'none');
+      latestFeedbackCard.innerHTML = formatFeedbackCard(latestFeedback);
+    } else {
+      latestFeedbackCard.innerHTML = '';
+      latestFeedbackEmpty && (latestFeedbackEmpty.style.display = 'block');
+    }
+  };
+
+  clearBtn && clearBtn.addEventListener('click', () => {
+    try {
+      localStorage.removeItem(CONTACT_STORAGE_KEY);
+      // keep feedback grid unless you want to clear it too.
+      render();
+    } catch {
+      // ignore
+    }
+  });
+
+  render();
+
+  // Update immediately when contact input changes (preview “what they want”)
+  if (elements.contactForm) {
+    const updateContactPreview = () => {
+      const firstName = q('#fname', elements.contactForm)?.value.trim();
+      const lastName = q('#lname', elements.contactForm)?.value.trim();
+      const email = q('#email', elements.contactForm)?.value.trim();
+      const service = q('#service', elements.contactForm)?.value.trim();
+      const budget = q('#budget', elements.contactForm)?.value.trim();
+      const message = q('#message', elements.contactForm)?.value.trim();
+
+      // show preview even before submit, but don't persist
+      if (!message && !email) return;
+
+      const previewItem = {
+        firstName,
+        lastName,
+        email,
+        service,
+        budget,
+        message,
+        createdAt: Date.now(),
+      };
+
+      if (latestContactEmpty) latestContactEmpty.style.display = 'none';
+      latestContactCard.innerHTML = formatContactCard(previewItem);
+    };
+
+    qa('input, textarea, select', elements.contactForm).forEach(el => {
+      el.addEventListener('input', updateContactPreview);
+    });
+  }
+
+  // Persist contact request payload on submit
+  if (elements.contactForm) {
+    elements.contactForm.addEventListener('submit', event => {
+      // store what the visitor wants; UI handler may also preventDefault
+
+      const firstName = q('#fname', elements.contactForm)?.value.trim();
+
+      const lastName = q('#lname', elements.contactForm)?.value.trim();
+      const email = q('#email', elements.contactForm)?.value.trim();
+      const service = q('#service', elements.contactForm)?.value.trim();
+      const budget = q('#budget', elements.contactForm)?.value.trim();
+      const message = q('#message', elements.contactForm)?.value.trim();
+
+      if (!firstName || !lastName || !email || !message) return;
+
+      const item = {
+        id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+        firstName,
+        lastName,
+        email,
+        service,
+        budget,
+        message,
+        createdAt: Date.now(),
+      };
+
+      const existing = loadContact();
+      saveContact([...existing, item]);
+      render();
+    });
+  }
+};
+
 window.addEventListener('DOMContentLoaded', init);
+

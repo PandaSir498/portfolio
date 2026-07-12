@@ -74,9 +74,8 @@ body {
   transition: width .2s, height .2s, border-color .2s;
   opacity: .6;
 }
-body:hover #cursor-dot, body:hover #cursor-ring { opacity: 1; }
 
-a, button { cursor: none; }
+
 
 /* ─────────────────────────────────────────────────────────────
    UTILITY CLASSES
@@ -1522,6 +1521,97 @@ nav.scrolled {
   transition: height .3s;
 }
 .form-status.visible { height: 20px; }
+
+/* ─────────────────────────────────────────────────────────────
+   REQUESTS PANEL (Inbox)
+   ───────────────────────────────────────────────────────────── */
+#requestsPanel {
+  padding: 0;
+  background: var(--bg-section);
+}
+
+.requests-panel{
+  margin: 0 auto;
+  padding: 64px 0;
+}
+
+.requests-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.requests-title{
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 700;
+  color: var(--white);
+}
+
+.requests-sub{
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--white-dim);
+  line-height: 1.7;
+  max-width: 620px;
+}
+
+.requests-grid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.requests-col-title{
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.requests-card{
+  background: rgba(25,46,55,.35);
+  border: 1px solid var(--border-dim);
+  border-radius: 3px;
+  padding: 18px;
+}
+
+.requests-empty{
+  color: var(--white-dim);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.requests-row{
+  display:grid;
+  grid-template-columns: 130px 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(242,241,241,.07);
+}
+.requests-row:first-child{ border-top: none; }
+.requests-k{
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+}
+.requests-v{
+  font-size: 14px;
+  color: var(--white);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.requests-actions{ display:flex; align-items:flex-start; }
+
+@media (max-width: 900px){
+  .requests-panel{ padding: 48px 0; }
+  .requests-grid{ grid-template-columns: 1fr; }
+}
 
 /* ─────────────────────────────────────────────────────────────
    FOOTER
