@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PS/Studio — Graphic Designer Portfolio</title>
+
+<!--
+=================================================================
+  PORTFOLIO WEBSITE — AYUSH ADHIKARI / PS/ studio
+  Easy-edit guide for VSCode:
+  ─────────────────────────────────────────────────────────────
+  • CONTENT  → Search "/* ═══ EDIT:" comments to find each
+               editable section (name, bio, skills, projects…)
+  • COLORS   → Edit :root variables at the top of css/style.css
+  • IMAGES   → Replace placeholder divs with <img> tags or
+               set background-image on .photo-placeholder
+=================================================================
+-->
+<link rel="stylesheet" href="css/style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- Scroll progress bar -->
+<div id="progress-bar"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAVIGATION
+     ════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+
+    <!-- ═══ EDIT: Logo ═══ -->
+    <a href="#hero" class="nav-logo">PS<span>/</span>Studio</a>
+
+    <ul class="nav-links">
+      <!-- ═══ EDIT: Nav links ═══ -->
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Connect</a></li>
+    </ul>
+
+    <a href="#contact" class="nav-hire">Hire Me</a>
+    <button class="nav-burger" id="burgerBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav drawer -->
+<nav class="nav-drawer" id="navDrawer">
+  <a href="#portfolio" onclick="closeDrawer()">Work</a>
+  <a href="#about"     onclick="closeDrawer()">About</a>
+  <a href="#services"  onclick="closeDrawer()">Services</a>
+  <a href="#testimonials" onclick="closeDrawer()">Reviews</a>
+  <a href="#contact"   onclick="closeDrawer()">Connect</a>
+  <a href="#contact" class="nav-hire" onclick="closeDrawer()" style="margin-top:20px;text-align:center;">Hire Me</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 01 — HERO
+     ════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <!-- Floating geometric shapes -->
+  <div class="hero-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+    <div class="shape shape-5"></div>
+    <div class="shape-tri"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- Left: Text Content -->
+      <div class="hero-content reveal">
+
+        <!-- ═══ EDIT: Eyebrow label ═══ -->
+        <p class="hero-eyebrow">✦ &nbsp;Visual Identity &amp; Brand Design</p>
+
+        <!-- ═══ EDIT: Main headline ═══ -->
+        <h1 class="hero-headline">
+          Crafting Visual
+          <em class="grad-text">Experiences</em>
+        </h1>
+
+        <!-- ═══ EDIT: Subheadline ═══ -->
+        <p class="hero-sub">
+          Award-winning graphic designer specializing in brand identity,
+          visual systems, and immersive digital experiences.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#portfolio" class="btn-primary">View Portfolio &nbsp;→</a>
+          <a href="#contact"   class="btn-outline">Hire Me</a>
+        </div>
+
+        <!-- ═══ EDIT: Stats (number + label) ═══ -->
+        <div class="hero-stats">
+          <div>
+            <p class="stat-num">02<span class="grad-text">+</span></p>
+            <p class="stat-label">Years</p>
+          </div>
+          <div>
+            <p class="stat-num">80<span class="grad-text">+</span></p>
+            <p class="stat-label">Projects</p>
+          </div>
+          <div>
+            <p class="stat-num">10<span class="grad-text">+</span></p>
+            <p class="stat-label">Clients</p>
+          </div>
+          <div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Photo -->
+      <div class="hero-photo-wrap reveal" style="transition-delay:.2s">
+        <!-- ═══ EDIT: Availability text ═══ -->
+        <div class="avail-badge">
+          <span class="avail-dot"></span>
+          <span class="avail-text">Available for new projects</span>
+        </div>
+
+        <div class="photo-placeholder">
+          <!-- Replace this div's background-image to show your photo -->
+          <img
+            class="hero-image"
+            src="assets/images/IMG_20250601_124329.jpg"
+            alt="Designer photo"
+          />
+          <div class="photo-placeholder-label"></div>
+          <div class="photo-border"></div>
+          <div class="photo-gradient-bottom"></div>
+
+          <!-- Corner decorations -->
+          <div class="corner corner-tl"></div>
+          <div class="corner corner-tr"></div>
+          <div class="corner corner-bl"></div>
+          <div class="corner corner-br"></div>
+
+          <!-- ═══ EDIT: Name tag ═══ -->
+          <div class="photo-name-tag">
+            <div class="name-line"></div>
+            <p>Ayush Adhikari &nbsp;—&nbsp; Graphic Designer</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /hero-inner -->
+  </div><!-- /container -->
+
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 02 — ABOUT
+     ════════════════════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- Left: Photo -->
+      <div class="about-photo-wrap reveal">
+        <div class="about-photo">
+          <!-- ═══ EDIT: Replace with your about photo ═══ -->
+          <div class="photo-placeholder-label">
+
+          </div>
+         <img
+            class="about-image"
+            src="assets/images/about images.png"
+            alt="Designer photo"
+          />
+        </div>
+        <div class="about-exp-badge">
+          <!-- ═══ EDIT: Years of experience ═══ -->
+          <span class="num">2<span style="font-size:22px">+</span></span>
+          <span class="lbl">Years Exp</span>
+        </div>
+      </div>
+
+      <!-- Right: Content -->
+      <div class="about-content reveal" style="transition-delay:.15s">
+
+        <p class="section-label">About Me</p>
+
+        <!-- ═══ EDIT: About heading ═══ -->
+        <h2 class="about-heading">
+          The Mind Behind
+          <em class="grad-text">the Brand.</em>
+        </h2>
+
+        <!-- ═══ EDIT: Bio paragraphs ═══ -->
+        <p class="about-bio">
+          I'm Ayush Adhikari, a graphic designer with 2+ years of experience creating
+          powerful brand identities, digital experiences, and visual systems that connect
+          with audiences and drive real results.
+        </p>
+        <p class="about-bio">
+          My approach blends strategic thinking with meticulous craft — every project begins
+          with deep research into the brand's story, market position, and audience before
+          a single pixel is placed.
+        </p>
+
+        <p class="skills-heading">Expertise</p>
+
+        <!-- ═══ EDIT: Skills — name and percentage ═══ -->
+        <div class="skills-grid" id="skillsGrid">
+          <!-- Skills injected by JS from SKILLS_DATA below -->
+        </div>
+
+        <!-- ═══ EDIT: Stats ═══ -->
+        <div class="about-stats">
+          <div class="about-stat">
+            <p class="num">80<span class="grad-text">+</span></p>
+            <p class="lbl">Projects</p>
+          </div>
+          <div class="about-stat">
+            <p class="num">10<span class="grad-text">+</span></p>
+            <p class="lbl">Clients</p>
+          </div>
+          
+          <div class="about-stat">
+            <p class="num">2<span class="grad-text">+</span></p>
+            <p class="lbl">Years</p>
+          </div>
+        </div>
+
+        <a href="assets/ayush adh resume.pdf" class="btn-outline" download="Ayush-Adhikari-CV.pdf">
+          Download CV &nbsp;↓
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 03 — SERVICES
+     ════════════════════════════════════════════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="services-header reveal">
+      <div>
+        <p class="section-label">Services</p>
+        <!-- ═══ EDIT: Services heading ═══ -->
+        <h2 class="services-heading">
+          What I Create
+          <em class="grad-text">for You</em>
+        </h2>
+      </div>
+      <p class="services-sub">
+        Premium design services tailored for modern brands, ambitious startups,
+        and businesses that understand the power of visual identity.
+      </p>
+    </div>
+
+    <!-- ═══ EDIT: Services — see SERVICES_DATA in js/script.js -->
+    <div class="services-grid reveal" id="servicesGrid" style="transition-delay:.1s">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════════════
+     SECTION 04 — PORTFOLIO
+     ═════════════════════════════════════════════════════════════════════════ -->
+<section id="portfolio">
+  <div class="container">
+    <div class="portfolio-header reveal">
+      <div>
+        <p class="section-label">Selected Work</p>
+        <h2 class="portfolio-heading">Featured <em class="grad-text">Projects</em></h2>
+      </div>
+      <a href="#contact" class="btn-outline">Start a Project</a>
+    </div>
+
+    <div class="portfolio-filters reveal" id="filterBar">
+      <!-- Injected by JS from PROJECT_DATA categories -->
+    </div>
+
+    <div class="portfolio-grid reveal" id="portfolioGrid" style="transition-delay:.15s">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════════════
+     PROJECT DETAIL MODAL
+     ═════════════════════════════════════════════════════════════════════════ -->
+<div class="project-modal" id="projectModal">
+  <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+  <div class="modal-inner" id="modalInner"></div>
+</div>
+
+<!-- ═════════════════════════════════════════════════════════════════════════
+     SECTION 06 — TESTIMONIALS
+     ═════════════════════════════════════════════════════════════════════════ -->
+<section id="testimonials">
+  <div class="container">
+    <div class="testimonials-header reveal">
+      <p class="section-label" style="justify-content:center">Client Reviews</p>
+      <h2 class="testimonials-heading">What Clients <em class="grad-text" style="font-style:italic">Say</em></h2>
+      <p class="testimonials-sub">Kind words from brands I've had the privilege to work with.</p>
+    </div>
+
+    <div class="testimonials-carousel reveal" style="transition-delay:.1s">
+      <div class="testimonials-track" id="testimonialTrack"></div>
+    </div>
+
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prevBtn" aria-label="Previous">←</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+      <button class="carousel-btn" id="nextBtn" aria-label="Next">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════════════
+     SECTION 07 — CLIENT FEEDBACK
+     ═════════════════════════════════════════════════════════════════════════ -->
+<section id="clientFeedback">
+  <div class="container">
+    <div class="client-feedback-grid">
+
+      <div class="reveal" id="clientFeedbackFormWrap">
+        <p class="section-label">Client Feedback</p>
+        <h2 class="client-feedback-heading">
+          Real-time
+          <em class="grad-text" style="font-style:italic">Feedback</em>
+        </h2>
+        <p class="client-feedback-sub">
+          Share your thoughts while you’re on the project — I’ll use your feedback to keep improving.
+        </p>
+
+        <form class="feedback-form" id="clientFeedbackForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fbName">Your Name</label>
+              <input id="fbName" type="text" placeholder="e.g., Sarah" required />
+            </div>
+            <div class="form-group">
+              <label for="fbRole">Role / Company</label>
+              <input id="fbRole" type="text" placeholder="e.g., Marketing Director" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fbRating">Rating</label>
+            <select id="fbRating" required>
+              <option value="">Select a rating…</option>
+              <option value="5">5 - Excellent</option>
+              <option value="4">4 - Very Good</option>
+              <option value="3">3 - Good</option>
+              <option value="2">2 - Needs Improvement</option>
+              <option value="1">1 - Not satisfied</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="fbMessage">Your Feedback</label>
+            <textarea id="fbMessage" placeholder="What did you like? What could be improved?" required></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn-primary" style="width:100%;justify-content:center">
+              Submit Feedback &nbsp;→
+            </button>
+
+            <div class="realtime-feedback" aria-live="polite" aria-atomic="true" style="margin-top:14px">
+              <div class="realtime-feedback-lbl">Real-time guidance</div>
+              <div class="realtime-feedback-msg" id="clientFeedbackMsg">Start typing to see guidance.</div>
+            </div>
+
+            <p class="form-status" id="clientFeedbackStatus">✓ &nbsp;Thanks! Your feedback is ready.</p>
+          </div>
+        </form>
+      </div>
+
+      <div class="reveal" style="transition-delay:.15s">
+        <div class="client-feedback-preview">
+          <p class="section-label" style="margin-bottom:14px">Preview</p>
+          <div id="clientFeedbackGrid" class="client-feedback-gridCards"></div>
+          <div class="client-feedback-empty" id="clientFeedbackEmpty">No feedback submitted yet. Your first submission will appear here instantly.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════════════
+     SECTION 08 — CONTACT
+     ═════════════════════════════════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="reveal">
+        <p class="section-label">Get in Touch</p>
+        <h2 class="contact-heading">
+          Let's Create
+          <em class="grad-text">Something Amazing</em>
+        </h2>
+        <p class="contact-sub">
+          Have a project in mind? I'd love to hear about it.
+          Let's discuss how we can bring your vision to life.
+        </p>
+
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <div class="contact-icon">✉</div>
+            <div>
+              <p class="contact-lbl">Email</p>
+              <a href="mailto:adhikaria498@gmail.com" class="contact-val">adhikaria498@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <p class="contact-lbl">Location</p>
+              <p class="contact-val">Itahari, Nepal</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">⏱</div>
+            <div>
+              <p class="contact-lbl">Response time</p>
+              <p class="contact-val">Within 1 hour</p>
+               <a href="https://wa.me/+977 9844010055" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fa fa-whatsapp whatsapp-icon"></i>
+    </a>
+              
+            </div>
+          </div>
+        </div>
+
+        <div class="social-links">
+           <a href="https://www.behance.net/gamerghost2" class="social-link" title="Behance">Be</a>
+         <a href="https://www.linkedin.com/in/panda-sir/" class="social-link" title="LinkedIn">Ln</a>
+          <a href="https://www.facebook.com/panda498/" class="social-link" title="Facebook">Fb</a>
+           </div>
+      </div>
+
+      <div class="reveal" style="transition-delay:.15s">
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input id="fname" type="text" placeholder="First Name" required />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input id="lname" type="text" placeholder="Last Name" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="hello@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="service">Service Needed</label>
+            <select id="service">
+              <option value="">Select a service…</option>
+              <option>Logo Design</option>
+              <option>Brand Identity</option>
+              <option>Social Media Design</option>
+               <option>Packaging Design</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="budget">Project Budget</label>
+            <select id="budget">
+              <option value="">Select budget range…</option>
+              <option>$500 – $1,000</option>
+              <option>$1,000 – $3,000</option>
+              <option>$3,000 – $8,000</option>
+              <option>$8,000+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Tell me about your project, goals, and timeline…" required></textarea>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn-primary" style="width:100%;justify-content:center">
+              Send Message &nbsp;→
+            </button>
+
+            <!-- Real-time feedback (client requested) -->
+            <div class="realtime-feedback" aria-live="polite" aria-atomic="true">
+              <div class="realtime-feedback-lbl">Real-time feedback</div>
+              <div class="realtime-feedback-msg" id="realtimeFeedbackMsg">Start typing to see guidance.</div>
+            </div>
+
+            <p class="form-status" id="formStatus">✓ &nbsp;Message sent! I'll be in touch within 24 hours.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <p class="footer-logo">PS <span>/</span>Studio</p>
+    <div class="footer-links">
+      <a href="#hero">Home</a>
+      <a href="#portfolio">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p class="footer-copy">© 2025 Ayush Adhikari. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
