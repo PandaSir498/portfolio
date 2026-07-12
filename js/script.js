@@ -673,22 +673,56 @@ const setupInteractions = () => {
 
     elements.contactForm.addEventListener('submit', event => {
       event.preventDefault();
+
       const firstName = q('#fname', elements.contactForm)?.value.trim();
       const lastName = q('#lname', elements.contactForm)?.value.trim();
       const email = q('#email', elements.contactForm)?.value.trim();
+      const service = q('#service', elements.contactForm)?.value.trim();
+      const budget = q('#budget', elements.contactForm)?.value.trim();
       const message = q('#message', elements.contactForm)?.value.trim();
 
+      // Basic validation
       if (!firstName || !lastName || !email || !message) {
         showFormMessage('Please complete all required fields.', false);
         return;
       }
 
-      elements.contactForm.reset();
-      showFormMessage('✓ Message sent! I’ll be in touch within 24 hours.', true);
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showFormMessage('Please enter a valid email address.', false);
+        return;
+      }
 
-      // Reset real-time message too
-      updateRealtime();
+      if (message.length < 20) {
+        showFormMessage('Add a bit more detail to help me understand your project (min 20 characters).', false);
+        return;
+      }
+
+      // Send via EmailJS
+      // NOTE: Replace YOUR_TEMPLATE_ID with your real template id.
+      emailjs
+        .send(
+          'service_i9ijfaa',
+          'template_ut7g5rl',
+          {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            service: service || '',
+            budget: budget || '',
+            message: message,
+          }
+        )
+        .then(() => {
+          showFormMessage("✓ Message sent successfully!", true);
+          elements.contactForm.reset();
+          updateRealtime();
+        })
+        .catch(error => {
+          console.error(error);
+          showFormMessage('Failed to send message. Please try again.', false);
+        });
     });
+
 
     // Keep feedback updated as the user types
     qa('input, textarea, select', elements.contactForm).forEach(input => {
@@ -736,7 +770,7 @@ const setupRequestsInbox = () => {
   const latestContactCard = q('#latestContactCard');
   const latestContactEmpty = q('#latestContactEmpty');
   const latestFeedbackCard = q('#latestFeedbackCard');
-  const latestFeedbackEmpty = q('#latestFeedbackEmpty');
+  const latestFeedbackEmpty = q('#latestFemedbackEmpty');
   const clearBtn = q('#requestsClearBtn');
 
   if (!latestContactCard || !latestFeedbackCard) return;
