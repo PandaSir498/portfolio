@@ -698,10 +698,18 @@ const setupInteractions = () => {
       }
 
       // Send via EmailJS
-      // NOTE: Replace YOUR_TEMPLATE_ID with your real template id.
+      // If EmailJS fails, we show the real error in console and a helpful UI message.
+      if (typeof emailjs === 'undefined' || !emailjs || typeof emailjs.send !== 'function') {
+        showFormMessage('EmailJS is not loaded. Check console for errors.', false);
+        return;
+      }
+      emailjs.init({
+  publicKey: "xaKUsOi7WR3YbMXTR",
+});
+
       emailjs
         .send(
-          'service_i9ijfaa',
+          'service_qlu3o95',
           'template_ut7g5rl',
           {
             first_name: firstName,
@@ -713,13 +721,20 @@ const setupInteractions = () => {
           }
         )
         .then(() => {
-          showFormMessage("✓ Message sent successfully!", true);
+          showFormMessage('✓ Message sent successfully!', true);
+
+          // Auto clear status + clear input fields after a short delay
           elements.contactForm.reset();
           updateRealtime();
+
+          setTimeout(() => {
+            elements.formStatus.classList.remove('visible');
+          }, 3500);
         })
         .catch(error => {
-          console.error(error);
-          showFormMessage('Failed to send message. Please try again.', false);
+          console.error('EmailJS send error:', error);
+          const msg = (error && error.message) ? error.message : 'Unknown EmailJS error';
+          showFormMessage(`Failed to send message. (${msg})`, false);
         });
     });
 
