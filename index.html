@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PS/Studio — Graphic Designer Portfolio</title>
+<title>PS/Studio | Ayush Adhikari — Graphic Designer</title>
+<meta name="description" content="Portfolio of Ayush Adhikari, a graphic designer creating distinctive brand identities, posters, and digital experiences." />
+<meta name="theme-color" content="#101a1f" />
 
 <!--
 =================================================================
@@ -24,10 +26,6 @@
 </head>
 <body>
 
-<!-- Custom cursor -->
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
-
 <!-- Scroll progress bar -->
 <div id="progress-bar"></div>
 
@@ -37,8 +35,8 @@
 <nav id="navbar">
   <div class="nav-inner">
 
-    <!-- ═══ EDIT: Logo ═══ -->
-    <a href="#hero" class="nav-logo">PS<span>/</span>Studio</a>
+    <!-- ═══ EDIT: Logo — clicking scrolls to Logo Design service card ═══ -->
+    <a href="#services" class="nav-logo" data-scroll-to="service-logo-design">PS<span>/</span>Studio</a>
 
     <ul class="nav-links">
       <!-- ═══ EDIT: Nav links ═══ -->
@@ -50,14 +48,14 @@
     </ul>
 
     <a href="#contact" class="nav-hire">Hire Me</a>
-    <button class="nav-burger" id="burgerBtn" aria-label="Menu">
+    <button class="nav-burger" id="burgerBtn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
 <!-- Mobile nav drawer -->
-<nav class="nav-drawer" id="navDrawer">
+<nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation">
   <a href="#portfolio" onclick="closeDrawer()">Work</a>
   <a href="#about"     onclick="closeDrawer()">About</a>
   <a href="#services"  onclick="closeDrawer()">Services</a>
@@ -315,8 +313,8 @@
 <section id="testimonials">
   <div class="container">
     <div class="testimonials-header reveal">
-      <p class="section-label" style="justify-content:center">Client Reviews</p>
-      <h2 class="testimonials-heading">What Clients <em class="grad-text" style="font-style:italic">Say</em></h2>
+      <p class="section-label section-label-centered">Client Reviews</p>
+      <h2 class="testimonials-heading">What Clients <em class="grad-text">Say</em></h2>
       <p class="testimonials-sub">Kind words from brands I've had the privilege to work with.</p>
     </div>
 
@@ -325,9 +323,9 @@
     </div>
 
     <div class="carousel-controls">
-      <button class="carousel-btn" id="prevBtn" aria-label="Previous">←</button>
+      <button class="carousel-btn" id="prevBtn" type="button" aria-label="Previous testimonial">←</button>
       <div class="carousel-dots" id="carouselDots"></div>
-      <button class="carousel-btn" id="nextBtn" aria-label="Next">→</button>
+      <button class="carousel-btn" id="nextBtn" type="button" aria-label="Next testimonial">→</button>
     </div>
   </div>
 </section>
@@ -343,22 +341,27 @@
         <p class="section-label">Client Feedback</p>
         <h2 class="client-feedback-heading">
           Real-time
-          <em class="grad-text" style="font-style:italic">Feedback</em>
+          <em class="grad-text">Feedback</em>
         </h2>
         <p class="client-feedback-sub">
-          Share your thoughts while you’re on the project — I’ll use your feedback to keep improving.
+          Share your thoughts while we’re working together. Your feedback is sent directly to the studio.
         </p>
 
         <form class="feedback-form" id="clientFeedbackForm" novalidate>
           <div class="form-row">
             <div class="form-group">
               <label for="fbName">Your Name</label>
-              <input id="fbName" type="text" placeholder="e.g., Sarah" required />
+              <input id="fbName" name="name" type="text" autocomplete="name" placeholder="e.g., Sarah" required />
             </div>
             <div class="form-group">
               <label for="fbRole">Role / Company</label>
-              <input id="fbRole" type="text" placeholder="e.g., Marketing Director" required />
+              <input id="fbRole" name="role" type="text" autocomplete="organization-title" placeholder="e.g., Marketing Director" required />
             </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fbEmail">Email</label>
+            <input id="fbEmail" name="email" type="email" autocomplete="email" placeholder="you@company.com" required />
           </div>
 
           <div class="form-group">
@@ -397,7 +400,7 @@
         <div class="client-feedback-preview">
           <p class="section-label" style="margin-bottom:14px">Preview</p>
           <div id="clientFeedbackGrid" class="client-feedback-gridCards"></div>
-          <div class="client-feedback-empty" id="clientFeedbackEmpty">No feedback submitted yet. Your first submission will appear here instantly.</div>
+          <div class="client-feedback-empty" id="clientFeedbackEmpty">Your submitted feedback will appear here after it has been sent.</div>
         </div>
       </div>
 
@@ -425,36 +428,34 @@
 
         <div class="contact-info">
           <div class="contact-info-item">
-            <div class="contact-icon">✉</div>
+            <div class="contact-icon" aria-hidden="true">✉</div>
             <div>
               <p class="contact-lbl">Email</p>
               <a href="mailto:adhikaria498@gmail.com" class="contact-val">adhikaria498@gmail.com</a>
             </div>
           </div>
           <div class="contact-info-item">
-            <div class="contact-icon">📍</div>
+            <div class="contact-icon" aria-hidden="true">⌖</div>
             <div>
               <p class="contact-lbl">Location</p>
               <p class="contact-val">Itahari, Nepal</p>
             </div>
           </div>
           <div class="contact-info-item">
-            <div class="contact-icon">⏱</div>
+            <div class="contact-icon" aria-hidden="true">◷</div>
             <div>
               <p class="contact-lbl">Response time</p>
               <p class="contact-val">Within 1 hour</p>
-               <a href="https://wa.me/+977 9844010055" target="_blank" aria-label="Chat on WhatsApp">
-        <i class="fa fa-whatsapp whatsapp-icon"></i>
-    </a>
+              <a class="contact-val" href="https://wa.me/9779844010055" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
               
             </div>
           </div>
         </div>
 
         <div class="social-links">
-           <a href="https://www.behance.net/gamerghost2" class="social-link" title="Behance">Be</a>
-         <a href="https://www.linkedin.com/in/panda-sir/" class="social-link" title="LinkedIn">Ln</a>
-          <a href="https://www.facebook.com/panda498/" class="social-link" title="Facebook">Fb</a>
+          <a href="https://www.behance.net/gamerghost2" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="View Ayush's Behance portfolio">Be</a>
+          <a href="https://www.linkedin.com/in/panda-sir/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Connect with Ayush on LinkedIn">in</a>
+          <a href="https://www.facebook.com/panda498/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Visit Ayush's Facebook profile">f</a>
            </div>
       </div>
 
@@ -463,16 +464,16 @@
           <div class="form-row">
             <div class="form-group">
               <label for="fname">First Name</label>
-              <input id="fname" type="text" placeholder="First Name" required />
+              <input id="fname" name="firstName" type="text" autocomplete="given-name" placeholder="First name" required />
             </div>
             <div class="form-group">
               <label for="lname">Last Name</label>
-              <input id="lname" type="text" placeholder="Last Name" required />
+              <input id="lname" name="lastName" type="text" autocomplete="family-name" placeholder="Last name" required />
             </div>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input id="email" type="email" placeholder="hello@example.com" required />
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="hello@example.com" required />
           </div>
           <div class="form-group">
             <label for="service">Service Needed</label>
@@ -481,7 +482,7 @@
               <option>Logo Design</option>
               <option>Brand Identity</option>
               <option>Social Media Design</option>
-               <option>Packaging Design</option>
+               <option>Poster Design</option>
               <option>Other</option>
             </select>
           </div>
@@ -497,7 +498,7 @@
           </div>
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" placeholder="Tell me about your project, goals, and timeline…" required></textarea>
+            <textarea id="message" name="message" placeholder="Tell me about your project, goals, and timeline…" required></textarea>
           </div>
           <div class="form-submit">
             <button type="submit" class="btn-primary" style="width:100%;justify-content:center">
@@ -528,7 +529,7 @@
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
-    <p class="footer-copy">© 2025 Ayush Adhikari. All rights reserved.</p>
+    <p class="footer-copy">© <span id="currentYear">2026</span> Ayush Adhikari. All rights reserved.</p>
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>

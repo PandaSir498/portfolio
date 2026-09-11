@@ -2,7 +2,7 @@ const SKILLS_DATA = [
   { name: 'Brand Identity', pct: 92 },
   { name: 'Logo Design', pct: 96 },
     { name: 'Social Media Design', pct: 90 },
-  { name: 'Packaging Design', pct: 82 },
+  { name: 'Poster Design', pct: 82 },
   { name: 'Typography', pct: 94 },
 ];
 
@@ -29,8 +29,8 @@ const SERVICES_DATA = [
   {
     icon: '◻',
     num: '05',
-    title: 'Packaging Design',
-    desc: 'Tactile, shelf-ready packaging that makes products irresistible at first glance and unforgettable after.',
+    title: 'Poster Design',
+    desc: 'Bold, expressive posters that capture attention and turn a message into a memorable visual moment.',
   },
   
 ];
@@ -38,50 +38,53 @@ const SERVICES_DATA = [
 const PROJECT_DATA = [
   {
     id: 1,
-    title: 'Aura Spirits',
+    title: 'Bold Lobo',
     category: 'Branding',
-    overview: 'A premium artisan spirits brand built around the concept of elemental purity, balancing craft with luxury.',
-    year: '2024',
-    client: 'Aura Distillery',
+    overview: 'A bold, modern identity system built around a confident mark, high-contrast colour, and versatile brand applications.',
+    year: '2026',
+    client: 'Bold Lobo',
     role: 'Brand Identity',
-    colors: ['#1A2E38', '#53CCBB', '#E6C372', '#F2F1F1', '#8B9EA6'],
-    colorNames: ['Deep Navy', 'Teal', 'Gold', 'Cream', 'Slate'],
+    image: 'assets/bold_lobo_brandboard.png',
+    colors: ['#0D0D0D', '#FCD903', '#F5F5F5', '#A3C9CC'],
+    colorNames: ['Midnight Black', 'Signal Yellow', 'Cloud White', 'Powder Blue'],
     process: [
-      { title: 'Discovery', desc: 'Stakeholder interviews, competitor mapping, and brand positioning.' },
-      { title: 'Strategy', desc: 'Visual direction, messaging, and persona definition for the identity.' },
-      { title: 'Design', desc: 'Logo system, typography, color palette, and collateral exploration.' },
+      { title: 'Discovery', desc: 'Defining the brand personality, audience, and positioning for a confident visual direction.' },
+      { title: 'Identity', desc: 'Building the logotype, icon mark, type system, and signature high-contrast palette.' },
+      { title: 'Applications', desc: 'Extending the identity across stationery, packaging, and everyday brand touchpoints.' },
     ],
   },
   {
     id: 2,
-    title: 'Forma Studio',
+    title: 'Curve',
     category: 'Logo',
-    overview: 'A minimal architecture studio identity grounded in geometry and crisp typography.',
-    year: '2024',
-    client: 'Forma Architecture',
-    role: 'Logo + Print System',
-    colors: ['#0D1B22', '#FFFFFF', '#C8A96E', '#3A3A3A', '#E8E0D4'],
-    colorNames: ['Charcoal', 'White', 'Sand', 'Dark Gray', 'Linen'],
+    overview: 'A distinctive logo system for Curve, combining a flowing symbol and expressive wordmark to make everyday organisation feel considered and approachable.',
+    year: '2026',
+    client: 'Curve',
+    role: 'Logo + Visual Identity',
+    image: 'assets/curve_brandboard.png',
+    colors: ['#C61414', '#360A0A', '#EAE6DD'],
+    colorNames: ['Curve Red', 'Deep Maroon', 'Warm Cream'],
     process: [
-      { title: 'Research', desc: 'Visual audit of competitors and architecture brands.' },
-      { title: 'Concept', desc: 'Logomark and wordmark exploration with structured forms.' },
-      { title: 'Handoff', desc: 'Brand assets, stationery, and use guidelines for launch.' },
+      { title: 'Direction', desc: 'Defining an energetic, welcoming visual direction for an organisation-focused brand.' },
+      { title: 'Logo System', desc: 'Crafting the flowing mark, custom-feeling wordmark, and flexible logo lockups.' },
+      { title: 'Applications', desc: 'Extending the identity across stationery, packaging, and everyday brand touchpoints.' },
     ],
   },
   {
     id: 3,
-    title: 'Verde Botanics',
-    category: 'Packaging',
-    overview: 'Sustainable skincare packaging that feels fresh, premium, and natural.',
-    year: '2023',
-    client: 'Verde Beauty Co.',
-    role: 'Packaging + Brand',
-    colors: ['#2C4A2E', '#8FBF7A', '#F5EDD6', '#C9A86C', '#3E3E3E'],
-    colorNames: ['Forest', 'Sage', 'Parchment', 'Honey', 'Graphite'],
+    title: 'Pahichan Pasta',
+    category: 'Poster',
+    overview: 'A bold social media poster collection that brings Pahichan Pasta’s wholesome, Nepal-made story to life.',
+    year: '2026',
+    client: 'Pahichan Pasta',
+    role: 'Digital Poster Design',
+    image: 'assets/pahichan pasta.png',
+    colors: ['#0F2E5D', '#2C7A32', '#D9AB3B', '#E9822B', '#F3F0E8'],
+    colorNames: ['Pahichan Navy', 'Harvest Green', 'Grain Gold', 'Pasta Orange', 'Warm Cream'],
     process: [
-      { title: 'Audit', desc: 'Testing materials, retail layouts, and premium shelf presence.' },
-      { title: 'Design', desc: 'Label systems, typography, and illustration direction.' },
-      { title: 'Delivery', desc: 'Print-ready assets and eco-friendly production specs.' },
+      { title: 'Research', desc: 'Identifying product benefits and visual cues that connect with the target audience.' },
+      { title: 'Design', desc: 'Creating vivid campaign posters with energetic typography, food imagery, and product storytelling.' },
+      { title: 'Delivery', desc: 'Preparing polished digital poster assets for social media campaigns.' },
     ],
   },
   {
@@ -113,7 +116,7 @@ const TESTIMONIAL_DATA = [
   {
     name: 'Leah Thompson',
     role: 'Marketing Director, Nova Retail',
-    quote: 'The visual identity elevated every part of our launch — from packaging to social media campaigns.',
+    quote: 'The visual identity elevated every part of our launch — from posters to social media campaigns.',
     avatar: 'LT',
   },
   {
@@ -161,15 +164,20 @@ const state = {
 
 const renderSkills = () => {
   if (!elements.skillsGrid) return;
-  elements.skillsGrid.innerHTML = SKILLS_DATA.map(skill => `
-    <div class="skill-item">
+  elements.skillsGrid.innerHTML = SKILLS_DATA.map(skill => {
+    // Make "Logo Design" skill clickable to scroll to the service card
+    const slug = 'service-' + skill.name.toLowerCase().replace(/\s+/g, '-');
+    const isClickable = skill.name === 'Logo Design';
+    return `
+    <div class="skill-item ${isClickable ? 'skill-item-clickable' : ''}" ${isClickable ? `data-scroll-to="${slug}" title="Click to view ${skill.name} service"` : ''}>
       <div class="skill-top">
         <p class="skill-name">${skill.name}</p>
         <p class="skill-pct">${skill.pct}%</p>
       </div>
       <div class="skill-track"><span class="skill-fill"></span></div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   qa('.skill-fill', elements.skillsGrid).forEach((fill, index) => {
     fill.style.width = `${SKILLS_DATA[index].pct}%`;
@@ -178,14 +186,17 @@ const renderSkills = () => {
 
 const renderServices = () => {
   if (!elements.servicesGrid) return;
-  elements.servicesGrid.innerHTML = SERVICES_DATA.map(service => `
-    <article class="service-card">
+  elements.servicesGrid.innerHTML = SERVICES_DATA.map(service => {
+    // Create a slug from the title for the id attribute
+    const slug = 'service-' + service.title.toLowerCase().replace(/\s+/g, '-');
+    return `
+    <article class="service-card" id="${slug}">
       <div class="service-icon">${service.icon}</div>
-      <div class="service-num">${service.num}</div>
       <h3 class="service-title">${service.title}</h3>
       <p class="service-desc">${service.desc}</p>
     </article>
-  `).join('');
+  `;
+  }).join('');
 };
 
 const renderFilters = () => {
@@ -210,18 +221,21 @@ const renderProjects = () => {
   elements.portfolioGrid.innerHTML = projects.map((project, index) => {
     const hasImage = Boolean(project.image);
     return `
-    <article class="portfolio-card" data-id="${project.id}" tabindex="0" role="button" aria-label="View project ${project.title}">
+    <article class="portfolio-card ${hasImage ? 'has-image' : 'is-concept'} project-${project.id} pcard-${index + 1}" data-id="${project.id}" tabindex="0" role="button" aria-label="View project ${project.title}">
       <div class="portfolio-card-bg" ${hasImage ? '' : `style="background: linear-gradient(135deg, ${project.colors[0]}, ${project.colors[1]});"`}>
         ${hasImage ? `<img class="portfolio-card-img" src="${project.image}" alt="${project.title} thumbnail" />` : ''}
       </div>
       <div class="portfolio-card-overlay">
-        <span class="pcard-num">0${project.id}</span>
+        <span class="pcard-kicker">Selected case study · 0${project.id}</span>
         <h3 class="pcard-title">${project.title}</h3>
         <span class="pcard-cat">${project.category}</span>
       </div>
       <div class="pcard-strip">
-        <span class="pcard-title">${project.title}</span>
-        <span class="pcard-num">${project.category}</span>
+        <div>
+          <span class="pcard-cat">${project.category}</span>
+          <span class="pcard-title">${project.title}</span>
+        </div>
+        <span class="pcard-arrow" aria-hidden="true">↗</span>
       </div>
     </article>
   `;
@@ -235,14 +249,18 @@ const openProjectModal = projectId => {
   const paletteMarkup = project.colors.map((color, index) => `
     <div class="color-swatch" style="background: ${color};">
       <span>${project.colorNames[index] || color}</span>
+      <code>${color}</code>
     </div>
   `).join('');
 
   const processMarkup = project.process.map(step => `
-    <div class="meta-item">
-      <p class="lbl">${step.title}</p>
-      <p class="val">${step.desc}</p>
-    </div>
+    <article class="process-step">
+      <span class="process-step-number">0${project.process.indexOf(step) + 1}</span>
+      <div>
+        <p class="process-step-title">${step.title}</p>
+        <p class="process-step-desc">${step.desc}</p>
+      </div>
+    </article>
   `).join('');
 
   const hasImage = Boolean(project.image);
@@ -255,8 +273,9 @@ const openProjectModal = projectId => {
           </a>
         ` : ''}
         <div class="photo-placeholder-label">${project.title}</div>
+        <div class="modal-visual-meta"><span>Selected work · 0${project.id}</span><span>${hasImage ? 'Open artwork ↗' : project.category}</span></div>
       </div>
-      <div>
+      <div class="modal-intro">
         <span class="modal-tag">${project.category}</span>
         <h2 class="modal-title">${project.title}</h2>
         <p class="modal-overview">${project.overview}</p>
@@ -267,11 +286,21 @@ const openProjectModal = projectId => {
         </div>
       </div>
     </div>
-    <p class="modal-overview">${project.overview}</p>
-    <div class="modal-section-title">Project details</div>
-    <div class="modal-overview">${project.process.map(step => `<strong>${step.title}:</strong> ${step.desc}`).join(' <br /> ')}</div>
-    <div class="modal-section-title">Color palette</div>
-    <div class="color-palette">${paletteMarkup}</div>
+    <div class="modal-content-grid">
+      <section class="modal-story">
+        <p class="modal-section-title">The brief</p>
+        <p class="modal-story-copy">${project.overview}</p>
+        <span class="modal-story-mark">PS/</span>
+      </section>
+      <section class="modal-process">
+        <p class="modal-section-title">Creative process</p>
+        <div class="process-steps">${processMarkup}</div>
+      </section>
+    </div>
+    <section class="modal-palette-section">
+      <p class="modal-section-title">Colour palette</p>
+      <div class="color-palette">${paletteMarkup}</div>
+    </section>
   `;
 
   elements.projectModal.classList.add('open');
@@ -287,6 +316,10 @@ const closeProjectModal = () => {
 const closeDrawer = () => {
   if (!elements.navDrawer) return;
   elements.navDrawer.classList.remove('open');
+  if (elements.burgerBtn) {
+    elements.burgerBtn.setAttribute('aria-expanded', 'false');
+    elements.burgerBtn.setAttribute('aria-label', 'Open navigation menu');
+  }
 };
 
 window.closeDrawer = closeDrawer;
@@ -316,44 +349,6 @@ const setupRevealAnimations = () => {
   }, { threshold: 0.12 });
 
   revealElements.forEach(el => observer.observe(el));
-};
-
-const setupCursor = () => {
-  const dot = q('#cursor-dot');
-  const ring = q('#cursor-ring');
-  if (!dot || !ring) return;
-
-  document.addEventListener('mousemove', event => {
-    const { clientX, clientY } = event;
-    dot.style.left = `${clientX}px`;
-    dot.style.top = `${clientY}px`;
-    ring.style.left = `${clientX}px`;
-    ring.style.top = `${clientY}px`;
-  });
-
-  document.addEventListener('mouseover', event => {
-    if (event.target.closest('a, button, input, textarea, select, .filter-btn, .service-card, .portfolio-card, .carousel-btn')) {
-      ring.style.transform = 'translate(-50%, -50%) scale(1.4)';
-      ring.style.borderColor = 'rgba(83,204,187,0.9)';
-    }
-  });
-
-  document.addEventListener('mouseout', event => {
-    if (event.target.closest('a, button, input, textarea, select, .filter-btn, .service-card, .portfolio-card, .carousel-btn')) {
-      ring.style.transform = 'translate(-50%, -50%) scale(1)';
-      ring.style.borderColor = 'rgba(83,204,187,0.6)';
-    }
-  });
-
-  window.addEventListener('mouseleave', () => {
-    dot.style.opacity = '0';
-    ring.style.opacity = '0';
-  });
-
-  window.addEventListener('mouseenter', () => {
-    dot.style.opacity = '1';
-    ring.style.opacity = '0.6';
-  });
 };
 
 const renderTestimonials = () => {
@@ -466,7 +461,7 @@ const renderClientFeedback = () => {
     .map(item => `
       <article class="client-feedback-card" data-id="${item.id}">
         <div class="client-feedback-top">
-          <div class="client-feedback-avatar">${(item.name || 'C')[0].toUpperCase()}</div>
+        <div class="client-feedback-avatar">${escapeHtml((item.name || 'C')[0].toUpperCase())}</div>
           <div>
             <p class="client-feedback-name">${escapeHtml(item.name)}</p>
             <p class="client-feedback-role">${escapeHtml(item.role)}</p>
@@ -501,14 +496,17 @@ const setupClientFeedback = () => {
     }, 3500);
   };
 
-  const validateRealtime = ({ name, role, rating, message }) => {
+  const validateRealtime = ({ name, role, email, rating, message }) => {
     const missing = [];
     if (!name) missing.push('Name');
     if (!role) missing.push('Role/Company');
+    if (!email) missing.push('Email');
     if (!rating) missing.push('Rating');
     if (!message) missing.push('Feedback');
 
     if (missing.length) return `Missing: ${missing.join(', ')}.`;
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Please enter a valid email address.';
 
     if (String(message).trim().length < 20) return 'Add a bit more detail (min 20 characters).';
 
@@ -521,10 +519,11 @@ const setupClientFeedback = () => {
   const updateRealtime = () => {
     const name = q('#fbName', elements.clientFeedbackForm)?.value.trim();
     const role = q('#fbRole', elements.clientFeedbackForm)?.value.trim();
+    const email = q('#fbEmail', elements.clientFeedbackForm)?.value.trim();
     const rating = q('#fbRating', elements.clientFeedbackForm)?.value;
     const message = q('#fbMessage', elements.clientFeedbackForm)?.value.trim();
 
-    elements.clientFeedbackMsg.textContent = validateRealtime({ name, role, rating, message });
+    elements.clientFeedbackMsg.textContent = validateRealtime({ name, role, email, rating, message });
   };
 
   elements.clientFeedbackForm.addEventListener('input', event => {
@@ -544,10 +543,11 @@ const setupClientFeedback = () => {
 
     const name = q('#fbName', elements.clientFeedbackForm)?.value.trim();
     const role = q('#fbRole', elements.clientFeedbackForm)?.value.trim();
+    const email = q('#fbEmail', elements.clientFeedbackForm)?.value.trim();
     const rating = q('#fbRating', elements.clientFeedbackForm)?.value;
     const message = q('#fbMessage', elements.clientFeedbackForm)?.value.trim();
 
-    const realtimeMsg = validateRealtime({ name, role, rating, message });
+    const realtimeMsg = validateRealtime({ name, role, email, rating, message });
     const isValid = realtimeMsg === 'Looks good — submit when ready.';
 
     if (!isValid) {
@@ -555,39 +555,99 @@ const setupClientFeedback = () => {
       return;
     }
 
-    const r = Number(rating);
-    const submitted = {
-      id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
-      name,
-      role,
-      rating: r,
-      message,
-      createdAt: Date.now(),
-    };
+    if (typeof emailjs === 'undefined' || !emailjs || typeof emailjs.send !== 'function') {
+      showClientFeedbackStatus('Feedback service is unavailable. Please email me directly instead.', false);
+      return;
+    }
 
-    const existing = loadFeedback();
-    const next = [...existing, submitted];
-    saveFeedback(next);
+    const submitButton = q('button[type="submit"]', elements.clientFeedbackForm);
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending feedback…';
+    }
 
-    // Re-render instantly
-    renderClientFeedback();
-
-    // Hide empty label
-    if (elements.clientFeedbackEmpty) elements.clientFeedbackEmpty.style.display = 'none';
-
-    elements.clientFeedbackForm.reset();
-    if (elements.clientFeedbackStatus) elements.clientFeedbackStatus.classList.remove('visible');
-    elements.clientFeedbackMsg.textContent = 'Start typing to see guidance.';
-    showClientFeedbackStatus('✓ Thanks! Your feedback was submitted.', true);
+    emailjs.send(
+      'service_qlu3o95',
+      'template_ut7g5rl',
+      {
+        first_name: name,
+        last_name: role,
+        email,
+        service: 'Client Feedback',
+        budget: `Rating: ${rating}/5`,
+        message,
+      }
+    ).then(() => {
+      const submitted = {
+        id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+        name,
+        role,
+        rating: Number(rating),
+        message,
+        createdAt: Date.now(),
+      };
+      saveFeedback([...loadFeedback(), submitted]);
+      renderClientFeedback();
+      elements.clientFeedbackForm.reset();
+      elements.clientFeedbackMsg.textContent = 'Start typing to see guidance.';
+      showClientFeedbackStatus('✓ Thanks — your feedback has been sent.', true);
+    }).catch(() => {
+      showClientFeedbackStatus('Unable to send feedback right now. Please try again or email me directly.', false);
+    }).finally(() => {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Submit Feedback →';
+      }
+    });
   });
+};
+
+/**
+ * Smoothly scroll to an element by its ID and temporarily highlight it
+ */
+const scrollToService = targetId => {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+
+  // Remove any existing highlight
+  document.querySelectorAll('.highlight-card').forEach(el => {
+    el.classList.remove('highlight-card');
+  });
+
+  // Calculate offset for fixed nav height
+  const navH = 80; // account for fixed nav + margin
+  const top = target.getBoundingClientRect().top + window.scrollY - navH;
+
+  window.scrollTo({ top, behavior: 'smooth' });
+
+  // Apply highlight after scroll completes
+  setTimeout(() => {
+    target.classList.add('highlight-card');
+    // Remove highlight after 2.5s
+    setTimeout(() => target.classList.remove('highlight-card'), 2500);
+  }, 600);
 };
 
 const setupInteractions = () => {
   if (elements.burgerBtn && elements.navDrawer) {
     elements.burgerBtn.addEventListener('click', () => {
-      elements.navDrawer.classList.toggle('open');
+      const isOpen = elements.navDrawer.classList.toggle('open');
+      elements.burgerBtn.setAttribute('aria-expanded', String(isOpen));
+      elements.burgerBtn.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
     });
   }
+
+  // Global delegation for data-scroll-to clicks (e.g. skill items, service card CTAs)
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-scroll-to]');
+    if (trigger) {
+      const targetId = trigger.dataset.scrollTo;
+      if (targetId) {
+        event.preventDefault();
+        scrollToService(targetId);
+      }
+    }
+  });
 
   if (elements.filterBar) {
     elements.filterBar.addEventListener('click', event => {
@@ -603,6 +663,14 @@ const setupInteractions = () => {
     elements.portfolioGrid.addEventListener('click', event => {
       const card = event.target.closest('.portfolio-card');
       if (!card) return;
+      openProjectModal(card.dataset.id);
+    });
+
+    elements.portfolioGrid.addEventListener('keydown', event => {
+      if (!['Enter', ' '].includes(event.key)) return;
+      const card = event.target.closest('.portfolio-card');
+      if (!card) return;
+      event.preventDefault();
       openProjectModal(card.dataset.id);
     });
   }
@@ -700,13 +768,25 @@ const setupInteractions = () => {
       // Send via EmailJS
       // If EmailJS fails, we show the real error in console and a helpful UI message.
       if (typeof emailjs === 'undefined' || !emailjs || typeof emailjs.send !== 'function') {
-        showFormMessage('EmailJS is not loaded. Check console for errors.', false);
+        showFormMessage('The contact service is unavailable. Please email me directly instead.', false);
         return;
       }
-      emailjs.init({
-  publicKey: "xaKUsOi7WR3YbMXTR",
-});
-
+      const submitButton = q('button[type="submit"]', elements.contactForm);
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending message…';
+      }
+      const enquirySummary = [
+        'NEW PROJECT ENQUIRY',
+        '',
+        `Name: ${firstName} ${lastName}`,
+        `Email: ${email}`,
+        `Service needed: ${service || 'Not specified'}`,
+        `Project budget: ${budget || 'Not specified'}`,
+        '',
+        'Project details:',
+        message,
+      ].join('\n');
       emailjs
         .send(
           'service_qlu3o95',
@@ -717,7 +797,10 @@ const setupInteractions = () => {
             email: email,
             service: service || '',
             budget: budget || '',
-            message: message,
+            // The EmailJS template currently displays {{message}}. Including the
+            // structured summary here makes every detail visible without relying
+            // on optional template variables.
+            message: enquirySummary,
           }
         )
         .then(() => {
@@ -733,8 +816,13 @@ const setupInteractions = () => {
         })
         .catch(error => {
           console.error('EmailJS send error:', error);
-          const msg = (error && error.message) ? error.message : 'Unknown EmailJS error';
-          showFormMessage(`Failed to send message. (${msg})`, false);
+          showFormMessage('Unable to send your message right now. Please try again or email me directly.', false);
+        })
+        .finally(() => {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Send Message →';
+          }
         });
     });
 
@@ -766,10 +854,11 @@ const init = () => {
   renderTestimonials();
   setupCarousel();
   setupRevealAnimations();
-  setupCursor();
   setupInteractions();
   updateNavbarAndProgress();
   window.addEventListener('scroll', updateNavbarAndProgress);
+  const year = q('#currentYear');
+  if (year) year.textContent = new Date().getFullYear();
 };
 
 const CONTACT_STORAGE_KEY = 'contact_requests_v1';
@@ -936,4 +1025,3 @@ const setupRequestsInbox = () => {
 };
 
 window.addEventListener('DOMContentLoaded', init);
-
