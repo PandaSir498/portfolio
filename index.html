@@ -3,227 +3,167 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PS/Studio | Ayush Adhikari — Graphic Designer</title>
-<meta name="description" content="Portfolio of Ayush Adhikari, a graphic designer creating distinctive brand identities, posters, and digital experiences." />
-<meta name="theme-color" content="#101a1f" />
+<title>Ayush Adhikari | Graphic Designer &amp; Brand Identity Designer</title>
+<meta name="description" content="View the portfolio of Ayush Adhikari, a graphic designer in Itahari, Nepal. Explore logo design, brand identity, social media graphics, and posters." />
+<meta name="theme-color" content="#F5F5F2" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Ayush Adhikari | Graphic Designer &amp; Brand Identity Designer" />
+<meta property="og:description" content="Logo design, brand identity, social media graphics, and posters by Ayush Adhikari in Itahari, Nepal." />
+<script>
+  try {
+    document.documentElement.dataset.theme = localStorage.getItem('portfolio-theme') === 'dark' ? 'dark' : 'light';
+  } catch {
+    document.documentElement.dataset.theme = 'light';
+  }
+</script>
 
-<!--
-=================================================================
-  PORTFOLIO WEBSITE — AYUSH ADHIKARI / PS/ studio
-  Easy-edit guide for VSCode:
-  ─────────────────────────────────────────────────────────────
-  • CONTENT  → Search "/* ═══ EDIT:" comments to find each
-               editable section (name, bio, skills, projects…)
-  • COLORS   → Edit :root variables at the top of css/style.css
-  • IMAGES   → Replace placeholder divs with <img> tags or
-               set background-image on .photo-placeholder
-=================================================================
--->
+
 <link rel="stylesheet" href="css/style.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Ayush Adhikari","jobTitle":"Graphic Designer and Brand Identity Designer","address":{"@type":"PostalAddress","addressLocality":"Itahari","addressCountry":"NP"},"knowsAbout":["Logo Design","Brand Identity","Social Media Design","Poster Design"],"sameAs":["https://www.behance.net/gamerghost2","https://www.linkedin.com/in/panda-sir/","https://www.facebook.com/panda498/"]}</script>
 </head>
 <body>
+<a class="skip-link" href="#portfolio">Skip to selected work</a>
 
-<!-- Scroll progress bar -->
+
 <div id="progress-bar"></div>
 
-<!-- ═══════════════════════════════════════════════════════
-     NAVIGATION
-     ════════════════════════════════════════════════════ -->
-<nav id="navbar">
+
+<nav id="navbar" aria-label="Main navigation">
   <div class="nav-inner">
 
-    <!-- ═══ EDIT: Logo — clicking scrolls to Logo Design service card ═══ -->
-    <a href="#services" class="nav-logo" data-scroll-to="service-logo-design">PS<span>/</span>Studio</a>
+    
+    <a href="#hero" class="nav-logo">AA<span>/</span></a>
 
     <ul class="nav-links">
-      <!-- ═══ EDIT: Nav links ═══ -->
+      
       <li><a href="#portfolio">Work</a></li>
-      <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="#testimonials">Reviews</a></li>
-      <li><a href="#contact">Connect</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-hire">Contact Me</a></li>
     </ul>
 
-    <a href="#contact" class="nav-hire">Hire Me</a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+      <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+      <span class="theme-toggle-label">Dark</span>
+    </button>
     <button class="nav-burger" id="burgerBtn" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<!-- Mobile nav drawer -->
-<nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation">
-  <a href="#portfolio" onclick="closeDrawer()">Work</a>
-  <a href="#about"     onclick="closeDrawer()">About</a>
-  <a href="#services"  onclick="closeDrawer()">Services</a>
-  <a href="#testimonials" onclick="closeDrawer()">Reviews</a>
-  <a href="#contact"   onclick="closeDrawer()">Connect</a>
-  <a href="#contact" class="nav-hire" onclick="closeDrawer()" style="margin-top:20px;text-align:center;">Hire Me</a>
+
+<nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" inert aria-hidden="true">
+  <a href="#portfolio">Work</a>
+  <a href="#services" >Services</a>
+  <a href="#about"    >About</a>
+  <a href="#contact" class="nav-hire">Contact Me</a>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 01 — HERO
-     ════════════════════════════════════════════════════ -->
+
 <section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-
-  <!-- Floating geometric shapes -->
-  <div class="hero-shapes">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    <div class="shape shape-3"></div>
-    <div class="shape shape-4"></div>
-    <div class="shape shape-5"></div>
-    <div class="shape-tri"></div>
-  </div>
-
+<div class="container hero-inner">
+<div class="hero-content reveal"><p class="hero-eyebrow">Independent graphic designer &mdash; Nepal</p><h1 class="hero-headline"><span>AYUSH</span><span>ADHIKARI<span class="hero-period">.</span></span></h1><div class="hero-bottom"><p class="hero-sub">I build distinctive visual identities for brands that want to be remembered.</p><div class="hero-ctas"><a href="#portfolio" class="btn-primary">View Selected Work &nearr;</a><a href="#contact" class="btn-outline">Let&rsquo;s Work Together &nearr;</a></div></div></div>
+<figure class="hero-photo-wrap reveal"><img class="hero-image" src="assets/images/profile/ayush-adhikari-transparent.png" alt="Ayush Adhikari, graphic designer in Nepal" fetchpriority="high"><figcaption>Graphic Designer &amp;<br>Brand Identity Designer</figcaption></figure>
+<div class="hero-note"><span><i class="avail-dot" aria-hidden="true"></i> Available for freelance projects</span><span>Nepal &middot; Working worldwide</span><a href="#portfolio">Scroll to explore &darr;</a></div></div></section>
+<section id="portfolio">
   <div class="container">
-    <div class="hero-inner">
-
-      <!-- Left: Text Content -->
-      <div class="hero-content reveal">
-
-        <!-- ═══ EDIT: Eyebrow label ═══ -->
-        <p class="hero-eyebrow">✦ &nbsp;Visual Identity &amp; Brand Design</p>
-
-        <!-- ═══ EDIT: Main headline ═══ -->
-        <h1 class="hero-headline">
-          Crafting Visual
-          <em class="grad-text">Experiences</em>
-        </h1>
-
-        <!-- ═══ EDIT: Subheadline ═══ -->
-        <p class="hero-sub">
-          Award-winning graphic designer specializing in brand identity,
-          visual systems, and immersive digital experiences.
-        </p>
-
-        <div class="hero-ctas">
-          <a href="#portfolio" class="btn-primary">View Portfolio &nbsp;→</a>
-          <a href="#contact"   class="btn-outline">Hire Me</a>
-        </div>
-
-        <!-- ═══ EDIT: Stats (number + label) ═══ -->
-        <div class="hero-stats">
-          <div>
-            <p class="stat-num">02<span class="grad-text">+</span></p>
-            <p class="stat-label">Years</p>
-          </div>
-          <div>
-            <p class="stat-num">80<span class="grad-text">+</span></p>
-            <p class="stat-label">Projects</p>
-          </div>
-          <div>
-            <p class="stat-num">10<span class="grad-text">+</span></p>
-            <p class="stat-label">Clients</p>
-          </div>
-          <div>
-            
-          </div>
-        </div>
+    <div class="portfolio-header reveal">
+      <div>
+        <p class="section-label">01 / Portfolio &mdash; 2026</p>
+        <h2 class="portfolio-heading">Selected work<span class="grad-text">.</span></h2>
       </div>
+      <a href="#contact" class="btn-outline">Contact Me</a>
+    </div>
 
-      <!-- Right: Photo -->
-      <div class="hero-photo-wrap reveal" style="transition-delay:.2s">
-        <!-- ═══ EDIT: Availability text ═══ -->
-        <div class="avail-badge">
-          <span class="avail-dot"></span>
-          <span class="avail-text">Available for new projects</span>
-        </div>
+    <div class="portfolio-filters reveal" id="filterBar">
+      
+    </div>
 
-        <div class="photo-placeholder">
-          <!-- Replace this div's background-image to show your photo -->
-          <img
-            class="hero-image"
-            src="assets/images/IMG_20250601_124329.jpg"
-            alt="Designer photo"
-          />
-          <div class="photo-placeholder-label"></div>
-          <div class="photo-border"></div>
-          <div class="photo-gradient-bottom"></div>
-
-          <!-- Corner decorations -->
-          <div class="corner corner-tl"></div>
-          <div class="corner corner-tr"></div>
-          <div class="corner corner-bl"></div>
-          <div class="corner corner-br"></div>
-
-          <!-- ═══ EDIT: Name tag ═══ -->
-          <div class="photo-name-tag">
-            <div class="name-line"></div>
-            <p>Ayush Adhikari &nbsp;—&nbsp; Graphic Designer</p>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /hero-inner -->
-  </div><!-- /container -->
-
-  <div class="scroll-hint">Scroll</div>
+    <div class="portfolio-grid reveal" id="portfolioGrid">
+      
+    </div>
+  </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 02 — ABOUT
-     ════════════════════════════════════════════════════ -->
+<div class="project-modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="projectTitle" aria-hidden="true" inert>
+  <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+  <div class="modal-inner" id="modalInner"></div>
+</div>
+
+
+
+<section id="services">
+  <div class="container">
+    <div class="services-header reveal">
+      <div>
+        <p class="section-label">02 / What I do</p>
+        
+        <h2 class="services-heading">
+          Good design.<br>Real impact.
+        </h2>
+      </div>
+      <p class="services-sub">
+        Logo design, brand identity, social media graphics, and posters for businesses.
+      </p>
+    </div>
+
+    
+    <div class="services-grid reveal" id="servicesGrid">
+      
+    </div>
+  </div>
+</section>
+
+
+
 <section id="about">
   <div class="container">
     <div class="about-grid">
 
-      <!-- Left: Photo -->
+      
       <div class="about-photo-wrap reveal">
         <div class="about-photo">
-          <!-- ═══ EDIT: Replace with your about photo ═══ -->
+          
           <div class="photo-placeholder-label">
 
           </div>
          <img
             class="about-image"
-            src="assets/images/about images.png"
-            alt="Designer photo"
+            src="assets/images/profile/about-ayush.png" loading="lazy" decoding="async"
+            alt="Ayush Adhikari at work as a graphic designer"
           />
-        </div>
-        <div class="about-exp-badge">
-          <!-- ═══ EDIT: Years of experience ═══ -->
-          <span class="num">2<span style="font-size:22px">+</span></span>
-          <span class="lbl">Years Exp</span>
         </div>
       </div>
 
-      <!-- Right: Content -->
-      <div class="about-content reveal" style="transition-delay:.15s">
+      
+      <div class="about-content reveal">
 
-        <p class="section-label">About Me</p>
+        <p class="section-label">03 / About Ayush</p>
 
-        <!-- ═══ EDIT: About heading ═══ -->
+        
         <h2 class="about-heading">
-          The Mind Behind
-          <em class="grad-text">the Brand.</em>
+          Thoughtful design.<br>Distinctive brands.
         </h2>
 
-        <!-- ═══ EDIT: Bio paragraphs ═══ -->
+        
         <p class="about-bio">
-          I'm Ayush Adhikari, a graphic designer with 2+ years of experience creating
-          powerful brand identities, digital experiences, and visual systems that connect
-          with audiences and drive real results.
+          I’m Ayush Adhikari, a graphic designer based in Itahari, Nepal. I create logos, brand identities, social media designs, and posters for businesses.
         </p>
         <p class="about-bio">
-          My approach blends strategic thinking with meticulous craft — every project begins
-          with deep research into the brand's story, market position, and audience before
-          a single pixel is placed.
+          I work with each client to understand their goals and audience, then create clear, consistent designs for print and digital use.
         </p>
 
-        <p class="skills-heading">Expertise</p>
+        <p class="skills-heading">Tools</p>
+        <ul class="tools-list">
+          <li>Adobe Illustrator</li>
+          <li>Adobe Photoshop</li>
+        </ul>
 
-        <!-- ═══ EDIT: Skills — name and percentage ═══ -->
-        <div class="skills-grid" id="skillsGrid">
-          <!-- Skills injected by JS from SKILLS_DATA below -->
-        </div>
-
-        <!-- ═══ EDIT: Stats ═══ -->
+        
         <div class="about-stats">
           <div class="about-stat">
             <p class="num">80<span class="grad-text">+</span></p>
@@ -236,11 +176,11 @@
           
           <div class="about-stat">
             <p class="num">2<span class="grad-text">+</span></p>
-            <p class="lbl">Years</p>
+            <p class="lbl">Years experience</p>
           </div>
         </div>
 
-        <a href="assets/ayush adh resume.pdf" class="btn-outline" download="Ayush-Adhikari-CV.pdf">
+        <a href="assets/documents/ayush-adhikari-resume.pdf" class="btn-outline" download="Ayush-Adhikari-CV.pdf">
           Download CV &nbsp;↓
         </a>
       </div>
@@ -249,181 +189,57 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 03 — SERVICES
-     ════════════════════════════════════════════════════ -->
-<section id="services">
-  <div class="container">
-    <div class="services-header reveal">
-      <div>
-        <p class="section-label">Services</p>
-        <!-- ═══ EDIT: Services heading ═══ -->
-        <h2 class="services-heading">
-          What I Create
-          <em class="grad-text">for You</em>
-        </h2>
-      </div>
-      <p class="services-sub">
-        Premium design services tailored for modern brands, ambitious startups,
-        and businesses that understand the power of visual identity.
-      </p>
-    </div>
 
-    <!-- ═══ EDIT: Services — see SERVICES_DATA in js/script.js -->
-    <div class="services-grid reveal" id="servicesGrid" style="transition-delay:.1s">
-      <!-- Injected by JS -->
+
+<section id="how-i-work">
+  <div class="container">
+    <div class="how-header reveal">
+      <p class="section-label">04 / The process</p>
+      <h2 class="how-heading">How I Work</h2>
+      <p class="how-sub">A clear process from the first conversation to the final design files.</p>
     </div>
+    <ol class="how-steps reveal">
+      <li class="how-step">
+        <span class="how-step-number">01</span>
+        <h3>Discover</h3>
+        <p>We talk about your project, audience, needs, and timeline.</p>
+      </li>
+      <li class="how-step">
+        <span class="how-step-number">02</span>
+        <h3>Strategy</h3>
+        <p>I set a design direction and agree on the work with you.</p>
+      </li>
+      <li class="how-step">
+        <span class="how-step-number">03</span>
+        <h3>Design</h3>
+        <p>I create the designs and make revisions based on your feedback.</p>
+      </li>
+      <li class="how-step">
+        <span class="how-step-number">04</span>
+        <h3>Deliver</h3>
+        <p>You receive the approved files for your chosen use.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
-<!-- ═════════════════════════════════════════════════════════════════════════
-     SECTION 04 — PORTFOLIO
-     ═════════════════════════════════════════════════════════════════════════ -->
-<section id="portfolio">
-  <div class="container">
-    <div class="portfolio-header reveal">
-      <div>
-        <p class="section-label">Selected Work</p>
-        <h2 class="portfolio-heading">Featured <em class="grad-text">Projects</em></h2>
-      </div>
-      <a href="#contact" class="btn-outline">Start a Project</a>
-    </div>
 
-    <div class="portfolio-filters reveal" id="filterBar">
-      <!-- Injected by JS from PROJECT_DATA categories -->
-    </div>
 
-    <div class="portfolio-grid reveal" id="portfolioGrid" style="transition-delay:.15s">
-      <!-- Injected by JS -->
-    </div>
-  </div>
-</section>
+<section id="testimonials" hidden aria-hidden="true"></section>
 
-<!-- ═════════════════════════════════════════════════════════════════════════
-     PROJECT DETAIL MODAL
-     ═════════════════════════════════════════════════════════════════════════ -->
-<div class="project-modal" id="projectModal">
-  <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
-  <div class="modal-inner" id="modalInner"></div>
-</div>
 
-<!-- ═════════════════════════════════════════════════════════════════════════
-     SECTION 06 — TESTIMONIALS
-     ═════════════════════════════════════════════════════════════════════════ -->
-<section id="testimonials">
-  <div class="container">
-    <div class="testimonials-header reveal">
-      <p class="section-label section-label-centered">Client Reviews</p>
-      <h2 class="testimonials-heading">What Clients <em class="grad-text">Say</em></h2>
-      <p class="testimonials-sub">Kind words from brands I've had the privilege to work with.</p>
-    </div>
 
-    <div class="testimonials-carousel reveal" style="transition-delay:.1s">
-      <div class="testimonials-track" id="testimonialTrack"></div>
-    </div>
-
-    <div class="carousel-controls">
-      <button class="carousel-btn" id="prevBtn" type="button" aria-label="Previous testimonial">←</button>
-      <div class="carousel-dots" id="carouselDots"></div>
-      <button class="carousel-btn" id="nextBtn" type="button" aria-label="Next testimonial">→</button>
-    </div>
-  </div>
-</section>
-
-<!-- ═════════════════════════════════════════════════════════════════════════
-     SECTION 07 — CLIENT FEEDBACK
-     ═════════════════════════════════════════════════════════════════════════ -->
-<section id="clientFeedback">
-  <div class="container">
-    <div class="client-feedback-grid">
-
-      <div class="reveal" id="clientFeedbackFormWrap">
-        <p class="section-label">Client Feedback</p>
-        <h2 class="client-feedback-heading">
-          Real-time
-          <em class="grad-text">Feedback</em>
-        </h2>
-        <p class="client-feedback-sub">
-          Share your thoughts while we’re working together. Your feedback is sent directly to the studio.
-        </p>
-
-        <form class="feedback-form" id="clientFeedbackForm" novalidate>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="fbName">Your Name</label>
-              <input id="fbName" name="name" type="text" autocomplete="name" placeholder="e.g., Sarah" required />
-            </div>
-            <div class="form-group">
-              <label for="fbRole">Role / Company</label>
-              <input id="fbRole" name="role" type="text" autocomplete="organization-title" placeholder="e.g., Marketing Director" required />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="fbEmail">Email</label>
-            <input id="fbEmail" name="email" type="email" autocomplete="email" placeholder="you@company.com" required />
-          </div>
-
-          <div class="form-group">
-            <label for="fbRating">Rating</label>
-            <select id="fbRating" required>
-              <option value="">Select a rating…</option>
-              <option value="5">5 - Excellent</option>
-              <option value="4">4 - Very Good</option>
-              <option value="3">3 - Good</option>
-              <option value="2">2 - Needs Improvement</option>
-              <option value="1">1 - Not satisfied</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="fbMessage">Your Feedback</label>
-            <textarea id="fbMessage" placeholder="What did you like? What could be improved?" required></textarea>
-          </div>
-
-          <div class="form-submit">
-            <button type="submit" class="btn-primary" style="width:100%;justify-content:center">
-              Submit Feedback &nbsp;→
-            </button>
-
-            <div class="realtime-feedback" aria-live="polite" aria-atomic="true" style="margin-top:14px">
-              <div class="realtime-feedback-lbl">Real-time guidance</div>
-              <div class="realtime-feedback-msg" id="clientFeedbackMsg">Start typing to see guidance.</div>
-            </div>
-
-            <p class="form-status" id="clientFeedbackStatus">✓ &nbsp;Thanks! Your feedback is ready.</p>
-          </div>
-        </form>
-      </div>
-
-      <div class="reveal" style="transition-delay:.15s">
-        <div class="client-feedback-preview">
-          <p class="section-label" style="margin-bottom:14px">Preview</p>
-          <div id="clientFeedbackGrid" class="client-feedback-gridCards"></div>
-          <div class="client-feedback-empty" id="clientFeedbackEmpty">Your submitted feedback will appear here after it has been sent.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═════════════════════════════════════════════════════════════════════════
-     SECTION 08 — CONTACT
-     ═════════════════════════════════════════════════════════════════════════ -->
 <section id="contact">
   <div class="container">
     <div class="contact-grid">
 
       <div class="reveal">
-        <p class="section-label">Get in Touch</p>
+        <p class="section-label">05 / Your next chapter</p>
         <h2 class="contact-heading">
-          Let's Create
-          <em class="grad-text">Something Amazing</em>
+          LET&rsquo;S CREATE<br>SOMETHING<br><em>GREAT.</em>
         </h2>
         <p class="contact-sub">
-          Have a project in mind? I'd love to hear about it.
-          Let's discuss how we can bring your vision to life.
+          Have a design project in mind? Send a message to discuss the work, goals, and timeline.
         </p>
 
         <div class="contact-info">
@@ -446,20 +262,20 @@
             <div>
               <p class="contact-lbl">Response time</p>
               <p class="contact-val">Within 1 hour</p>
-              <a class="contact-val" href="https://wa.me/9779844010055" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+          <a class="whatsapp-button" href="https://wa.me/9779844010055" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
               
             </div>
           </div>
         </div>
 
         <div class="social-links">
-          <a href="https://www.behance.net/gamerghost2" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="View Ayush's Behance portfolio">Be</a>
-          <a href="https://www.linkedin.com/in/panda-sir/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Connect with Ayush on LinkedIn">in</a>
-          <a href="https://www.facebook.com/panda498/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Visit Ayush's Facebook profile">f</a>
+          <a href="https://www.behance.net/gamerghost2" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="View Ayush's Behance portfolio">Behance &nearr;</a>
+          <a href="https://www.linkedin.com/in/panda-sir/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Connect with Ayush on LinkedIn">LinkedIn &nearr;</a>
+          <a href="https://www.facebook.com/panda498/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Visit Ayush's Facebook profile">Facebook &nearr;</a>
            </div>
       </div>
 
-      <div class="reveal" style="transition-delay:.15s">
+      <div class="reveal contact-form-wrap">
         <form class="contact-form" id="contactForm" novalidate>
           <div class="form-row">
             <div class="form-group">
@@ -477,7 +293,7 @@
           </div>
           <div class="form-group">
             <label for="service">Service Needed</label>
-            <select id="service">
+            <select id="service" name="service">
               <option value="">Select a service…</option>
               <option>Logo Design</option>
               <option>Brand Identity</option>
@@ -487,9 +303,9 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="budget">Project Budget</label>
-            <select id="budget">
-              <option value="">Select budget range…</option>
+            <label for="budget">Project Budget (optional)</label>
+            <select id="budget" name="budget">
+              <option value="">Select a range (optional)</option>
               <option>$500 – $1,000</option>
               <option>$1,000 – $3,000</option>
               <option>$3,000 – $8,000</option>
@@ -498,20 +314,20 @@
           </div>
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell me about your project, goals, and timeline…" required></textarea>
+            <textarea id="message" name="message" minlength="20" placeholder="Tell me about your project, goals, and timeline…" required></textarea>
           </div>
           <div class="form-submit">
-            <button type="submit" class="btn-primary" style="width:100%;justify-content:center">
+            <button type="submit" class="btn-primary">
               Send Message &nbsp;→
             </button>
 
-            <!-- Real-time feedback (client requested) -->
+            
             <div class="realtime-feedback" aria-live="polite" aria-atomic="true">
               <div class="realtime-feedback-lbl">Real-time feedback</div>
               <div class="realtime-feedback-msg" id="realtimeFeedbackMsg">Start typing to see guidance.</div>
             </div>
 
-            <p class="form-status" id="formStatus">✓ &nbsp;Message sent! I'll be in touch within 24 hours.</p>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite" aria-atomic="true"></p>
           </div>
         </form>
       </div>
@@ -519,23 +335,22 @@
   </div>
 </section>
 
-
 <footer>
   <div class="container footer-inner">
-    <p class="footer-logo">PS <span>/</span>Studio</p>
+    <div><p class="footer-logo">AYUSH ADHIKARI</p><p>Graphic Designer &middot; Itahari, Nepal<br>Available worldwide</p></div>
     <div class="footer-links">
-      <a href="#hero">Home</a>
       <a href="#portfolio">Work</a>
+      <a href="#services">Services</a>
       <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#hero">Back to top &uarr;</a>
     </div>
-    <p class="footer-copy">© <span id="currentYear">2026</span> Ayush Adhikari. All rights reserved.</p>
+    <p class="footer-copy">© <span id="currentYear">2026</span> Ayush Adhikari. Designed with attention to detail.</p>
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
-emailjs.init({
+if (window.emailjs) window.emailjs.init({
     publicKey: "xaKUsOi7WR3YbMXTR",
 });
 </script>
