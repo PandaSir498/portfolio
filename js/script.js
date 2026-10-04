@@ -646,6 +646,110 @@ const setupInteractions = () => {
   }
 };
 
+const setupMovableMusic = () => {
+  const card = q('.music-card');
+  const slot = q('.music-card-slot');
+  const handle = q('.music-drag-handle');
+  const reset = q('.music-reset');
+  if (!card || !slot || !handle || !reset) return;
+
+  q('.music-controls').hidden = false;
+  q('.music-move-help').hidden = false;
+  let drag = null;
+  let moved = false;
+  let position = { x: 0, y: 0 };
+
+  const place = (x, y) => {
+    const rect = card.getBoundingClientRect();
+    position = {
+      x: Math.max(12, Math.min(x, window.innerWidth - rect.width - 12)),
+      y: Math.max(12, Math.min(y, window.innerHeight - rect.height - 12)),
+    };
+    card.style.left = `${position.x}px`;
+    card.style.top = `${position.y}px`;
+  };
+
+  const floatCard = () => {
+    if (card.classList.contains('is-floating')) return;
+    const rect = card.getBoundingClientRect();
+    slot.style.minHeight = `${rect.height}px`;
+    card.style.width = `${Math.min(420, rect.width, window.innerWidth - 24)}px`;
+    // Keep the same iframe in the same DOM location so moving it does not reload playback.
+    card.classList.add('is-floating');
+    reset.hidden = false;
+    handle.setAttribute('aria-pressed', 'true');
+    place(rect.left, rect.top);
+  };
+
+  const endDrag = () => {
+    const pointerId = drag?.pointerId;
+    drag = null;
+    card.classList.remove('is-dragging');
+    if (pointerId !== undefined && handle.hasPointerCapture(pointerId)) handle.releasePointerCapture(pointerId);
+  };
+
+  const restoreCard = () => {
+    endDrag();
+    card.classList.remove('is-floating');
+    for (const property of ['left', 'top', 'width']) card.style.removeProperty(property);
+    slot.style.removeProperty('min-height');
+    reset.hidden = true;
+    handle.setAttribute('aria-pressed', 'false');
+    slot.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+    handle.focus({ preventScroll: true });
+  };
+
+  handle.addEventListener('pointerdown', event => {
+    if (!event.isPrimary || event.button !== 0) return;
+    moved = false;
+    drag = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, origin: null };
+    handle.setPointerCapture(event.pointerId);
+  });
+  handle.addEventListener('pointermove', event => {
+    if (!drag || event.pointerId !== drag.pointerId) return;
+    const dx = event.clientX - drag.x;
+    const dy = event.clientY - drag.y;
+    if (!moved && Math.hypot(dx, dy) < 6) return;
+    if (!moved) {
+      floatCard();
+      drag.origin = { ...position };
+      moved = true;
+      card.classList.add('is-dragging');
+    }
+    place(drag.origin.x + dx, drag.origin.y + dy);
+  });
+  handle.addEventListener('pointerup', endDrag);
+  handle.addEventListener('pointercancel', endDrag);
+  handle.addEventListener('lostpointercapture', endDrag);
+  handle.addEventListener('click', event => {
+    if (moved && event.detail > 0) { moved = false; return; }
+    moved = false;
+    if (card.classList.contains('is-floating')) restoreCard();
+    else floatCard();
+  });
+  handle.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+      restoreCard();
+      return;
+    }
+    const directions = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
+    const direction = directions[event.key];
+    if (!direction) return;
+    event.preventDefault();
+    floatCard();
+    const step = event.shiftKey ? 30 : 10;
+    place(position.x + direction[0] * step, position.y + direction[1] * step);
+  });
+  reset.addEventListener('click', restoreCard);
+  window.addEventListener('resize', () => {
+    if (!card.classList.contains('is-floating')) return;
+    endDrag();
+    place(position.x, position.y);
+  });
+};
+
 // Play one short generated tap for each interactive click.
 const setupTapSounds = () => {
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -702,6 +806,7 @@ const init = () => {
   renderProjects();
   setupRevealAnimations();
   setupInteractions();
+  setupMovableMusic();
   updateNavbarAndProgress();
   let scrollPending = false;
   window.addEventListener('scroll', () => { if (scrollPending) return; scrollPending = true; requestAnimationFrame(() => { updateNavbarAndProgress(); scrollPending = false; }); }, { passive: true });

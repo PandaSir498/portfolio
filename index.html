@@ -18,7 +18,7 @@
 </script>
 
 
-<link rel="stylesheet" href="css/style.css?v=20261004-about-full-portrait" />
+<link rel="stylesheet" href="css/style.css?v=20261004-movable-music" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -126,7 +126,13 @@
           </div>
         </div>
 
+        <div class="music-card-slot">
         <aside class="music-card" aria-labelledby="favourite-song">
+          <div class="music-controls" hidden>
+            <button class="music-drag-handle" type="button" aria-label="Move music player" aria-describedby="music-move-help" aria-pressed="false"><span aria-hidden="true">&#10021;</span> Move player</button>
+            <button class="music-reset" type="button" hidden>Reset</button>
+          </div>
+          <p class="music-move-help" id="music-move-help" hidden>Drag or use arrow keys. Escape returns the player.</p>
           <div class="music-card-intro">
             <div class="music-card-top">
               <p class="music-eyebrow">All-time favourite</p>
@@ -136,11 +142,16 @@
             </div>
             <h3 id="favourite-song">What Makes You Beautiful</h3>
             <p class="music-artist">One Direction <span>&middot; My favourite band</span></p>
-            <a class="music-track-link" href="https://open.spotify.com/track/4cluDES4hQEUhmXj6TXkSo" target="_blank" rel="noopener noreferrer">View track &nearr;</a>
+            <a class="music-track-link" href="https://open.spotify.com/track/4cluDES4hQEUhmXj6TXkSo" target="_blank" rel="noopener noreferrer">Open in Spotify &nearr;</a>
             <div class="music-vinyl" aria-hidden="true"><span>1D</span></div>
           </div>
           <iframe class="music-player" title="Spotify player: What Makes You Beautiful by One Direction" src="https://open.spotify.com/embed/track/4cluDES4hQEUhmXj6TXkSo?utm_source=generator" width="100%" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+          <div class="music-playback-help">
+            <p>Only hearing a preview? Open Spotify to sign in, or listen with the official video.</p>
+            <a href="https://www.youtube.com/watch?v=QJO3ROT-A4E" target="_blank" rel="noopener noreferrer">Watch official video &nearr;</a>
+          </div>
         </aside>
+        </div>
 
         <a href="assets/documents/ayush-adhikari-resume.pdf" class="btn-outline" download="Ayush-Adhikari-CV.pdf">
           Download CV &nbsp;↓
@@ -364,6 +375,6 @@ if (window.emailjs) window.emailjs.init({
 });
 </script>
 
-<script src="js/script.js?v=20261004-ray-project"></script>
+<script src="js/script.js?v=20261004-movable-music"></script>
 </body>
 </html>
