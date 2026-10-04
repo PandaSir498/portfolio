@@ -56,11 +56,12 @@ const endpoint = new Promise((resolve, reject) => {
   }));
   await send('Page.navigate', { url: pathToFileURL(path.join(__dirname, '..', 'index.html')).href });
   for (let attempt = 0; attempt < 100; attempt++) {
-    if (await evaluate('document.querySelectorAll(".portfolio-card").length === 5')) break;
+    if (await evaluate('document.querySelectorAll(".portfolio-card").length === 6')) break;
     await new Promise(resolve => setTimeout(resolve, 100));
   }
   console.log('Page loaded');
-  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card").length'), 5);
+  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card").length'), 6);
+  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card.project-6").length'), 1);
   assert.equal(await evaluate('document.querySelectorAll(".service-card").length'), 4);
   assert.equal(await evaluate(`document.querySelectorAll('#navbar a[href="#contact"]').length`), 1);
   assert.equal(await evaluate(`document.querySelectorAll('#navDrawer a[href="#contact"]').length`), 1);
@@ -84,8 +85,16 @@ const endpoint = new Promise((resolve, reject) => {
   assert.equal(await evaluate('getComputedStyle(document.querySelector("#navDrawer")).visibility'), 'visible');
   await evaluate('document.dispatchEvent(new KeyboardEvent("keydown", {key:"Escape"}))');
   assert.equal(await evaluate('document.querySelector("#navDrawer").inert'), true);
+  await evaluate('document.querySelector("[data-category=Logo]").click()');
+  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card").length'), 2);
+  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card.project-6").length'), 1);
+  await evaluate('document.querySelector(".portfolio-card.project-6").click()');
+  assert.equal(await evaluate('document.querySelector("#projectTitle").textContent'), 'Ray Inc.');
+  assert.equal(await evaluate('document.querySelector(".modal-hero-img-src").getAttribute("src")'), 'assets/images/projects/Ray Inc. Brand Identity Board.png');
+  await evaluate('document.querySelector("#modalClose").click()');
   await evaluate('document.querySelector("[data-category=Branding]").click()');
-  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card").length'), 3);
+  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card").length'), 4);
+  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card.project-6").length'), 1);
   assert.equal(await evaluate('document.activeElement.dataset.category'), 'Branding');
   await evaluate('document.querySelector(".portfolio-card").focus(); document.querySelector(".portfolio-card").click()');
   assert.equal(await evaluate('document.activeElement.id'), 'modalClose');

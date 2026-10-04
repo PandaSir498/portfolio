@@ -2,26 +2,26 @@ const SERVICES_DATA = [
   {
     icon: '◎',
     num: '01',
-    title: 'Logo Design',
+    title: 'Logo Design', category: 'Logo',
     desc: 'Logo design for businesses that need a clear and recognizable brand mark.',
   },
   {
     icon: '◈',
     num: '02',
-    title: 'Brand Identity',
+    title: 'Brand Identity', category: 'Branding',
     desc: 'A consistent set of brand elements, including colors, typography, logos, and supporting graphics.',
   },
   {
     icon: '◐',
     num: '03',
-    title: 'Social Media Design',
+    title: 'Social Media Design', category: 'Poster',
     desc: 'Graphics for social media posts, stories, announcements, and promotions.',
   },
   
   {
     icon: '◻',
     num: '04',
-    title: 'Poster Design',
+    title: 'Poster Design', category: 'Poster',
     desc: 'Posters for events, products, and campaigns, designed for print or digital sharing.',
   },
   
@@ -37,7 +37,7 @@ const PROJECT_DATA = [
     year: '2026',
     client: 'ELGATO',
     role: 'Brand Identity',
-    image: 'assets/images/projects/elgato-brand-identity.png',
+    image: 'assets/images/projects/elgato-brand-identity.png', darkImage: 'assets/images/projects/elgato-brand-identity-dark.png',
     colors: ['#FFE0C1', '#132A28', '#304359', '#F7F3EA'],
     colorNames: ['Peach', 'Deep Ink', 'Navy', 'Warm Cream'],
     process: [
@@ -56,7 +56,7 @@ const PROJECT_DATA = [
     year: '2026',
     client: 'Pahichan Pasta',
     role: 'Digital Poster Design',
-    image: 'assets/images/projects/pahichan-pasta.png',
+    image: 'assets/images/projects/pahichan-pasta.png', darkImage: 'assets/images/projects/pahichan-pasta-dark.png',
     colors: ['#0F2E5D', '#2C7A32', '#D9AB3B', '#E9822B', '#F3F0E8'],
     colorNames: ['Pahichan Navy', 'Harvest Green', 'Grain Gold', 'Pasta Orange', 'Warm Cream'],
     process: [
@@ -74,7 +74,7 @@ const PROJECT_DATA = [
     year: '2026',
     client: 'Bold Lobo',
     role: 'Brand Identity',
-    image: 'assets/images/projects/bold-lobo-brandboard.png',
+    image: 'assets/images/projects/bold-lobo-brandboard.png', darkImage: 'assets/images/projects/bold-lobo-brandboard-dark.png',
     colors: ['#0D0D0D', '#FCD903', '#F5F5F5', '#A3C9CC'],
     colorNames: ['Midnight Black', 'Signal Yellow', 'Cloud White', 'Powder Blue'],
     process: [
@@ -92,7 +92,7 @@ const PROJECT_DATA = [
     year: '2026',
     client: 'Curve',
     role: 'Logo + Visual Identity',
-    image: 'assets/images/projects/curve-brandboard.png',
+    image: 'assets/images/projects/curve-brandboard.png', darkImage: 'assets/images/projects/curve-brandboard-dark.png',
     colors: ['#C61414', '#360A0A', '#EAE6DD'],
     colorNames: ['Curve Red', 'Deep Maroon', 'Warm Cream'],
     process: [
@@ -117,6 +117,25 @@ const PROJECT_DATA = [
       { title: 'Planning', desc: 'Setting a dark blue and gold visual direction for the brand.' },
       { title: 'Identity', desc: 'Creating the logo, color palette, typography, and supporting graphics.' },
       { title: 'Applications', desc: 'Showing the identity across digital and print materials.' },
+    ],
+  },
+  {
+    id: 6,
+    title: 'Ray Inc.',
+    category: 'Branding',
+    categories: ['Branding', 'Logo'],
+    overview: 'A visual identity for Ray Inc. pairing a sweeping symbol and wordmark with bright yellow, deep blue, and light gray. Inter typography supports a clear, modern visual system.',
+    results: 'The brand board brings together logo variations, typography, a color palette, apparel, stationery, business cards, digital mockups, and a luggage tag.',
+    year: '2026',
+    client: 'Ray Inc.',
+    role: 'Logo + Brand Identity',
+    image: 'assets/images/projects/Ray Inc. Brand Identity Board.png',
+    colors: ['#F2FF21', '#0F3A4A', '#E8ECFF'],
+    colorNames: ['Ray Yellow', 'Ray Blue', 'Light Gray'],
+    process: [
+      { title: 'Visual Direction', desc: 'Combining vivid yellow with deep blue and light gray for a distinctive identity.' },
+      { title: 'Logo', desc: 'Pairing a sweeping symbol with the Ray Inc. wordmark and Inter typography.' },
+      { title: 'Applications', desc: 'Presenting the identity across apparel, print materials, digital mockups, and a luggage tag.' },
     ],
   },
 ];
@@ -150,9 +169,17 @@ const state = {
   previousOverflow: '',
 };
 
+const getProjectImage = project => document.documentElement.dataset.theme === 'dark'
+  ? (project.darkImage || project.image) : project.image;
+
 const applyTheme = (theme, persist = true) => {
   const activeTheme = theme === 'dark' ? 'dark' : 'light';
   document.documentElement.dataset.theme = activeTheme;
+  qa('img[data-light-src]').forEach(image => {
+    image.src = activeTheme === 'dark' ? image.dataset.darkSrc : image.dataset.lightSrc;
+    const link = image.closest('.modal-hero-image-link');
+    if (link) link.href = image.src;
+  });
 
   if (elements.themeToggle) {
     const isDark = activeTheme === 'dark';
@@ -193,8 +220,8 @@ const renderServices = () => {
     return `
     <article class="service-card" id="${slug}">
       <span class="service-number">${service.num}</span>
-      <h3 class="service-title">${service.title}</h3>
-      <p class="service-desc">${service.desc}</p><a href="#contact" class="service-arrow" aria-label="Discuss ${service.title}">&#8599;</a>
+      <h3 class="service-title"><a href="#portfolio" data-service-category="${service.category}">${service.title}</a></h3>
+      <p class="service-desc">${service.desc}</p><a href="#portfolio" data-service-category="${service.category}" class="service-arrow" aria-label="View ${service.title} work">&#8599;</a>
     </article>
   `;
   }).join('');
@@ -202,7 +229,7 @@ const renderServices = () => {
 
 const renderFilters = () => {
   if (!elements.filterBar) return;
-  const categories = ['All', ...new Set(PROJECT_DATA.map(project => project.category))];
+  const categories = ['All', ...new Set(PROJECT_DATA.flatMap(project => project.categories || [project.category]))];
   elements.filterBar.innerHTML = categories.map(category => `
     <button type="button" class="filter-btn ${state.activeCategory === category ? 'active' : ''}" aria-pressed="${state.activeCategory === category}" data-category="${category}">
       ${category}
@@ -212,7 +239,7 @@ const renderFilters = () => {
 
 const renderProjects = () => {
   if (!elements.portfolioGrid) return;
-  const projects = PROJECT_DATA.filter(project => state.activeCategory === 'All' || project.category === state.activeCategory);
+  const projects = PROJECT_DATA.filter(project => state.activeCategory === 'All' || (project.categories || [project.category]).includes(state.activeCategory));
 
   if (!projects.length) {
     elements.portfolioGrid.innerHTML = '<p class="section-label">No projects found in this category.</p>';
@@ -221,19 +248,20 @@ const renderProjects = () => {
 
   elements.portfolioGrid.innerHTML = projects.map((project, index) => {
     const hasImage = Boolean(project.image);
+    const categoryLabel = (project.categories || [project.category]).join(' &amp; ');
     return `
     <article class="portfolio-card ${hasImage ? 'has-image' : 'is-concept'} ${project.featured ? 'is-featured' : ''} project-${project.id} pcard-${index + 1}" data-id="${project.id}" tabindex="0" role="button" aria-label="View project ${project.title}">
       <div class="portfolio-card-bg" ${hasImage ? '' : `style="background: linear-gradient(135deg, ${project.colors[0]}, ${project.colors[1]});"`}>
-        ${hasImage ? `<img class="portfolio-card-img" src="${project.image}" alt="${project.title} ${project.category} design" loading="lazy" decoding="async" />` : ''}
+        ${hasImage ? `<img class="portfolio-card-img" src="${getProjectImage(project)}" data-light-src="${project.image}" data-dark-src="${project.darkImage || project.image}" alt="${project.title} ${project.category} design" loading="lazy" decoding="async" />` : ''}
       </div>
       <div class="portfolio-card-overlay">
       <span class="pcard-kicker">Project · ${String(PROJECT_DATA.indexOf(project) + 1).padStart(2, '0')}</span>
         <h3 class="pcard-title">${project.title}</h3>
-        <span class="pcard-cat">${project.category} &middot; ${project.year}</span>
+        <span class="pcard-cat">${categoryLabel} &middot; ${project.year}</span>
       </div>
       <div class="pcard-strip">
         <div>
-          <span class="pcard-cat">${project.category} &middot; ${project.year}</span>
+          <span class="pcard-cat">${categoryLabel} &middot; ${project.year}</span>
           <span class="pcard-title">${project.title}</span>
         </div>
         <span class="pcard-arrow" aria-hidden="true">↗</span>
@@ -266,12 +294,13 @@ const openProjectModal = projectId => {
   `).join('');
 
   const hasImage = Boolean(project.image);
+  const categoryLabel = (project.categories || [project.category]).join(' &amp; ');
   elements.modalInner.innerHTML = `
     <div class="modal-project-image">
       <div class="modal-hero-img" ${hasImage ? '' : `style="background: linear-gradient(135deg, ${project.colors[0]}, ${project.colors[1]});"`}>
         ${hasImage ? `
-          <a class="modal-hero-image-link" href="${project.image}" target="_blank" rel="noopener noreferrer" aria-label="Open ${project.title} image in new tab">
-            <img class="modal-hero-img-src" src="${project.image}" alt="${project.title} ${project.category} project image" />
+          <a class="modal-hero-image-link" href="${getProjectImage(project)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${project.title} image in new tab">
+            <img class="modal-hero-img-src" src="${getProjectImage(project)}" data-light-src="${project.image}" data-dark-src="${project.darkImage || project.image}" alt="${project.title} ${project.category} project image" />
           </a>
         ` : ''}
         <div class="photo-placeholder-label">${project.title}</div>
@@ -280,7 +309,7 @@ const openProjectModal = projectId => {
     </div>
     <section class="modal-brief">
       <p class="modal-section-title">Project ${String(PROJECT_DATA.indexOf(project) + 1).padStart(2, '0')} / Overview</p>
-      <span class="modal-tag">${project.category}</span>
+      <span class="modal-tag">${categoryLabel}</span>
       <h2 class="modal-title" id="projectTitle">${project.title}</h2>
       <p class="modal-overview">${project.overview}</p>
       <div class="modal-meta">
@@ -376,6 +405,18 @@ const setupRevealAnimations = () => {
 };
 
 const setupInteractions = () => {
+  elements.servicesGrid?.addEventListener('click', event => {
+    const link = event.target.closest('a[data-service-category]');
+    if (!link) return;
+    state.activeCategory = link.dataset.serviceCategory;
+    renderFilters();
+    renderProjects();
+    const heading = q('.portfolio-heading');
+    if (heading) {
+      heading.setAttribute('tabindex', '-1');
+      heading.focus({ preventScroll: true });
+    }
+  });
   if (elements.burgerBtn && elements.navDrawer) {
     elements.burgerBtn.addEventListener('click', () => {
       const isOpen = elements.navDrawer.classList.toggle('open');
@@ -605,7 +646,56 @@ const setupInteractions = () => {
   }
 };
 
+// Play one short generated tap for each interactive click.
+const setupTapSounds = () => {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) return;
+  let context;
+  const playTap = async () => {
+    try {
+      context ||= new AudioContextClass();
+      if (context.state === 'suspended') await context.resume();
+      if (context.state !== 'running') return;
+      const now = context.currentTime;
+      const tone = context.createOscillator();
+      const volume = context.createGain();
+      tone.type = 'sine';
+      tone.frequency.setValueAtTime(700, now);
+      tone.frequency.exponentialRampToValueAtTime(180, now + 0.045);
+      volume.gain.setValueAtTime(0, now);
+      volume.gain.linearRampToValueAtTime(0.075, now + 0.003);
+      volume.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+      tone.connect(volume);
+      volume.connect(context.destination);
+      tone.onended = () => { tone.disconnect(); volume.disconnect(); };
+      tone.start(now);
+      tone.stop(now + 0.065);
+    } catch {
+      // Audio availability must never interrupt navigation.
+    }
+  };
+  const findControl = event => event.target instanceof Element
+    ? event.target.closest('a[href], button, [role="button"], summary, select')
+    : null;
+  document.addEventListener('click', event => {
+    const control = findControl(event);
+    if (event.isTrusted && control && !control.matches(':disabled, [aria-disabled="true"]')) {
+      void playTap();
+    }
+  }, { capture: true });
+  document.addEventListener('keydown', event => {
+    const control = findControl(event);
+    // Custom project cards activate on keydown; native controls emit clicks.
+    if (event.isTrusted && !event.repeat && ['Enter', ' '].includes(event.key)
+        && control?.matches('[role="button"]:not(button):not(a)')
+        && control.getAttribute('aria-disabled') !== 'true') {
+      void playTap();
+    }
+  }, { capture: true });
+};
+
 const init = () => {
+  setupTapSounds();
   setupThemeToggle();
   renderServices();
   renderFilters();
