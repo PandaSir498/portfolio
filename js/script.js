@@ -1,25 +1,21 @@
 const SERVICES_DATA = [
   {
-    icon: '◎',
     num: '01',
     title: 'Logo Design', category: 'Logo',
     desc: 'Logo design for businesses that need a clear and recognizable brand mark.',
   },
   {
-    icon: '◈',
     num: '02',
     title: 'Brand Identity', category: 'Branding',
     desc: 'A consistent set of brand elements, including colors, typography, logos, and supporting graphics.',
   },
   {
-    icon: '◐',
     num: '03',
     title: 'Social Media Design', category: 'Poster',
     desc: 'Graphics for social media posts, stories, announcements, and promotions.',
   },
   
   {
-    icon: '◻',
     num: '04',
     title: 'Poster Design', category: 'Poster',
     desc: 'Posters for events, products, and campaigns, designed for print or digital sharing.',
@@ -29,9 +25,53 @@ const SERVICES_DATA = [
 
 const PROJECT_DATA = [
   {
+    id: 7,
+    title: 'Everlast',
+    category: 'Branding',
+    categories: ['Branding', 'Logo'],
+    summary: 'A monochrome identity with a futuristic edge. Built for what lasts.',
+    rationale: 'The monochrome palette keeps attention on the symbol and metallic surfaces. Orbitron adds a futuristic voice, while Inter provides a simpler companion for smaller text.',
+    overview: 'A futuristic visual identity for Everlast, combining a sculptural symbol and wordmark with black, charcoal, off white, and silver gray. Orbitron headings and Inter body text complete the visual system.',
+    results: 'The brand board presents logo variations, an app icon, typography, a color palette, business cards, signage, a bottle, apparel, and a digital screen mockup.',
+    year: '2026',
+    client: 'Everlast',
+    role: 'Logo + Brand Identity',
+    image: 'assets/images/projects/Everlast Futuristic Brand Identity Board.png',
+    colors: ['#000000', '#1A1A1A', '#F5F5F5', '#A7A7A7'],
+    colorNames: ['Pure Black', 'Charcoal', 'Off White', 'Silver Gray'],
+    process: [
+      { title: 'Visual Direction', desc: 'Combining monochrome tones, metallic surfaces, and flowing forms for a futuristic identity.' },
+      { title: 'Identity', desc: 'Pairing a sculptural symbol and wordmark with Orbitron and Inter typography.' },
+      { title: 'Applications', desc: 'Presenting the identity across an app icon, print materials, signage, apparel, and digital mockups.' },
+    ],
+  },
+  {
+    id: 8,
+    title: 'Flash',
+    category: 'Branding',
+    categories: ['Branding', 'Logo'],
+    summary: 'Electric green. Bold motion. A visual identity built around speed and possibility.',
+    rationale: 'Electric green creates a strong focal point against black. The angular symbol and light trails reinforce the visual theme of speed across the logo and its applications.',
+    overview: 'A visual identity for Flash built around an angular lightning symbol, a bold wordmark, electric green, and deep black. Raleway typography and streaks of light carry the themes of speed, energy, and innovation.',
+    results: 'The brand board brings together logo variations and clear space, typography, a color palette, app icons, business cards, stationery, packaging, digital screens, billboards, and supporting patterns.',
+    year: '2026',
+    client: 'Flash',
+    role: 'Logo + Brand Identity',
+    image: 'assets/images/projects/flash full branding.png',
+    colors: ['#39FF14', '#0D0D0D', '#1A1A1A', '#FFFFFF'],
+    colorNames: ['Electric Green', 'Deep Black', 'Neutral Gray', 'White'],
+    process: [
+      { title: 'Visual Direction', desc: 'Using electric green, deep black, and light trails to express energy and movement.' },
+      { title: 'Identity', desc: 'Developing an angular symbol, logo variations, Raleway typography, and supporting patterns.' },
+      { title: 'Applications', desc: 'Showing the identity across print, packaging, app icons, digital screens, and billboards.' },
+    ],
+  },
+  {
     id: 5,
     title: 'ELGATO Branding',
     category: 'Branding',
+    summary: 'Warm peach, deep ink, and a geometric mark. A cohesive identity across packaging and print.',
+    rationale: 'Peach and cream soften the geometric mark, while ink and navy add contrast. Repeating the symbol and palette across packaging and print keeps the identity recognizable.',
     overview: 'A visual identity for ELGATO featuring a geometric symbol, bold wordmark, and a peach, ink, navy, and cream color palette.',
     results: 'The brand board presents logo variations, typography, a color palette, business cards, packaging, and a shopping bag mockup.',
     year: '2026',
@@ -47,28 +87,11 @@ const PROJECT_DATA = [
     ],
   },
   {
-    id: 3,
-    title: 'Pahichan Pasta',
-    category: 'Poster',
-    featured: true,
-    overview: 'A social media poster series for Pahichan Pasta, featuring its pasta products, meal ideas, and Nepal-made message.',
-    results: 'The final series includes eight posters about the products, recipes, and campaign messages.',
-    year: '2026',
-    client: 'Pahichan Pasta',
-    role: 'Digital Poster Design',
-    image: 'assets/images/projects/pahichan-pasta.png', darkImage: 'assets/images/projects/pahichan-pasta-dark.png',
-    colors: ['#0F2E5D', '#2C7A32', '#D9AB3B', '#E9822B', '#F3F0E8'],
-    colorNames: ['Pahichan Navy', 'Harvest Green', 'Grain Gold', 'Pasta Orange', 'Warm Cream'],
-    process: [
-      { title: 'Planning', desc: 'Organizing product details and campaign messages for the poster series.' },
-      { title: 'Design', desc: 'Combining product images, food photography, and campaign text in each poster.' },
-      { title: 'Final Artwork', desc: 'Preparing the posters for sharing on social media.' },
-    ],
-  },
-  {
     id: 1,
     title: 'Bold Lobo',
     category: 'Branding',
+    summary: 'Signal yellow and bold black. A distinctive wolf symbol brought to life across brand materials.',
+    rationale: 'Yellow provides a clear accent against black, bringing attention to the wolf symbol and wordmark. The same contrast carries through the business card and tote bag mockups.',
     overview: 'A brand identity for Bold Lobo using a black, yellow, and white color palette across the logo and brand materials.',
     results: 'The brand board includes the logo, color palette, typography, business card, and tote bag mockups.',
     year: '2026',
@@ -78,7 +101,7 @@ const PROJECT_DATA = [
     colors: ['#0D0D0D', '#FCD903', '#F5F5F5', '#A3C9CC'],
     colorNames: ['Midnight Black', 'Signal Yellow', 'Cloud White', 'Powder Blue'],
     process: [
-      { title: 'Planning', desc: 'Setting the visual direction and color palette for the brand.' },
+      { title: 'Visual Direction', desc: 'Pairing black and white with a yellow accent across the identity.' },
       { title: 'Logo', desc: 'Creating the wordmark and wolf inspired symbol.' },
       { title: 'Brand Materials', desc: 'Showing the identity on business cards and a tote bag.' },
     ],
@@ -87,7 +110,9 @@ const PROJECT_DATA = [
     id: 2,
     title: 'Curve',
     category: 'Logo',
-    overview: 'A red and cream brand identity for Curve, an organization product. The logo is shown across stationery, packaging, and other brand materials.',
+    summary: 'A curved symbol in red and cream. A visual identity extending from stationery to packaging.',
+    rationale: 'The curved symbol gives the identity a recurring visual form. Red creates emphasis, while maroon and cream support consistent applications across stationery and packaging.',
+    overview: 'A red and cream visual identity for Curve, built around a curved symbol and wordmark. The brand board shows the logo across stationery, packaging, and product mockups.',
     results: 'The identity includes a logo, color palette, stationery, packaging, and product mockups.',
     year: '2026',
     client: 'Curve',
@@ -96,7 +121,7 @@ const PROJECT_DATA = [
     colors: ['#C61414', '#360A0A', '#EAE6DD'],
     colorNames: ['Curve Red', 'Deep Maroon', 'Warm Cream'],
     process: [
-      { title: 'Planning', desc: 'Choosing a red, maroon, and cream color palette for the identity.' },
+      { title: 'Visual Direction', desc: 'Combining red, maroon, and cream with a recurring curved form.' },
       { title: 'Logo', desc: 'Creating a curved symbol and wordmark for Curve.' },
       { title: 'Brand Materials', desc: 'Applying the identity to stationery, packaging, and product mockups.' },
     ],
@@ -105,6 +130,8 @@ const PROJECT_DATA = [
     id: 4,
     title: 'NEXORA Branding',
     category: 'Branding',
+    summary: 'Deep blue and gold with bright digital accents. A connected identity for print and screen.',
+    rationale: 'The dark foundation lets gold, teal, and blue accents stand out. Repeating the palette and logo across web, social, and print mockups connects the different applications.',
     overview: 'A dark blue and gold visual identity for NEXORA, shown across a logo, website, social media graphics, stationery, and product mockups.',
     results: 'The brand board includes the logo, website layout, social media posts, stationery, and app mockups.',
     year: '2026',
@@ -114,7 +141,7 @@ const PROJECT_DATA = [
     colors: ['#0E1E25', '#53CCBB', '#3498da', '#E6C372', '#F2F1F1'],
     colorNames: ['Ink', 'Teal', 'Blue', 'Gold', 'Cream'],
     process: [
-      { title: 'Planning', desc: 'Setting a dark blue and gold visual direction for the brand.' },
+      { title: 'Visual Direction', desc: 'Using a dark foundation with gold, teal, and blue accents.' },
       { title: 'Identity', desc: 'Creating the logo, color palette, typography, and supporting graphics.' },
       { title: 'Applications', desc: 'Showing the identity across digital and print materials.' },
     ],
@@ -124,6 +151,8 @@ const PROJECT_DATA = [
     title: 'Ray Inc.',
     category: 'Branding',
     categories: ['Branding', 'Logo'],
+    summary: 'Vivid yellow meets deep blue. A sweeping symbol and a clear visual system across everyday applications.',
+    rationale: 'Vivid yellow and deep blue create strong contrast, while the sweeping symbol adds movement. Inter supports a consistent typographic voice across print and digital mockups.',
     overview: 'A visual identity for Ray Inc. pairing a sweeping symbol and wordmark with bright yellow, deep blue, and light gray. Inter typography supports a clear, modern visual system.',
     results: 'The brand board brings together logo variations, typography, a color palette, apparel, stationery, business cards, digital mockups, and a luggage tag.',
     year: '2026',
@@ -159,7 +188,6 @@ const elements = {
   modalClose: q('#modalClose'),
   contactForm: q('#contactForm'),
   formStatus: q('#formStatus'),
-  realtimeFeedbackMsg: q('#realtimeFeedbackMsg'),
 };
 
 const state = {
@@ -167,6 +195,9 @@ const state = {
   modalTrigger: null,
   backgroundElements: [],
   previousOverflow: '',
+  revealObserver: null,
+  artworkCleanup: null,
+  drawerOverflow: '',
 };
 
 const getProjectImage = project => document.documentElement.dataset.theme === 'dark'
@@ -177,8 +208,9 @@ const applyTheme = (theme, persist = true) => {
   document.documentElement.dataset.theme = activeTheme;
   qa('img[data-light-src]').forEach(image => {
     image.src = activeTheme === 'dark' ? image.dataset.darkSrc : image.dataset.lightSrc;
-    const link = image.closest('.modal-hero-image-link');
-    if (link) link.href = image.src;
+  });
+  qa('.modal-hero-image-link[data-light-href]').forEach(link => {
+    link.href = activeTheme === 'dark' ? link.dataset.darkHref : link.dataset.lightHref;
   });
 
   if (elements.themeToggle) {
@@ -217,11 +249,13 @@ const renderServices = () => {
   elements.servicesGrid.innerHTML = SERVICES_DATA.map(service => {
     // Create a slug from the title for the id attribute
     const slug = 'service-' + service.title.toLowerCase().replace(/\s+/g, '-');
+    const hasWork = PROJECT_DATA.some(project => (project.categories || [project.category]).includes(service.category));
+    const linkAttributes = hasWork ? `href="#portfolio" data-service-category="${service.category}"` : 'href="#contact"';
     return `
     <article class="service-card" id="${slug}">
       <span class="service-number">${service.num}</span>
-      <h3 class="service-title"><a href="#portfolio" data-service-category="${service.category}">${service.title}</a></h3>
-      <p class="service-desc">${service.desc}</p><a href="#portfolio" data-service-category="${service.category}" class="service-arrow" aria-label="View ${service.title} work">&#8599;</a>
+      <h3 class="service-title"><a ${linkAttributes}>${service.title}</a></h3>
+      <p class="service-desc">${service.desc}</p><a ${linkAttributes} class="service-arrow" aria-label="${hasWork ? 'View' : 'Discuss'} ${service.title}${hasWork ? ' work' : ''}">&#8599;</a>
     </article>
   `;
   }).join('');
@@ -246,29 +280,61 @@ const renderProjects = () => {
     return;
   }
 
-  elements.portfolioGrid.innerHTML = projects.map((project, index) => {
-    const hasImage = Boolean(project.image);
+  elements.portfolioGrid.innerHTML = projects.map(project => {
     const categoryLabel = (project.categories || [project.category]).join(' &amp; ');
     return `
-    <article class="portfolio-card ${hasImage ? 'has-image' : 'is-concept'} ${project.featured ? 'is-featured' : ''} project-${project.id} pcard-${index + 1}" data-id="${project.id}" tabindex="0" role="button" aria-label="View project ${project.title}">
-      <div class="portfolio-card-bg" ${hasImage ? '' : `style="background: linear-gradient(135deg, ${project.colors[0]}, ${project.colors[1]});"`}>
-        ${hasImage ? `<img class="portfolio-card-img" src="${getProjectImage(project)}" data-light-src="${project.image}" data-dark-src="${project.darkImage || project.image}" alt="${project.title} ${project.category} design" loading="lazy" decoding="async" />` : ''}
-      </div>
-      <div class="portfolio-card-overlay">
-      <span class="pcard-kicker">Project · ${String(PROJECT_DATA.indexOf(project) + 1).padStart(2, '0')}</span>
-        <h3 class="pcard-title">${project.title}</h3>
-        <span class="pcard-cat">${categoryLabel} &middot; ${project.year}</span>
+    <article class="portfolio-card reveal is-featured is-spotlight project-${project.id}" data-id="${project.id}" tabindex="0" role="button" aria-label="View project ${project.title}">
+      <div class="portfolio-card-bg">
+        <img class="portfolio-card-img" src="${getProjectImage(project)}" data-light-src="${project.image}" data-dark-src="${project.darkImage || project.image}" alt="${project.title} ${project.category} design" loading="lazy" decoding="async" />
       </div>
       <div class="pcard-strip">
         <div>
           <span class="pcard-cat">${categoryLabel} &middot; ${project.year}</span>
-          <span class="pcard-title">${project.title}</span>
+          <h3 class="pcard-title">${project.title}</h3>
         </div>
-        <span class="pcard-arrow" aria-hidden="true">↗</span>
+        <p class="pcard-summary">${project.summary}</p>
+        <span class="pcard-view">Explore the project <span class="pcard-arrow" aria-hidden="true">&#8599;</span></span>
       </div>
     </article>
   `;
   }).join('');
+  setupRevealAnimations();
+};
+
+const setupArtworkViewer = () => {
+  const viewport = q('.artwork-viewport', elements.modalInner);
+  const image = q('.modal-hero-img-src', viewport || elements.modalInner);
+  if (!viewport || !image) return;
+  let zoom = 1;
+  const update = () => {
+    if (!image.naturalWidth) return;
+    const fitWidth = Math.min(viewport.clientWidth, Math.min(innerHeight * .7, 800) * image.naturalWidth / image.naturalHeight);
+    image.style.width = `${fitWidth * zoom}px`;
+    viewport.dataset.zoom = String(zoom);
+    q('.artwork-zoom-status', elements.modalInner).textContent = `${Math.round(zoom * 100)}%`;
+    q('[data-artwork-zoom="out"]', elements.modalInner).disabled = zoom === 1;
+    q('[data-artwork-zoom="in"]', elements.modalInner).disabled = zoom === 4;
+    if (zoom === 1) viewport.scrollTo(0, 0);
+  };
+  qa('[data-artwork-zoom]', elements.modalInner).forEach(button => {
+    button.addEventListener('click', () => {
+      const action = button.dataset.artworkZoom;
+      zoom = action === 'fit' ? 1 : Math.max(1, Math.min(4, zoom + (action === 'in' ? .5 : -.5)));
+      update();
+    });
+  });
+  image.addEventListener('load', update);
+  const resizeObserver = new ResizeObserver(update);
+  resizeObserver.observe(viewport);
+  window.addEventListener('resize', update);
+  // Disconnect when another project replaces this viewer or the modal closes.
+  state.artworkCleanup?.();
+  state.artworkCleanup = () => {
+    image.removeEventListener('load', update);
+    resizeObserver.disconnect();
+    window.removeEventListener('resize', update);
+  };
+  update();
 };
 
 const openProjectModal = projectId => {
@@ -282,8 +348,7 @@ const openProjectModal = projectId => {
     </div>
   `).join('');
 
-  const caseStudySteps = [project.process[0], { title: 'Concept', desc: project.overview }, ...project.process.slice(1)];
-  const processMarkup = caseStudySteps.map((step, index) => `
+  const processMarkup = project.process.map((step, index) => `
     <article class="process-step">
       <span class="process-step-number">0${index + 1}</span>
       <div>
@@ -293,18 +358,24 @@ const openProjectModal = projectId => {
     </article>
   `).join('');
 
-  const hasImage = Boolean(project.image);
   const categoryLabel = (project.categories || [project.category]).join(' &amp; ');
   elements.modalInner.innerHTML = `
     <div class="modal-project-image">
-      <div class="modal-hero-img" ${hasImage ? '' : `style="background: linear-gradient(135deg, ${project.colors[0]}, ${project.colors[1]});"`}>
-        ${hasImage ? `
-          <a class="modal-hero-image-link" href="${getProjectImage(project)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${project.title} image in new tab">
-            <img class="modal-hero-img-src" src="${getProjectImage(project)}" data-light-src="${project.image}" data-dark-src="${project.darkImage || project.image}" alt="${project.title} ${project.category} project image" />
-          </a>
-        ` : ''}
-        <div class="photo-placeholder-label">${project.title}</div>
-        <div class="modal-visual-meta"><span>Project · ${String(PROJECT_DATA.indexOf(project) + 1).padStart(2, '0')}</span><span>${hasImage ? 'Open image ↗' : project.category}</span></div>
+      <div class="modal-hero-img">
+          <div class="artwork-toolbar" role="group" aria-label="Artwork controls">
+            <span class="artwork-label">Brand board</span>
+            <div class="artwork-zoom-controls">
+              <button type="button" data-artwork-zoom="out" aria-label="Zoom out" aria-controls="artworkViewport" disabled>&minus;</button>
+              <output class="artwork-zoom-status" aria-live="polite" aria-label="Artwork zoom">100%</output>
+              <button type="button" data-artwork-zoom="in" aria-label="Zoom in" aria-controls="artworkViewport">+</button>
+              <button type="button" data-artwork-zoom="fit" aria-controls="artworkViewport">Fit</button>
+            </div>
+            <a class="modal-hero-image-link" href="${getProjectImage(project)}" data-light-href="${project.image}" data-dark-href="${project.darkImage || project.image}" target="_blank" rel="noopener noreferrer" aria-label="Open ${project.title} full size artwork in a new tab">Full size &#8599;</a>
+          </div>
+          <div class="artwork-viewport" id="artworkViewport" tabindex="0" role="region" aria-label="${project.title} artwork" aria-describedby="artworkHelp" data-zoom="1">
+            <img class="modal-hero-img-src" src="${getProjectImage(project)}" data-light-src="${project.image}" data-dark-src="${project.darkImage || project.image}" alt="${project.title} brand board showing its logo, color palette, typography, and applications" />
+          </div>
+          <p class="artwork-help" id="artworkHelp">Zoom in to inspect details. Scroll or swipe to explore the enlarged artwork.</p>
       </div>
     </div>
     <section class="modal-brief">
@@ -313,13 +384,14 @@ const openProjectModal = projectId => {
       <h2 class="modal-title" id="projectTitle">${project.title}</h2>
       <p class="modal-overview">${project.overview}</p>
       <div class="modal-meta">
-        <div class="meta-item"><p class="lbl">Client</p><p class="val">${project.client}</p></div>
+        <div class="meta-item"><p class="lbl">Brand</p><p class="val">${project.client}</p></div>
         <div class="meta-item"><p class="lbl">Year</p><p class="val">${project.year}</p></div>
         <div class="meta-item"><p class="lbl">Role</p><p class="val">${project.role}</p></div>
       </div>
     </section>
     <section class="modal-process">
-      <h3 class="modal-section-title">Design process</h3>
+      <h3 class="modal-section-title">Design approach</h3>
+      <p class="modal-rationale">${project.rationale}</p>
       <div class="process-steps">${processMarkup}</div>
     </section>
     <section class="modal-palette-section">
@@ -327,7 +399,7 @@ const openProjectModal = projectId => {
       <div class="color-palette">${paletteMarkup}</div>
     </section>
     <section class="modal-results">
-      <p class="modal-section-title">Results</p>
+      <h3 class="modal-section-title">Deliverables shown</h3>
       <p class="modal-results-copy">${project.results}</p>
     </section>
   `;
@@ -342,6 +414,7 @@ const openProjectModal = projectId => {
   elements.projectModal.inert = false;
   elements.projectModal.setAttribute('aria-hidden', 'false');
   elements.projectModal.classList.add('open');
+  setupArtworkViewer();
   elements.projectModal.scrollTop = 0;
   document.body.style.overflow = 'hidden';
   elements.modalClose?.focus();
@@ -350,27 +423,31 @@ const openProjectModal = projectId => {
 const closeProjectModal = () => {
   if (!elements.projectModal?.classList.contains('open')) return;
   elements.projectModal.classList.remove('open');
-  elements.projectModal.inert = true;
-  elements.projectModal.setAttribute('aria-hidden', 'true');
+  state.artworkCleanup?.();
+  state.artworkCleanup = null;
   state.backgroundElements.forEach(({ element, inert }) => { element.inert = inert; });
   state.backgroundElements = [];
   document.body.style.overflow = state.previousOverflow;
   state.modalTrigger?.focus();
+  elements.projectModal.inert = true;
+  elements.projectModal.setAttribute('aria-hidden', 'true');
 };
 
 const closeDrawer = () => {
   if (!elements.navDrawer) return;
+  const wasOpen = elements.navDrawer.classList.contains('open');
   elements.navDrawer.classList.remove('open');
+  if (wasOpen) document.body.style.overflow = state.drawerOverflow;
+  if (elements.navDrawer.contains(document.activeElement)) elements.burgerBtn?.focus();
   elements.navDrawer.inert = true;
   elements.navDrawer.setAttribute('aria-hidden', 'true');
-  if (elements.navDrawer.contains(document.activeElement)) elements.burgerBtn?.focus();
   if (elements.burgerBtn) {
     elements.burgerBtn.setAttribute('aria-expanded', 'false');
     elements.burgerBtn.setAttribute('aria-label', 'Open navigation menu');
   }
 };
 
-qa('a', elements.navDrawer).forEach(link => { link.removeAttribute('onclick'); link.addEventListener('click', closeDrawer); });
+qa('a', elements.navDrawer).forEach(link => link.addEventListener('click', closeDrawer));
 
 const updateNavbarAndProgress = () => {
   const scrollY = window.scrollY;
@@ -385,7 +462,8 @@ const updateNavbarAndProgress = () => {
 };
 
 const setupRevealAnimations = () => {
-  const revealElements = qa('.reveal');
+  state.revealObserver?.disconnect();
+  const revealElements = qa('.reveal:not(.visible)');
   if (!revealElements.length) return;
 
   if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -400,6 +478,7 @@ const setupRevealAnimations = () => {
       obs.unobserve(entry.target);
     });
   }, { threshold: 0.12 });
+  state.revealObserver = observer;
 
   revealElements.forEach(el => observer.observe(el));
 };
@@ -419,11 +498,18 @@ const setupInteractions = () => {
   });
   if (elements.burgerBtn && elements.navDrawer) {
     elements.burgerBtn.addEventListener('click', () => {
-      const isOpen = elements.navDrawer.classList.toggle('open');
-      elements.navDrawer.inert = !isOpen;
-      elements.navDrawer.setAttribute('aria-hidden', String(!isOpen));
-      elements.burgerBtn.setAttribute('aria-expanded', String(isOpen));
-      elements.burgerBtn.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      if (elements.navDrawer.classList.contains('open')) {
+        closeDrawer();
+        return;
+      }
+      state.drawerOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      elements.navDrawer.classList.add('open');
+      elements.navDrawer.inert = false;
+      elements.navDrawer.setAttribute('aria-hidden', 'false');
+      elements.burgerBtn.setAttribute('aria-expanded', 'true');
+      elements.burgerBtn.setAttribute('aria-label', 'Close navigation menu');
+      q('a', elements.navDrawer)?.focus();
     });
   }
 
@@ -439,6 +525,12 @@ const setupInteractions = () => {
   }
 
   if (elements.portfolioGrid) {
+    elements.portfolioGrid.addEventListener('focusin', event => {
+      const card = event.target.closest('.portfolio-card');
+      if (!card) return;
+      card.classList.add('visible');
+      state.revealObserver?.unobserve(card);
+    });
     elements.portfolioGrid.addEventListener('click', event => {
       const card = event.target.closest('.portfolio-card');
       if (!card) return;
@@ -468,14 +560,14 @@ const setupInteractions = () => {
 
   document.addEventListener('keydown', event => {
     if (event.key === 'Tab' && elements.navDrawer?.classList.contains('open')) {
-      const controls = [elements.burgerBtn, ...qa('a', elements.navDrawer)];
+      const controls = [elements.themeToggle, elements.burgerBtn, ...qa('a', elements.navDrawer)].filter(Boolean);
       const first = controls[0], last = controls[controls.length - 1];
       if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
       else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
       else if (!controls.includes(document.activeElement)) { event.preventDefault(); first.focus(); }
     }
     if (event.key === 'Tab' && elements.projectModal?.classList.contains('open')) {
-      const focusable = qa('button, a[href], input, select, textarea, [tabindex="0"]', elements.projectModal);
+      const focusable = qa('button, a[href], input, select, textarea, [tabindex="0"]', elements.projectModal).filter(control => !control.disabled);
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
       if (event.shiftKey && document.activeElement === first) {
@@ -493,7 +585,7 @@ const setupInteractions = () => {
   });
 
   document.addEventListener('click', event => {
-    if (!elements.navDrawer?.contains(event.target) && !elements.burgerBtn?.contains(event.target)) closeDrawer();
+    if (!elements.navDrawer?.contains(event.target) && !elements.burgerBtn?.contains(event.target) && !elements.themeToggle?.contains(event.target)) closeDrawer();
   });
   window.addEventListener('resize', () => {
     if (window.innerWidth > 900) closeDrawer();
@@ -506,44 +598,6 @@ const setupInteractions = () => {
       elements.formStatus.classList.add('visible');
       elements.formStatus.style.color = success ? 'var(--accent)' : 'var(--accent2)';
     };
-
-    const realtimeFeedback = (firstName, lastName, email, message, service, budget) => {
-      const missing = [];
-      if (!firstName) missing.push('First Name');
-      if (!lastName) missing.push('Last Name');
-      if (!email) missing.push('Email');
-      if (!message) missing.push('Message');
-
-      if (missing.length) {
-        return `Missing: ${missing.join(', ')}.`;
-      }
-
-      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      if (!emailOk) return 'Please enter a valid email address.';
-
-      if (message.length < 20) return 'Add a bit more detail to help me understand your project (min 20 characters).';
-
-      const extras = [];
-      if (service) extras.push('Service');
-      if (budget) extras.push('Budget');
-      return extras.length ? 'Great—your request looks good. You can send when ready.' : 'Great—your message looks good. You can send when ready.';
-    };
-
-    const updateRealtime = () => {
-      if (!elements.realtimeFeedbackMsg) return;
-
-      const firstName = q('#fname', elements.contactForm)?.value.trim();
-      const lastName = q('#lname', elements.contactForm)?.value.trim();
-      const email = q('#email', elements.contactForm)?.value.trim();
-      const message = q('#message', elements.contactForm)?.value.trim();
-      const service = q('#service', elements.contactForm)?.value.trim();
-      const budget = q('#budget', elements.contactForm)?.value.trim();
-
-      elements.realtimeFeedbackMsg.textContent = realtimeFeedback(firstName, lastName, email, message, service, budget);
-    };
-
-    // Initial feedback
-    updateRealtime();
 
     elements.contactForm.addEventListener('submit', event => {
       event.preventDefault();
@@ -582,6 +636,8 @@ const setupInteractions = () => {
         return;
       }
       const submitButton = q('button[type="submit"]', elements.contactForm);
+      const fields = qa('input, textarea, select', elements.contactForm).filter(field => !field.disabled);
+      fields.forEach(field => { field.disabled = true; });
       if (submitButton) {
         submitButton.disabled = true;
         submitButton.textContent = 'Sending message…';
@@ -615,19 +671,14 @@ const setupInteractions = () => {
         .then(() => {
           showFormMessage('✓ Message sent successfully!', true);
 
-          // Auto clear status + clear input fields after a short delay
           elements.contactForm.reset();
-          updateRealtime();
-
-          setTimeout(() => {
-            elements.formStatus.classList.remove('visible');
-          }, 3500);
         })
         .catch(error => {
           console.error('EmailJS send error:', error);
           showFormMessage('Unable to send your message right now. Please try again or email me directly.', false);
         })
         .finally(() => {
+          fields.forEach(field => { field.disabled = false; });
           if (submitButton) {
             submitButton.disabled = false;
             submitButton.textContent = 'Send Message →';
@@ -635,12 +686,10 @@ const setupInteractions = () => {
         });
     });
 
-
-    // Keep feedback updated as the user types
+    // Clear the previous submission status when the enquiry changes.
     qa('input, textarea, select', elements.contactForm).forEach(input => {
       input.addEventListener('input', () => {
         elements.formStatus.classList.remove('visible');
-        updateRealtime();
       });
     });
   }
@@ -750,7 +799,7 @@ const setupMovableMusic = () => {
   });
 };
 
-// Play one short generated tap for each interactive click.
+// Play one short tap for each click or keyboard activation of a control.
 const setupTapSounds = () => {
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextClass) return;
@@ -789,7 +838,7 @@ const setupTapSounds = () => {
   }, { capture: true });
   document.addEventListener('keydown', event => {
     const control = findControl(event);
-    // Custom project cards activate on keydown; native controls emit clicks.
+    // Native controls emit clicks; custom project cards activate on keydown.
     if (event.isTrusted && !event.repeat && ['Enter', ' '].includes(event.key)
         && control?.matches('[role="button"]:not(button):not(a)')
         && control.getAttribute('aria-disabled') !== 'true') {
@@ -804,7 +853,6 @@ const init = () => {
   renderServices();
   renderFilters();
   renderProjects();
-  setupRevealAnimations();
   setupInteractions();
   setupMovableMusic();
   updateNavbarAndProgress();

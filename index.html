@@ -17,8 +17,7 @@
   }
 </script>
 
-
-<link rel="stylesheet" href="css/style.css?v=20261004-movable-music" />
+<link rel="stylesheet" href="css/style.css?v=20261006-cleanup" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -27,13 +26,10 @@
 <body>
 <a class="skip-link" href="#portfolio">Skip to selected work</a>
 
-
 <div id="progress-bar"></div>
-
 
 <nav id="navbar" aria-label="Main navigation">
   <div class="nav-inner">
-
 
     <a href="#hero" class="nav-logo">AA<span>/</span></a>
 
@@ -55,14 +51,12 @@
   </div>
 </nav>
 
-
 <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" inert aria-hidden="true">
   <a href="#about"    >About</a>
   <a href="#services" >Services</a>
   <a href="#portfolio">Work</a>
   <a href="#contact" class="nav-hire">Contact Me</a>
 </nav>
-
 
 <section id="hero">
 <div class="container hero-inner">
@@ -72,7 +66,6 @@
 <section id="about">
   <div class="container">
     <div class="about-grid">
-
 
       <div class="about-photo-wrap reveal">
         <div class="about-photo">
@@ -85,16 +78,13 @@
         </div>
       </div>
 
-
       <div class="about-content reveal">
 
         <p class="section-label">01 / About Ayush</p>
 
-
         <h2 class="about-heading">
           Thoughtful design.<br>Distinctive brands.
         </h2>
-
 
         <p class="about-bio">
           I’m Ayush Adhikari, a graphic designer based in Itahari, Nepal. I create logos, brand identities, social media designs, and posters for businesses.
@@ -108,7 +98,6 @@
           <li>Adobe Illustrator</li>
           <li>Adobe Photoshop</li>
         </ul>
-
 
         <div class="about-stats">
           <div class="about-stat">
@@ -177,7 +166,6 @@
       </p>
     </div>
 
-
     <div class="services-grid reveal" id="servicesGrid">
 
     </div>
@@ -198,7 +186,7 @@
 
     </div>
 
-    <div class="portfolio-grid reveal" id="portfolioGrid">
+    <div class="portfolio-grid" id="portfolioGrid">
 
     </div>
   </div>
@@ -208,8 +196,6 @@
   <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
   <div class="modal-inner" id="modalInner"></div>
 </div>
-
-
 
 <section id="how-i-work">
   <div class="container">
@@ -243,12 +229,6 @@
   </div>
 </section>
 
-
-
-<section id="testimonials" hidden aria-hidden="true"></section>
-
-
-
 <section id="contact">
   <div class="container">
     <div class="contact-grid">
@@ -264,21 +244,18 @@
 
         <div class="contact-info">
           <div class="contact-info-item">
-            <div class="contact-icon" aria-hidden="true">✉</div>
             <div>
               <p class="contact-lbl">Email</p>
               <a href="mailto:adhikaria498@gmail.com" class="contact-val">adhikaria498@gmail.com</a>
             </div>
           </div>
           <div class="contact-info-item">
-            <div class="contact-icon" aria-hidden="true">⌖</div>
             <div>
               <p class="contact-lbl">Location</p>
               <p class="contact-val">Itahari, Nepal</p>
             </div>
           </div>
           <div class="contact-info-item">
-            <div class="contact-icon" aria-hidden="true">◷</div>
             <div>
               <p class="contact-lbl">Response time</p>
               <p class="contact-val">Within 1 hour</p>
@@ -326,10 +303,10 @@
             <label for="budget">Project Budget (optional)</label>
             <select id="budget" name="budget">
               <option value="">Select a range (optional)</option>
+              <option>$100 – $200</option>
+              <option>$200 – $500</option>
               <option>$500 – $1,000</option>
-              <option>$1,000 – $3,000</option>
-              <option>$3,000 – $8,000</option>
-              <option>$8,000+</option>
+              <option>$1,000+</option>
             </select>
           </div>
           <div class="form-group">
@@ -340,12 +317,6 @@
             <button type="submit" class="btn-primary">
               Send Message &nbsp;→
             </button>
-
-
-            <div class="realtime-feedback" aria-live="polite" aria-atomic="true">
-              <div class="realtime-feedback-lbl">Real-time feedback</div>
-              <div class="realtime-feedback-msg" id="realtimeFeedbackMsg">Start typing to see guidance.</div>
-            </div>
 
           <p class="form-status" id="formStatus" role="status" aria-live="polite" aria-atomic="true"></p>
           </div>
@@ -375,6 +346,6 @@ if (window.emailjs) window.emailjs.init({
 });
 </script>
 
-<script src="js/script.js?v=20261004-movable-music"></script>
+<script src="js/script.js?v=20261006-tap-restored"></script>
 </body>
 </html>
