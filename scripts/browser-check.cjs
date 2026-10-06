@@ -50,6 +50,15 @@ const endpoint = new Promise((resolve, reject) => {
     if (result.exceptionDetails) throw Error(JSON.stringify(result.exceptionDetails));
     return result.result.value;
   };
+  const closeModal = () => evaluate(`new Promise(resolve => {
+    if (!history.state?.portfolioProject) {document.querySelector('#modalClose').click(); resolve(); return;}
+    window.addEventListener('popstate', resolve, {once:true});
+    document.querySelector('#modalClose').click();
+  })`);
+  const travelHistory = direction => evaluate(`new Promise(resolve => {
+    window.addEventListener('popstate', () => requestAnimationFrame(() => requestAnimationFrame(resolve)), {once:true});
+    history.${direction}();
+  })`);
   await send('Page.enable');
   await send('Runtime.enable');
   await send('Network.enable');
@@ -98,47 +107,49 @@ const endpoint = new Promise((resolve, reject) => {
     assert.equal(await evaluate('document.querySelector("#projectTitle").textContent'), title);
     assert.equal(await evaluate('document.querySelector(".modal-hero-img-src").getAttribute("src")'), image);
     assert.equal(await evaluate('(async () => {await document.querySelector(".modal-hero-img-src").decode(); return true;})()'), true);
-    assert.equal(await evaluate('document.querySelectorAll(".modal-process .process-step").length'), 3);
-    assert.ok(await evaluate('document.querySelector(".modal-rationale").textContent.length > 50'));
-    assert.equal(await evaluate('document.querySelector(".modal-results .modal-section-title").textContent'), 'Deliverables shown');
+    assert.equal(await evaluate('document.querySelectorAll(".modal-process .process-step").length'), 4);
+    assert.equal(await evaluate('document.querySelector(".modal-results .modal-section-title").textContent'), 'Results');
     assert.equal(await evaluate('document.querySelector(".modal-hero-image-link").getAttribute("href")'), image);
-    await evaluate('document.querySelector("[data-artwork-zoom=in]").click()');
-    assert.equal(await evaluate('document.querySelector(".artwork-zoom-status").textContent'), '150%');
-    await evaluate('document.querySelector("[data-artwork-zoom=fit]").click()');
-    assert.equal(await evaluate('document.querySelector(".artwork-zoom-status").textContent'), '100%');
-    await evaluate('document.querySelector("#modalClose").click()');
+    await closeModal();
     assert.equal(await evaluate('document.activeElement.dataset.id'), String(id));
   }
   console.log('PASS: seven featured previews, full images, project details, and restored focus.');
-  // Detail viewing stays inside the modal on a small screen and follows the selected theme.
-  await send('Emulation.setDeviceMetricsOverride', {width:320, height:900, deviceScaleFactor:1, mobile:false});
-  await evaluate('document.querySelector(".project-5").focus(); document.querySelector(".project-5").click(); applyTheme("dark", false)');
-  await evaluate('(async () => {await document.querySelector(".modal-hero-img-src").decode();})()');
+  // Mobile Back returns to the same gallery; Forward restores the earlier project view.
+  await send('Emulation.setDeviceMetricsOverride', {width:375, height:900, deviceScaleFactor:1, mobile:true});
+  await evaluate('document.querySelector(".project-5").scrollIntoView({block:"center", behavior:"instant"})');
+  const galleryScroll = await evaluate('scrollY');
+  const galleryUrl = await evaluate('location.href');
+  await evaluate('document.querySelector(".project-5").click()');
+  assert.equal(await evaluate('history.state.portfolioProject'), 5);
+  assert.equal(await evaluate('document.querySelectorAll(".artwork-viewport, .artwork-toolbar, .modal-rationale").length'), 0);
+  assert.equal(await evaluate('document.querySelector(".modal-hero-image-link").contains(document.querySelector(".modal-hero-img-src"))'), true);
+  await travelHistory('back');
+  assert.equal(await evaluate('document.querySelector("#projectModal").inert'), true);
+  assert.equal(await evaluate('document.body.style.overflow'), '');
+  assert.equal(await evaluate('document.activeElement.dataset.id'), '5');
+  assert.equal(await evaluate('location.href'), galleryUrl);
+  assert.ok(Math.abs(await evaluate('scrollY') - galleryScroll) <= 2);
+  await travelHistory('forward');
+  assert.equal(await evaluate('document.querySelector("#projectTitle").textContent'), 'ELGATO Branding');
+  assert.equal(await evaluate('document.querySelector("#projectModal").inert'), false);
+  await evaluate('applyTheme("dark", false)');
   assert.ok(await evaluate('document.querySelector(".modal-hero-image-link").href.endsWith("elgato-brand-identity-dark.png")'));
-  await evaluate('for (let i=0; i<10; i++) document.querySelector("[data-artwork-zoom=in]").click()');
-  assert.equal(await evaluate('document.querySelector(".artwork-zoom-status").textContent'), '400%');
-  assert.equal(await evaluate('document.querySelector("[data-artwork-zoom=in]").disabled'), true);
-  assert.ok(await evaluate('document.querySelector(".artwork-viewport").scrollWidth > document.querySelector(".artwork-viewport").clientWidth'));
-  assert.ok(await evaluate('document.documentElement.scrollWidth <= innerWidth'));
-  await evaluate('document.querySelector(".artwork-viewport").scrollTo(100,100)');
-  assert.ok(await evaluate('document.querySelector(".artwork-viewport").scrollLeft > 0'));
-  await evaluate('document.querySelector("[data-artwork-zoom=fit]").click()');
-  assert.equal(await evaluate('document.querySelector(".artwork-viewport").scrollLeft'), 0);
-  assert.equal(await evaluate('document.querySelector("[data-artwork-zoom=out]").disabled'), true);
-  await evaluate('document.querySelector("#modalClose").focus(); document.dispatchEvent(new KeyboardEvent("keydown", {key:"Tab", shiftKey:true, bubbles:true}))');
-  assert.equal(await evaluate('document.activeElement.className'), 'artwork-viewport');
-  await evaluate('document.dispatchEvent(new KeyboardEvent("keydown", {key:"Tab", bubbles:true}))');
-  assert.equal(await evaluate('document.activeElement.id'), 'modalClose');
-  await evaluate('document.querySelector("#modalClose").click(); applyTheme("light", false)');
-  await evaluate('document.querySelector(".project-8").click()');
-  assert.equal(await evaluate('document.querySelector(".artwork-zoom-status").textContent'), '100%');
-  await evaluate('document.querySelector("#modalClose").click()');
+  await evaluate('document.querySelector("#modalClose").focus(); document.dispatchEvent(new KeyboardEvent("keydown", {key:"Tab", shiftKey:true}))');
+  assert.equal(await evaluate('document.activeElement.className'), 'modal-hero-image-link');
+  await closeModal();
+  assert.equal(await evaluate('Boolean(history.state?.portfolioProject)'), false);
+  await evaluate('applyTheme("light", false); document.querySelector(".project-8").click()');
+  await evaluate('new Promise(resolve => {window.addEventListener("popstate", resolve, {once:true}); document.dispatchEvent(new KeyboardEvent("keydown", {key:"Escape"}));})');
+  assert.equal(await evaluate('document.querySelector("#projectModal").inert'), true);
+  assert.equal(await evaluate('Boolean(history.state?.portfolioProject)'), false);
+  await evaluate('document.querySelector(".project-7").click()');
+  await evaluate('new Promise(resolve => {window.addEventListener("popstate", resolve, {once:true}); document.querySelector("#projectModal").click();})');
+  assert.equal(await evaluate('document.querySelector("#projectModal").inert'), true);
   assert.equal(await evaluate('document.querySelector("#service-poster-design a").getAttribute("href")'), '#contact');
-  // Every card reveals independently even when the gallery is taller than the viewport.
   await evaluate('document.querySelector(".project-6").scrollIntoView({block:"center", behavior:"instant"})');
   await new Promise(resolve => setTimeout(resolve, 750));
   assert.equal(await evaluate('document.querySelector(".project-6").classList.contains("visible")'), true);
-  console.log('PASS: design explanations, mobile zoom/scroll/reset, theme artwork, keyboard focus, and long-gallery visibility.');
+  console.log('PASS: earlier project view, mobile Back/Forward, gallery position, close/Escape/backdrop, theme, and focus.');
   // Drag the music card with real mouse and touch input; preserve the existing player.
   await send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false });
   await evaluate(`window.musicFrameBefore = document.querySelector('.music-player'); document.querySelector('.music-card').scrollIntoView({block:'center', behavior:'instant'})`);
@@ -197,7 +208,7 @@ const endpoint = new Promise((resolve, reject) => {
   await evaluate('document.querySelector(".portfolio-card.project-6").click()');
   assert.equal(await evaluate('document.querySelector("#projectTitle").textContent'), 'Ray Inc.');
   assert.equal(await evaluate('document.querySelector(".modal-hero-img-src").getAttribute("src")'), 'assets/images/projects/Ray Inc. Brand Identity Board.png');
-  await evaluate('document.querySelector("#modalClose").click()');
+  await closeModal();
   await evaluate('document.querySelector("[data-category=Branding]").click()');
   assert.equal(await evaluate('document.querySelectorAll(".portfolio-card").length'), 6);
   assert.equal(await evaluate('document.querySelectorAll(".portfolio-card.project-6").length'), 1);
@@ -210,7 +221,7 @@ const endpoint = new Promise((resolve, reject) => {
   assert.equal(await evaluate('document.querySelector(".modal-hero-img-src").getAttribute("src")'), 'assets/images/projects/elgato-brand-identity.png');
   assert.equal(await evaluate('document.querySelector("#portfolio").inert'), true);
   assert.equal(await evaluate('getComputedStyle(document.querySelector(".modal-title")).color'), 'rgb(17, 17, 17)');
-  await evaluate('document.querySelector("#modalClose").click()');
+  await closeModal();
   assert.equal(await evaluate('document.activeElement.classList.contains("portfolio-card")'), true);
   assert.equal(await evaluate('document.querySelector("#portfolio").inert'), false);
   await evaluate('document.querySelector("#themeToggle").click()');

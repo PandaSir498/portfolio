@@ -32,8 +32,8 @@ docs/archive/              Historical task notes
 
 - Edit text, contact links, and form fields in `index.html`.
 - Edit `PROJECT_DATA` and `SERVICES_DATA` in `js/script.js`.
-- Each project has a gallery `summary`, a detailed `overview`, a visual `rationale`, and the `results` describing the deliverables shown. Keep these based on the actual artwork; add client or concept context only when confirmed.
-- Project artwork supports zoom, scrolling, a fit reset, and a full size image link. Light and dark variants follow the selected theme.
+- Each project has a gallery `summary`, a detailed `overview`, and the `results` describing the deliverables shown. Keep these based on the actual artwork; add client or concept context only when confirmed.
+- Project artwork uses the full brand board with a link to open the original image. Light and dark variants follow the selected theme.
 - Edit colors, spacing, themes, and breakpoints in `css/style.css`.
 - Keep asset paths relative to `index.html`, such as `assets/images/projects/elgato-brand-identity.png`.
 

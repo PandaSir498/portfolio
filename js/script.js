@@ -30,7 +30,6 @@ const PROJECT_DATA = [
     category: 'Branding',
     categories: ['Branding', 'Logo'],
     summary: 'A monochrome identity with a futuristic edge. Built for what lasts.',
-    rationale: 'The monochrome palette keeps attention on the symbol and metallic surfaces. Orbitron adds a futuristic voice, while Inter provides a simpler companion for smaller text.',
     overview: 'A futuristic visual identity for Everlast, combining a sculptural symbol and wordmark with black, charcoal, off white, and silver gray. Orbitron headings and Inter body text complete the visual system.',
     results: 'The brand board presents logo variations, an app icon, typography, a color palette, business cards, signage, a bottle, apparel, and a digital screen mockup.',
     year: '2026',
@@ -51,7 +50,6 @@ const PROJECT_DATA = [
     category: 'Branding',
     categories: ['Branding', 'Logo'],
     summary: 'Electric green. Bold motion. A visual identity built around speed and possibility.',
-    rationale: 'Electric green creates a strong focal point against black. The angular symbol and light trails reinforce the visual theme of speed across the logo and its applications.',
     overview: 'A visual identity for Flash built around an angular lightning symbol, a bold wordmark, electric green, and deep black. Raleway typography and streaks of light carry the themes of speed, energy, and innovation.',
     results: 'The brand board brings together logo variations and clear space, typography, a color palette, app icons, business cards, stationery, packaging, digital screens, billboards, and supporting patterns.',
     year: '2026',
@@ -71,7 +69,6 @@ const PROJECT_DATA = [
     title: 'ELGATO Branding',
     category: 'Branding',
     summary: 'Warm peach, deep ink, and a geometric mark. A cohesive identity across packaging and print.',
-    rationale: 'Peach and cream soften the geometric mark, while ink and navy add contrast. Repeating the symbol and palette across packaging and print keeps the identity recognizable.',
     overview: 'A visual identity for ELGATO featuring a geometric symbol, bold wordmark, and a peach, ink, navy, and cream color palette.',
     results: 'The brand board presents logo variations, typography, a color palette, business cards, packaging, and a shopping bag mockup.',
     year: '2026',
@@ -91,7 +88,6 @@ const PROJECT_DATA = [
     title: 'Bold Lobo',
     category: 'Branding',
     summary: 'Signal yellow and bold black. A distinctive wolf symbol brought to life across brand materials.',
-    rationale: 'Yellow provides a clear accent against black, bringing attention to the wolf symbol and wordmark. The same contrast carries through the business card and tote bag mockups.',
     overview: 'A brand identity for Bold Lobo using a black, yellow, and white color palette across the logo and brand materials.',
     results: 'The brand board includes the logo, color palette, typography, business card, and tote bag mockups.',
     year: '2026',
@@ -111,7 +107,6 @@ const PROJECT_DATA = [
     title: 'Curve',
     category: 'Logo',
     summary: 'A curved symbol in red and cream. A visual identity extending from stationery to packaging.',
-    rationale: 'The curved symbol gives the identity a recurring visual form. Red creates emphasis, while maroon and cream support consistent applications across stationery and packaging.',
     overview: 'A red and cream visual identity for Curve, built around a curved symbol and wordmark. The brand board shows the logo across stationery, packaging, and product mockups.',
     results: 'The identity includes a logo, color palette, stationery, packaging, and product mockups.',
     year: '2026',
@@ -131,7 +126,6 @@ const PROJECT_DATA = [
     title: 'NEXORA Branding',
     category: 'Branding',
     summary: 'Deep blue and gold with bright digital accents. A connected identity for print and screen.',
-    rationale: 'The dark foundation lets gold, teal, and blue accents stand out. Repeating the palette and logo across web, social, and print mockups connects the different applications.',
     overview: 'A dark blue and gold visual identity for NEXORA, shown across a logo, website, social media graphics, stationery, and product mockups.',
     results: 'The brand board includes the logo, website layout, social media posts, stationery, and app mockups.',
     year: '2026',
@@ -152,7 +146,6 @@ const PROJECT_DATA = [
     category: 'Branding',
     categories: ['Branding', 'Logo'],
     summary: 'Vivid yellow meets deep blue. A sweeping symbol and a clear visual system across everyday applications.',
-    rationale: 'Vivid yellow and deep blue create strong contrast, while the sweeping symbol adds movement. Inter supports a consistent typographic voice across print and digital mockups.',
     overview: 'A visual identity for Ray Inc. pairing a sweeping symbol and wordmark with bright yellow, deep blue, and light gray. Inter typography supports a clear, modern visual system.',
     results: 'The brand board brings together logo variations, typography, a color palette, apparel, stationery, business cards, digital mockups, and a luggage tag.',
     year: '2026',
@@ -196,7 +189,8 @@ const state = {
   backgroundElements: [],
   previousOverflow: '',
   revealObserver: null,
-  artworkCleanup: null,
+  projectId: null,
+  historyClosing: false,
   drawerOverflow: '',
 };
 
@@ -208,9 +202,8 @@ const applyTheme = (theme, persist = true) => {
   document.documentElement.dataset.theme = activeTheme;
   qa('img[data-light-src]').forEach(image => {
     image.src = activeTheme === 'dark' ? image.dataset.darkSrc : image.dataset.lightSrc;
-  });
-  qa('.modal-hero-image-link[data-light-href]').forEach(link => {
-    link.href = activeTheme === 'dark' ? link.dataset.darkHref : link.dataset.lightHref;
+    const link = image.closest('.modal-hero-image-link');
+    if (link) link.href = image.src;
   });
 
   if (elements.themeToggle) {
@@ -301,45 +294,12 @@ const renderProjects = () => {
   setupRevealAnimations();
 };
 
-const setupArtworkViewer = () => {
-  const viewport = q('.artwork-viewport', elements.modalInner);
-  const image = q('.modal-hero-img-src', viewport || elements.modalInner);
-  if (!viewport || !image) return;
-  let zoom = 1;
-  const update = () => {
-    if (!image.naturalWidth) return;
-    const fitWidth = Math.min(viewport.clientWidth, Math.min(innerHeight * .7, 800) * image.naturalWidth / image.naturalHeight);
-    image.style.width = `${fitWidth * zoom}px`;
-    viewport.dataset.zoom = String(zoom);
-    q('.artwork-zoom-status', elements.modalInner).textContent = `${Math.round(zoom * 100)}%`;
-    q('[data-artwork-zoom="out"]', elements.modalInner).disabled = zoom === 1;
-    q('[data-artwork-zoom="in"]', elements.modalInner).disabled = zoom === 4;
-    if (zoom === 1) viewport.scrollTo(0, 0);
-  };
-  qa('[data-artwork-zoom]', elements.modalInner).forEach(button => {
-    button.addEventListener('click', () => {
-      const action = button.dataset.artworkZoom;
-      zoom = action === 'fit' ? 1 : Math.max(1, Math.min(4, zoom + (action === 'in' ? .5 : -.5)));
-      update();
-    });
-  });
-  image.addEventListener('load', update);
-  const resizeObserver = new ResizeObserver(update);
-  resizeObserver.observe(viewport);
-  window.addEventListener('resize', update);
-  // Disconnect when another project replaces this viewer or the modal closes.
-  state.artworkCleanup?.();
-  state.artworkCleanup = () => {
-    image.removeEventListener('load', update);
-    resizeObserver.disconnect();
-    window.removeEventListener('resize', update);
-  };
-  update();
-};
-
-const openProjectModal = projectId => {
+const openProjectModal = (projectId, fromHistory = false) => {
   const project = PROJECT_DATA.find(item => item.id === Number(projectId));
-  if (!project || !elements.projectModal || !elements.modalInner) return;
+  if (!project || !elements.projectModal || !elements.modalInner || state.historyClosing) return;
+  if (elements.projectModal.classList.contains('open')) closeProjectModal();
+  if (!fromHistory) history.pushState({ ...history.state, portfolioProject: project.id }, '');
+  state.projectId = project.id;
 
   const paletteMarkup = project.colors.map((color, index) => `
     <div class="color-swatch" style="background: ${color};">
@@ -348,7 +308,8 @@ const openProjectModal = projectId => {
     </div>
   `).join('');
 
-  const processMarkup = project.process.map((step, index) => `
+  const caseStudySteps = [project.process[0], { title: 'Concept', desc: project.overview }, ...project.process.slice(1)];
+  const processMarkup = caseStudySteps.map((step, index) => `
     <article class="process-step">
       <span class="process-step-number">0${index + 1}</span>
       <div>
@@ -358,24 +319,17 @@ const openProjectModal = projectId => {
     </article>
   `).join('');
 
+  const hasImage = Boolean(project.image);
   const categoryLabel = (project.categories || [project.category]).join(' &amp; ');
   elements.modalInner.innerHTML = `
     <div class="modal-project-image">
-      <div class="modal-hero-img">
-          <div class="artwork-toolbar" role="group" aria-label="Artwork controls">
-            <span class="artwork-label">Brand board</span>
-            <div class="artwork-zoom-controls">
-              <button type="button" data-artwork-zoom="out" aria-label="Zoom out" aria-controls="artworkViewport" disabled>&minus;</button>
-              <output class="artwork-zoom-status" aria-live="polite" aria-label="Artwork zoom">100%</output>
-              <button type="button" data-artwork-zoom="in" aria-label="Zoom in" aria-controls="artworkViewport">+</button>
-              <button type="button" data-artwork-zoom="fit" aria-controls="artworkViewport">Fit</button>
-            </div>
-            <a class="modal-hero-image-link" href="${getProjectImage(project)}" data-light-href="${project.image}" data-dark-href="${project.darkImage || project.image}" target="_blank" rel="noopener noreferrer" aria-label="Open ${project.title} full size artwork in a new tab">Full size &#8599;</a>
-          </div>
-          <div class="artwork-viewport" id="artworkViewport" tabindex="0" role="region" aria-label="${project.title} artwork" aria-describedby="artworkHelp" data-zoom="1">
-            <img class="modal-hero-img-src" src="${getProjectImage(project)}" data-light-src="${project.image}" data-dark-src="${project.darkImage || project.image}" alt="${project.title} brand board showing its logo, color palette, typography, and applications" />
-          </div>
-          <p class="artwork-help" id="artworkHelp">Zoom in to inspect details. Scroll or swipe to explore the enlarged artwork.</p>
+      <div class="modal-hero-img" ${hasImage ? '' : `style="background: linear-gradient(135deg, ${project.colors[0]}, ${project.colors[1]});"`}>
+        ${hasImage ? `
+          <a class="modal-hero-image-link" href="${getProjectImage(project)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${project.title} image in new tab">
+            <img class="modal-hero-img-src" src="${getProjectImage(project)}" data-light-src="${project.image}" data-dark-src="${project.darkImage || project.image}" alt="${project.title} ${project.category} project image" />
+          </a>
+        ` : ''}
+        <div class="modal-visual-meta"><span>Project · ${String(PROJECT_DATA.indexOf(project) + 1).padStart(2, '0')}</span><span>${hasImage ? 'Open image ↗' : project.category}</span></div>
       </div>
     </div>
     <section class="modal-brief">
@@ -390,8 +344,7 @@ const openProjectModal = projectId => {
       </div>
     </section>
     <section class="modal-process">
-      <h3 class="modal-section-title">Design approach</h3>
-      <p class="modal-rationale">${project.rationale}</p>
+      <h3 class="modal-section-title">Design process</h3>
       <div class="process-steps">${processMarkup}</div>
     </section>
     <section class="modal-palette-section">
@@ -399,13 +352,13 @@ const openProjectModal = projectId => {
       <div class="color-palette">${paletteMarkup}</div>
     </section>
     <section class="modal-results">
-      <h3 class="modal-section-title">Deliverables shown</h3>
+      <p class="modal-section-title">Results</p>
       <p class="modal-results-copy">${project.results}</p>
     </section>
   `;
 
   closeDrawer();
-  state.modalTrigger = document.activeElement;
+  state.modalTrigger = q(`.portfolio-card[data-id="${project.id}"]`) || document.activeElement;
   state.previousOverflow = document.body.style.overflow;
   state.backgroundElements = Array.from(document.body.children)
     .filter(element => element !== elements.projectModal && !['SCRIPT', 'STYLE'].includes(element.tagName))
@@ -414,7 +367,6 @@ const openProjectModal = projectId => {
   elements.projectModal.inert = false;
   elements.projectModal.setAttribute('aria-hidden', 'false');
   elements.projectModal.classList.add('open');
-  setupArtworkViewer();
   elements.projectModal.scrollTop = 0;
   document.body.style.overflow = 'hidden';
   elements.modalClose?.focus();
@@ -423,14 +375,23 @@ const openProjectModal = projectId => {
 const closeProjectModal = () => {
   if (!elements.projectModal?.classList.contains('open')) return;
   elements.projectModal.classList.remove('open');
-  state.artworkCleanup?.();
-  state.artworkCleanup = null;
+  state.projectId = null;
   state.backgroundElements.forEach(({ element, inert }) => { element.inert = inert; });
   state.backgroundElements = [];
   document.body.style.overflow = state.previousOverflow;
-  state.modalTrigger?.focus();
+  state.modalTrigger?.focus({ preventScroll: true });
   elements.projectModal.inert = true;
   elements.projectModal.setAttribute('aria-hidden', 'true');
+};
+
+const requestCloseProjectModal = () => {
+  if (!elements.projectModal?.classList.contains('open') || state.historyClosing) return;
+  const hasProjectEntry = history.state?.portfolioProject === state.projectId;
+  closeProjectModal();
+  if (hasProjectEntry) {
+    state.historyClosing = true;
+    history.back();
+  }
 };
 
 const closeDrawer = () => {
@@ -484,6 +445,13 @@ const setupRevealAnimations = () => {
 };
 
 const setupInteractions = () => {
+  window.addEventListener('popstate', event => {
+    state.historyClosing = false;
+    closeDrawer();
+    const projectId = event.state?.portfolioProject;
+    if (PROJECT_DATA.some(project => project.id === projectId)) openProjectModal(projectId, true);
+    else closeProjectModal();
+  });
   elements.servicesGrid?.addEventListener('click', event => {
     const link = event.target.closest('a[data-service-category]');
     if (!link) return;
@@ -547,13 +515,13 @@ const setupInteractions = () => {
   }
 
   if (elements.modalClose) {
-    elements.modalClose.addEventListener('click', closeProjectModal);
+    elements.modalClose.addEventListener('click', requestCloseProjectModal);
   }
 
   if (elements.projectModal) {
     elements.projectModal.addEventListener('click', event => {
       if (event.target === elements.projectModal) {
-        closeProjectModal();
+        requestCloseProjectModal();
       }
     });
   }
@@ -579,7 +547,7 @@ const setupInteractions = () => {
       }
     }
     if (event.key === 'Escape') {
-      closeProjectModal();
+      requestCloseProjectModal();
       closeDrawer();
     }
   });
