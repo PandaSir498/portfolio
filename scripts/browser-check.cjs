@@ -65,13 +65,13 @@ const endpoint = new Promise((resolve, reject) => {
   await send('Network.setBlockedURLs', { urls: ['http://*', 'https://*'] });
   await send('Page.navigate', { url: pathToFileURL(path.join(__dirname, '..', 'index.html')).href });
   for (let attempt = 0; attempt < 100; attempt++) {
-    if (await evaluate('document.querySelectorAll(".portfolio-card").length === 7')) break;
+    if (await evaluate('document.querySelectorAll(".portfolio-card").length === 8')) break;
     await new Promise(resolve => setTimeout(resolve, 100));
   }
   console.log('Page loaded');
-  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card").length'), 7);
+  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card").length'), 8);
   assert.equal(await evaluate('document.querySelectorAll(".portfolio-card.project-6").length'), 1);
-  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card.is-featured.is-spotlight").length'), 7);
+  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card.is-featured.is-spotlight").length'), 8);
   assert.equal(await evaluate('document.querySelectorAll(".project-3, [data-category=Poster]").length'), 0);
   assert.equal(await evaluate('document.querySelectorAll(".service-card").length'), 4);
   assert.deepEqual(await evaluate('Array.from(document.links).filter(link => link.getAttribute("href").startsWith("#") && !document.getElementById(link.getAttribute("href").slice(1))).map(link => link.getAttribute("href"))'), []);
@@ -99,6 +99,7 @@ const endpoint = new Promise((resolve, reject) => {
     [1, 'Bold Lobo', 'assets/images/projects/bold-lobo-brandboard.png'],
     [2, 'Curve', 'assets/images/projects/curve-brandboard.png'],
     [4, 'NEXORA Branding', 'assets/images/projects/nexora-branding.png'],
+    [9, 'Monochrome Logofolio 2026', 'assets/images/projects/Monochrome Logofolio 2026.png'],
     [6, 'Ray Inc.', 'assets/images/projects/Ray Inc. Brand Identity Board.png'],
   ]) {
     await evaluate(`document.querySelector('.project-${id}').scrollIntoView({block:'center', behavior:'instant'}); document.querySelector('.project-${id}').focus()`);
@@ -113,7 +114,7 @@ const endpoint = new Promise((resolve, reject) => {
     await closeModal();
     assert.equal(await evaluate('document.activeElement.dataset.id'), String(id));
   }
-  console.log('PASS: seven featured previews, full images, project details, and restored focus.');
+  console.log('PASS: eight featured previews, full images, project details, and restored focus.');
   // Mobile Back returns to the same gallery; Forward restores the earlier project view.
   await send('Emulation.setDeviceMetricsOverride', {width:375, height:900, deviceScaleFactor:1, mobile:true});
   await evaluate('document.querySelector(".project-5").scrollIntoView({block:"center", behavior:"instant"})');
@@ -203,7 +204,7 @@ const endpoint = new Promise((resolve, reject) => {
   assert.equal(await evaluate('document.querySelector("#navDrawer").inert'), true);
   assert.equal(await evaluate('document.body.style.overflow'), '');
   await evaluate('document.querySelector("[data-category=Logo]").click()');
-  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card").length'), 4);
+  assert.equal(await evaluate('document.querySelectorAll(".portfolio-card").length'), 5);
   assert.equal(await evaluate('document.querySelectorAll(".portfolio-card.project-6").length'), 1);
   await evaluate('document.querySelector(".portfolio-card.project-6").click()');
   assert.equal(await evaluate('document.querySelector("#projectTitle").textContent'), 'Ray Inc.');

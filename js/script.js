@@ -160,6 +160,25 @@ const PROJECT_DATA = [
       { title: 'Applications', desc: 'Presenting the identity across apparel, print materials, digital mockups, and a luggage tag.' },
     ],
   },
+  {
+    id: 9,
+    title: 'Monochrome Logofolio 2026',
+    category: 'Logo',
+    summary: 'Four distinctive identities. A selection of symbols and wordmarks in black and white.',
+    overview: 'A collection of selected logo identities for ORIVEX, Pod, YAX, and Pine, presented in monochrome. Geometric symbols, flowing forms, and expressive typography give each mark its own character.',
+    results: 'The logofolio brings together four final logo identities in a unified black and white presentation.',
+    year: '2026',
+    client: 'ORIVEX, Pod, YAX & Pine',
+    role: 'Logo Design',
+    image: 'assets/images/projects/Monochrome Logofolio 2026.png',
+    colors: ['#000000', '#FFFFFF'],
+    colorNames: ['Black', 'White'],
+    process: [
+      { title: 'Visual Direction', desc: 'A monochrome presentation focused on the form and typography of each identity.' },
+      { title: 'Logo Collection', desc: 'ORIVEX pairs a radial symbol with a wide wordmark; Pod uses bold lettering; YAX combines a flowing symbol with rounded type; Pine pairs curved forms with a clear wordmark.' },
+      { title: 'Presentation', desc: 'Four logos arranged in a consistent grid with white marks on a black background.' },
+    ],
+  },
 ];
 
 function q(selector, target = document) {
