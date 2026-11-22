@@ -27,6 +27,7 @@ const PROJECT_DATA = [
   {
     id: 7,
     title: 'Everlast',
+    designRationale: 'A sculptural symbol and restrained monochrome palette establish the futuristic direction, while Orbitron and Inter keep the identity consistent across digital and physical applications.',
     category: 'Branding',
     categories: ['Branding', 'Logo'],
     summary: 'A monochrome identity with a futuristic edge. Built for what lasts.',
@@ -47,6 +48,7 @@ const PROJECT_DATA = [
   {
     id: 8,
     title: 'Flash',
+    designRationale: 'The angular lightning motif expresses movement, while the electric-green and black palette creates strong contrast. Repeating these elements across touchpoints keeps the identity recognizable.',
     category: 'Branding',
     categories: ['Branding', 'Logo'],
     summary: 'Electric green. Bold motion. A visual identity built around speed and possibility.',
@@ -143,6 +145,7 @@ const PROJECT_DATA = [
   {
     id: 6,
     title: 'Ray Inc.',
+    designRationale: 'The sweeping mark gives Ray Inc. a recognizable visual anchor. Vivid yellow brings energy against deep blue, while clean typography keeps the applications legible.',
     category: 'Branding',
     categories: ['Branding', 'Logo'],
     summary: 'Vivid yellow meets deep blue. A sweeping symbol and a clear visual system across everyday applications.',
@@ -163,6 +166,7 @@ const PROJECT_DATA = [
   {
     id: 10,
     title: 'POD',
+    designRationale: 'The rounded POD wordmark establishes the streetwear character. Rich purple and warm neutrals carry the identity consistently across garments, packaging, and small-format labels.',
     category: 'Branding',
     categories: ['Branding', 'Logo'],
     summary: 'Bold lettering in purple and cream. A streetwear identity across apparel, packaging, and print.',
@@ -201,6 +205,94 @@ const PROJECT_DATA = [
   },
 ];
 
+/**
+ * Publish only approved, verifiable testimonials with permission from the client.
+ * Shape: { quote: '...', name: '...', role: '...', approved: true }
+ * An empty array deliberately keeps the feedback section hidden.
+ */
+const VERIFIED_CLIENT_FEEDBACK = [];
+
+const ATTRIBUTION_STORAGE_KEY = 'portfolio-campaign-attribution';
+
+const getProjectSlug = project => project.title.toLowerCase()
+  .normalize('NFKD')
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/^-|-$/g, '');
+
+const getSharedProject = () => {
+  const projectKey = new URLSearchParams(window.location.search).get('project');
+  return projectKey ? PROJECT_DATA.find(project =>
+    getProjectSlug(project) === projectKey || String(project.id) === projectKey
+  ) : null;
+};
+
+const getProjectShareUrl = project => {
+  const url = new URL(window.location.pathname, window.location.origin);
+  url.searchParams.set('project', getProjectSlug(project));
+  url.hash = 'portfolio';
+  return url.toString();
+};
+
+/** Track tagged LinkedIn inquiries without collecting personal browsing data. */
+const getCampaignAttribution = () => {
+  const params = new URLSearchParams(window.location.search);
+  const clean = value => (value || '').replace(/[^a-zA-Z0-9 _.-]/g, '').slice(0, 100);
+  const source = clean(params.get('utm_source'));
+  const medium = clean(params.get('utm_medium'));
+  const campaign = clean(params.get('utm_campaign'));
+  const content = clean(params.get('utm_content'));
+  let fromLinkedIn = false;
+  try {
+    const host = new URL(document.referrer).hostname.toLowerCase();
+    fromLinkedIn = host === 'linkedin.com' || host.endsWith('.linkedin.com') || host === 'lnkd.in';
+  } catch { /* Direct visits do not have a valid referrer. */ }
+
+  if (source || medium || campaign || content || fromLinkedIn) {
+    const attribution = {
+      source: source || (fromLinkedIn ? 'linkedin' : 'unknown'),
+      medium, campaign, content,
+      landingPath: window.location.pathname
+    };
+    try { sessionStorage.setItem(ATTRIBUTION_STORAGE_KEY, JSON.stringify(attribution)); } catch {}
+    return attribution;
+  }
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(ATTRIBUTION_STORAGE_KEY));
+    if (saved && typeof saved.source === 'string') return saved;
+  } catch {}
+  return { source: 'direct-or-unknown', medium: '', campaign: '', content: '', landingPath: window.location.pathname };
+};
+
+const campaignAttribution = getCampaignAttribution();
+
+// Events become active automatically if an analytics provider defines window.gtag.
+// Without an analytics account, tagged campaign details still accompany inquiries.
+const trackPortfolioEvent = (eventName, details = {}) => {
+  if (typeof window.gtag === 'function') window.gtag('event', eventName, details);
+};
+
+const renderClientProof = () => {
+  const section = document.querySelector('#clientProof');
+  const entries = document.querySelector('#clientProofEntries');
+  if (!section || !entries) return;
+  const verified = VERIFIED_CLIENT_FEEDBACK.filter(item =>
+    item.approved === true && item.quote?.trim() && item.name?.trim()
+  );
+  section.hidden = verified.length === 0;
+  entries.replaceChildren();
+  verified.forEach(item => {
+    const block = document.createElement('blockquote');
+    const quote = document.createElement('p');
+    quote.className = 'about-bio';
+    quote.textContent = '“' + item.quote.trim() + '”';
+    const author = document.createElement('p');
+    author.className = 'section-label';
+    author.textContent = item.name.trim() + (item.role?.trim() ? ' · ' + item.role.trim() : '');
+    block.append(quote, author);
+    entries.append(block);
+  });
+};
+
 function q(selector, target = document) {
   return target.querySelector(selector);
 }
@@ -230,6 +322,7 @@ const state = {
   revealObserver: null,
   projectId: null,
   historyClosing: false,
+  openedFromSharedLink: false,
   drawerOverflow: '',
 };
 
@@ -337,7 +430,15 @@ const openProjectModal = (projectId, fromHistory = false) => {
   const project = PROJECT_DATA.find(item => item.id === Number(projectId));
   if (!project || !elements.projectModal || !elements.modalInner || state.historyClosing) return;
   if (elements.projectModal.classList.contains('open')) closeProjectModal();
-  if (!fromHistory) history.pushState({ ...history.state, portfolioProject: project.id }, '');
+  if (!fromHistory) {
+    state.openedFromSharedLink = false;
+    history.pushState(
+      { ...history.state, portfolioProject: project.id, portfolioModalEntry: true },
+      '',
+      getProjectShareUrl(project)
+    );
+    trackPortfolioEvent('view_item', { item_id: getProjectSlug(project), item_name: project.title });
+  }
   state.projectId = project.id;
 
   const paletteMarkup = project.colors.map((color, index) => `
@@ -376,6 +477,7 @@ const openProjectModal = (projectId, fromHistory = false) => {
       <span class="modal-tag">${categoryLabel}</span>
       <h2 class="modal-title" id="projectTitle">${project.title}</h2>
       <p class="modal-overview">${project.overview}</p>
+      ${project.designRationale ? `<p class="modal-overview">${project.designRationale}</p>` : ''}
       <div class="modal-meta">
         <div class="meta-item"><p class="lbl">Brand</p><p class="val">${project.client}</p></div>
         <div class="meta-item"><p class="lbl">Year</p><p class="val">${project.year}</p></div>
@@ -391,8 +493,9 @@ const openProjectModal = (projectId, fromHistory = false) => {
       <div class="color-palette">${paletteMarkup}</div>
     </section>
     <section class="modal-results">
-      <p class="modal-section-title">Results</p>
+      <p class="modal-section-title">Deliverables &amp; applications</p>
       <p class="modal-results-copy">${project.results}</p>
+      <button class="btn-outline" type="button" id="copyProjectLink">Copy project link</button>
     </section>
   `;
 
@@ -426,8 +529,14 @@ const closeProjectModal = () => {
 const requestCloseProjectModal = () => {
   if (!elements.projectModal?.classList.contains('open') || state.historyClosing) return;
   const hasProjectEntry = history.state?.portfolioProject === state.projectId;
+  const initialSharedLink = state.openedFromSharedLink;
   closeProjectModal();
-  if (hasProjectEntry) {
+  if (initialSharedLink) {
+    state.openedFromSharedLink = false;
+    const url = new URL(window.location.href);
+    url.searchParams.delete('project');
+    history.replaceState({ ...history.state, portfolioProject: null, portfolioModalEntry: false }, '', url.toString());
+  } else if (hasProjectEntry && history.state?.portfolioModalEntry) {
     state.historyClosing = true;
     history.back();
   }
@@ -487,7 +596,7 @@ const setupInteractions = () => {
   window.addEventListener('popstate', event => {
     state.historyClosing = false;
     closeDrawer();
-    const projectId = event.state?.portfolioProject;
+    const projectId = event.state?.portfolioProject || getSharedProject()?.id;
     if (PROJECT_DATA.some(project => project.id === projectId)) openProjectModal(projectId, true);
     else closeProjectModal();
   });
@@ -559,6 +668,23 @@ const setupInteractions = () => {
 
   if (elements.projectModal) {
     elements.projectModal.addEventListener('click', event => {
+      const copy = event.target.closest('#copyProjectLink');
+      if (copy) {
+        const project = PROJECT_DATA.find(item => item.id === state.projectId);
+        if (!project) return;
+        const link = getProjectShareUrl(project);
+        if (navigator.clipboard?.writeText) {
+          navigator.clipboard.writeText(link)
+            .then(() => {
+              copy.textContent = 'Link copied!';
+              window.setTimeout(() => { if (copy.isConnected) copy.textContent = 'Copy project link'; }, 2000);
+            })
+            .catch(() => { window.prompt('Copy project link:', link); });
+        } else {
+          window.prompt('Copy project link:', link);
+        }
+        return;
+      }
       if (event.target === elements.projectModal) {
         requestCloseProjectModal();
       }
@@ -617,6 +743,12 @@ const setupInteractions = () => {
       const budget = q('#budget', elements.contactForm)?.value.trim();
       const message = q('#message', elements.contactForm)?.value.trim();
 
+      // Hidden honeypot: reject likely bot submissions before contacting EmailJS.
+      if (q('#websiteField', elements.contactForm)?.value.trim()) {
+        showFormMessage('Unable to submit. Please use the email link to contact me directly.', false);
+        return;
+      }
+
       // Basic validation
       if (!firstName || !lastName || !email || !message) {
         showFormMessage('Please complete all required fields.', false);
@@ -659,6 +791,13 @@ const setupInteractions = () => {
         '',
         'Project details:',
         message,
+        '',
+        'Campaign attribution (for understanding inquiries):',
+        `Source: ${campaignAttribution.source || 'direct-or-unknown'}`,
+        `Medium: ${campaignAttribution.medium || 'not specified'}`,
+        `Campaign: ${campaignAttribution.campaign || 'not specified'}`,
+        `Content: ${campaignAttribution.content || 'not specified'}`,
+        `Landing page: ${campaignAttribution.landingPath || '/'}`,
       ].join('\n');
       Promise.resolve().then(() => emailjs.send(
           'service_qlu3o95',
@@ -667,6 +806,8 @@ const setupInteractions = () => {
             first_name: firstName,
             last_name: lastName,
             email: email,
+            reply_to: email,
+            from_name: `${firstName} ${lastName}`,
             service: service || '',
             budget: budget || '',
             // The EmailJS template currently displays {{message}}. Including the
@@ -675,9 +816,16 @@ const setupInteractions = () => {
             message: enquirySummary,
           }
         ))
-        .then(() => {
+        .then(response => {
+          if (typeof response?.status === 'number' && (response.status < 200 || response.status >= 300)) {
+            throw new Error(`EmailJS returned status ${response.status}`);
+          }
           showFormMessage('✓ Message sent successfully!', true);
-
+          trackPortfolioEvent('generate_lead', {
+            method: 'contact_form',
+            service: service || 'not specified',
+            campaign_source: campaignAttribution.source
+          });
           elements.contactForm.reset();
         })
         .catch(error => {
@@ -858,9 +1006,20 @@ const init = () => {
   setupTapSounds();
   setupThemeToggle();
   renderServices();
+  renderClientProof();
   renderFilters();
   renderProjects();
   setupInteractions();
+  const sharedProject = getSharedProject();
+  if (sharedProject) {
+    state.openedFromSharedLink = true;
+    history.replaceState(
+      { ...history.state, portfolioProject: sharedProject.id, portfolioModalEntry: false },
+      '',
+      window.location.href
+    );
+    openProjectModal(sharedProject.id, true);
+  }
   setupMovableMusic();
   updateNavbarAndProgress();
   let scrollPending = false;
