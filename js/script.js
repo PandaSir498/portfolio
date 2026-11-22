@@ -26,12 +26,13 @@ const SERVICES_DATA = [
 const PROJECT_DATA = [
   {
     id: 7,
+    slug: 'everlast',
     title: 'Everlast',
     category: 'Branding',
     categories: ['Branding', 'Logo'],
     summary: 'A monochrome identity with a futuristic edge. Built for what lasts.',
-    overview: 'A futuristic visual identity for Everlast, combining a sculptural symbol and wordmark with black, charcoal, off white, and silver gray. Orbitron headings and Inter body text complete the visual system.',
-    results: 'The brand board presents logo variations, an app icon, typography, a color palette, business cards, signage, a bottle, apparel, and a digital screen mockup.',
+    overview: 'Everlast pairs a sculptural symbol and wordmark with a monochrome palette of black, charcoal, off white, and silver gray. Metallic surfaces and flowing forms establish the futuristic direction, while Orbitron headings and Inter body text carry the identity across its applications.',
+    results: 'The final brand board brings the logo variations, typography, and color palette together with an app icon, business cards, signage, a bottle, apparel, and a digital screen mockup. These presentations show how the same visual system carries across print, products, and digital use.',
     year: '2026',
     client: 'Everlast',
     role: 'Logo + Brand Identity',
@@ -39,19 +40,20 @@ const PROJECT_DATA = [
     colors: ['#000000', '#1A1A1A', '#F5F5F5', '#A7A7A7'],
     colorNames: ['Pure Black', 'Charcoal', 'Off White', 'Silver Gray'],
     process: [
-      { title: 'Visual Direction', desc: 'Combining monochrome tones, metallic surfaces, and flowing forms for a futuristic identity.' },
-      { title: 'Identity', desc: 'Pairing a sculptural symbol and wordmark with Orbitron and Inter typography.' },
-      { title: 'Applications', desc: 'Presenting the identity across an app icon, print materials, signage, apparel, and digital mockups.' },
+      { title: 'Visual Direction', desc: 'Monochrome tones keep the presentation consistent, while metallic surfaces and flowing forms express the futuristic direction.' },
+      { title: 'Identity', desc: 'A sculptural symbol and wordmark define the identity. Orbitron headings provide its futuristic voice, supported by Inter body text.' },
+      { title: 'Applications', desc: 'The app icon, print materials, signage, apparel, and digital mockups demonstrate the identity at different scales and across different surfaces.' },
     ],
   },
   {
     id: 8,
+    slug: 'flash',
     title: 'Flash',
     category: 'Branding',
     categories: ['Branding', 'Logo'],
     summary: 'Electric green. Bold motion. A visual identity built around speed and possibility.',
-    overview: 'A visual identity for Flash built around an angular lightning symbol, a bold wordmark, electric green, and deep black. Raleway typography and streaks of light carry the themes of speed, energy, and innovation.',
-    results: 'The brand board brings together logo variations and clear space, typography, a color palette, app icons, business cards, stationery, packaging, digital screens, billboards, and supporting patterns.',
+    overview: 'Flash uses an angular lightning symbol and bold wordmark to express speed and energy. Electric green against deep black gives the identity its contrast, while Raleway typography, light trails, and supporting patterns connect the logo to the wider visual system.',
+    results: 'The final brand board documents logo variations and clear space, Raleway typography, the color palette, and supporting patterns. App icons, business cards, stationery, packaging, digital screens, and billboards show the identity extending across print and digital applications.',
     year: '2026',
     client: 'Flash',
     role: 'Logo + Brand Identity',
@@ -59,9 +61,9 @@ const PROJECT_DATA = [
     colors: ['#39FF14', '#0D0D0D', '#1A1A1A', '#FFFFFF'],
     colorNames: ['Electric Green', 'Deep Black', 'Neutral Gray', 'White'],
     process: [
-      { title: 'Visual Direction', desc: 'Using electric green, deep black, and light trails to express energy and movement.' },
-      { title: 'Identity', desc: 'Developing an angular symbol, logo variations, Raleway typography, and supporting patterns.' },
-      { title: 'Applications', desc: 'Showing the identity across print, packaging, app icons, digital screens, and billboards.' },
+      { title: 'Visual Direction', desc: 'Electric green and deep black establish strong contrast. Light trails reinforce the themes of speed, energy, and movement.' },
+      { title: 'Identity', desc: 'The angular lightning symbol, bold wordmark, and Raleway typography form the core system, supported by logo variations, clear space, and patterns.' },
+      { title: 'Applications', desc: 'Print materials, packaging, app icons, digital screens, and billboards carry the same visual elements across small and large formats.' },
     ],
   },
   {
@@ -142,12 +144,13 @@ const PROJECT_DATA = [
   },
   {
     id: 6,
+    slug: 'ray-inc',
     title: 'Ray Inc.',
     category: 'Branding',
     categories: ['Branding', 'Logo'],
     summary: 'Vivid yellow meets deep blue. A sweeping symbol and a clear visual system across everyday applications.',
-    overview: 'A visual identity for Ray Inc. pairing a sweeping symbol and wordmark with bright yellow, deep blue, and light gray. Inter typography supports a clear, modern visual system.',
-    results: 'The brand board brings together logo variations, typography, a color palette, apparel, stationery, business cards, digital mockups, and a luggage tag.',
+    overview: 'Ray Inc. combines a sweeping symbol and wordmark with vivid yellow, deep blue, and light gray. The contrast between the colors gives the identity a clear visual signature, while Inter typography provides consistency across its print, apparel, and digital presentations.',
+    results: 'The final brand board presents the logo variations, Inter typography, and color palette alongside apparel, stationery, business cards, digital mockups, and a luggage tag. Together, these applications show the symbol and color system working across different formats.',
     year: '2026',
     client: 'Ray Inc.',
     role: 'Logo + Brand Identity',
@@ -155,19 +158,20 @@ const PROJECT_DATA = [
     colors: ['#F2FF21', '#0F3A4A', '#E8ECFF'],
     colorNames: ['Ray Yellow', 'Ray Blue', 'Light Gray'],
     process: [
-      { title: 'Visual Direction', desc: 'Combining vivid yellow with deep blue and light gray for a distinctive identity.' },
-      { title: 'Logo', desc: 'Pairing a sweeping symbol with the Ray Inc. wordmark and Inter typography.' },
-      { title: 'Applications', desc: 'Presenting the identity across apparel, print materials, digital mockups, and a luggage tag.' },
+      { title: 'Visual Direction', desc: 'Vivid yellow contrasts with deep blue, while light gray provides a lighter supporting tone across the identity.' },
+      { title: 'Logo', desc: 'The sweeping symbol and Ray Inc. wordmark establish the core identity. Inter typography connects the logo presentation with supporting information.' },
+      { title: 'Applications', desc: 'Apparel, stationery, business cards, digital mockups, and a luggage tag demonstrate consistent use of the symbol, typography, and palette.' },
     ],
   },
   {
     id: 10,
+    slug: 'pod',
     title: 'POD',
     category: 'Branding',
     categories: ['Branding', 'Logo'],
     summary: 'Bold lettering in purple and cream. A streetwear identity across apparel, packaging, and print.',
-    overview: 'A visual identity for POD built around a rounded wordmark and the tagline An Inspiration. Purple, taupe, cream, and black connect the logo with apparel, packaging, and printed materials.',
-    results: 'The brand collage presents logo variations, a color palette, a hoodie, a cap, business cards, a presentation box, shopping bags, hang tags, and a clothing label.',
+    overview: 'POD is a streetwear identity centered on a rounded wordmark and the tagline An Inspiration. Purple, taupe, cream, and black create a consistent visual connection between the logo, apparel, packaging, and printed materials, with light and dark logo variations shown throughout the presentation.',
+    results: 'The final collage presents the logo variations and color palette alongside a hoodie, cap, business cards, presentation box, shopping bags, hang tags, and a clothing label. The applications bring the wordmark and tagline together across clothing, retail packaging, and smaller printed details.',
     year: '2026',
     client: 'POD',
     role: 'Logo + Brand Identity',
@@ -175,9 +179,9 @@ const PROJECT_DATA = [
     colors: ['#65277D', '#947D73', '#E5D6BF', '#111111'],
     colorNames: ['Purple', 'Taupe', 'Cream', 'Black'],
     process: [
-      { title: 'Visual Direction', desc: 'Combining rich purple with warm neutrals and black for a streetwear identity.' },
-      { title: 'Logo', desc: 'Pairing a rounded POD wordmark with the tagline An Inspiration in light and dark variations.' },
-      { title: 'Applications', desc: 'Showing the identity across apparel, packaging, business cards, shopping bags, and clothing tags.' },
+      { title: 'Visual Direction', desc: 'Rich purple, taupe, cream, and black connect the streetwear presentation across fabric, packaging, and printed materials.' },
+      { title: 'Logo', desc: 'The rounded POD wordmark is paired with the tagline An Inspiration. Light and dark variations show the same identity against different backgrounds.' },
+      { title: 'Applications', desc: 'The hoodie, cap, packaging, business cards, shopping bags, and clothing tags demonstrate how the wordmark and palette repeat across the brand materials.' },
     ],
   },
   {
@@ -200,6 +204,44 @@ const PROJECT_DATA = [
     ],
   },
 ];
+
+/**
+ * Future testimonials: { name: string, quote: string, role?: string,
+ * company?: string, projectId?: number, verified: boolean,
+ * approvedForPublication: boolean }. Add only genuine, approved client reviews.
+ * No section or renderer is mounted; this stays entirely invisible.
+ */
+const TESTIMONIALS_DATA = [];
+
+const CAMPAIGN_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+const CAMPAIGN_STORAGE_KEY = 'portfolio-campaign';
+let campaignAttribution = {};
+
+const sanitizeCampaign = value => Object.fromEntries(CAMPAIGN_KEYS.flatMap(key => {
+  if (typeof value?.[key] !== 'string') return [];
+  const text = value[key].replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 150);
+  return text ? [[key, text]] : [];
+}));
+
+const setupCampaignAttribution = () => {
+  try { campaignAttribution = sanitizeCampaign(JSON.parse(sessionStorage.getItem(CAMPAIGN_STORAGE_KEY))); } catch {}
+  const incoming = sanitizeCampaign(Object.fromEntries(new URLSearchParams(location.search)));
+  if (Object.keys(incoming).length) {
+    // The latest tagged visit replaces the campaign; untagged visits retain it.
+    campaignAttribution = incoming;
+    try { sessionStorage.setItem(CAMPAIGN_STORAGE_KEY, JSON.stringify(incoming)); } catch {}
+  }
+  // Optional integration point: no analytics library, network request, or identity data.
+  window.portfolioCampaign = Object.freeze({ getAttribution: () => ({ ...campaignAttribution }) });
+  if (Object.keys(campaignAttribution).length) {
+    window.dispatchEvent(new CustomEvent('portfolio:attribution', { detail: { ...campaignAttribution } }));
+  }
+};
+
+const projectFromUrl = () => {
+  const slug = new URLSearchParams(location.search).get('project');
+  return PROJECT_DATA.find(project => (project.slug || String(project.id)) === slug);
+};
 
 function q(selector, target = document) {
   return target.querySelector(selector);
@@ -337,7 +379,11 @@ const openProjectModal = (projectId, fromHistory = false) => {
   const project = PROJECT_DATA.find(item => item.id === Number(projectId));
   if (!project || !elements.projectModal || !elements.modalInner || state.historyClosing) return;
   if (elements.projectModal.classList.contains('open')) closeProjectModal();
-  if (!fromHistory) history.pushState({ ...history.state, portfolioProject: project.id }, '');
+  if (!fromHistory) {
+    const url = new URL(location.href);
+    url.searchParams.set('project', project.slug || String(project.id));
+    history.pushState({ ...history.state, portfolioProject: project.id, portfolioProjectEntry: true }, '', url);
+  }
   state.projectId = project.id;
 
   const paletteMarkup = project.colors.map((color, index) => `
@@ -425,11 +471,17 @@ const closeProjectModal = () => {
 
 const requestCloseProjectModal = () => {
   if (!elements.projectModal?.classList.contains('open') || state.historyClosing) return;
-  const hasProjectEntry = history.state?.portfolioProject === state.projectId;
+  const hasProjectEntry = history.state?.portfolioProject === state.projectId && history.state?.portfolioProjectEntry;
   closeProjectModal();
   if (hasProjectEntry) {
     state.historyClosing = true;
     history.back();
+  } else {
+    // A directly shared popup closes in place instead of leaving the portfolio.
+    const url = new URL(location.href);
+    url.searchParams.delete('project');
+    const { portfolioProject, portfolioProjectEntry, ...rest } = history.state || {};
+    history.replaceState(rest, '', url);
   }
 };
 
@@ -487,7 +539,7 @@ const setupInteractions = () => {
   window.addEventListener('popstate', event => {
     state.historyClosing = false;
     closeDrawer();
-    const projectId = event.state?.portfolioProject;
+    const projectId = projectFromUrl()?.id || event.state?.portfolioProject;
     if (PROJECT_DATA.some(project => project.id === projectId)) openProjectModal(projectId, true);
     else closeProjectModal();
   });
@@ -600,6 +652,19 @@ const setupInteractions = () => {
   });
 
   if (elements.contactForm && elements.formStatus) {
+    let sending = false;
+    let pendingDelivery = null;
+    let lastSubmittedAt = 0;
+    const cooldownKey = 'portfolio-inquiry-sent-at';
+    try { lastSubmittedAt = Number(sessionStorage.getItem(cooldownKey)) || 0; } catch {}
+    // Hidden bot trap: no layout, label, focus stop, or accessibility-tree entry.
+    const spamField = document.createElement('input');
+    Object.assign(spamField, { type: 'text', name: 'website', hidden: true, tabIndex: -1, autocomplete: 'off' });
+    spamField.setAttribute('aria-hidden', 'true');
+    elements.contactForm.append(spamField);
+    const limits = { fname: 120, lname: 120, email: 254, message: 6000 };
+    Object.entries(limits).forEach(([id, length]) => { q(`#${id}`, elements.contactForm).maxLength = length; });
+
     const showFormMessage = (message, success = true) => {
       elements.formStatus.textContent = message;
       elements.formStatus.classList.add('visible');
@@ -608,7 +673,21 @@ const setupInteractions = () => {
 
     elements.contactForm.addEventListener('submit', event => {
       event.preventDefault();
-      if (q('button[type="submit"]', elements.contactForm)?.disabled) return;
+      if (sending || q('button[type="submit"]', elements.contactForm)?.disabled) return;
+      if (pendingDelivery) {
+        showFormMessage('Your previous submission is still pending. Please email me directly before trying again.', false);
+        return;
+      }
+      qa('[aria-invalid]', elements.contactForm).forEach(field => {
+        field.removeAttribute('aria-invalid');
+        field.removeAttribute('aria-describedby');
+      });
+      const invalidField = (field, message) => {
+        showFormMessage(message, false);
+        field.setAttribute('aria-invalid', 'true');
+        field.setAttribute('aria-describedby', 'formStatus');
+        field.focus();
+      };
 
       const firstName = q('#fname', elements.contactForm)?.value.trim();
       const lastName = q('#lname', elements.contactForm)?.value.trim();
@@ -619,36 +698,59 @@ const setupInteractions = () => {
 
       // Basic validation
       if (!firstName || !lastName || !email || !message) {
-        showFormMessage('Please complete all required fields.', false);
-        qa('[required]', elements.contactForm).find(field => !field.value.trim())?.focus();
+        invalidField(qa('[required]', elements.contactForm).find(field => !field.value.trim()), 'Please complete all required fields.');
         return;
       }
 
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showFormMessage('Please enter a valid email address.', false);
-        q('#email', elements.contactForm)?.focus();
+      if (email.length > limits.email || !q('#email', elements.contactForm).validity.valid || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        invalidField(q('#email', elements.contactForm), 'Please enter a valid email address.');
+        return;
+      }
+
+      const invalidName = ['fname', 'lname'].find(id => {
+        const value = q(`#${id}`, elements.contactForm).value.trim();
+        return value.length > limits[id] || /[\u0000-\u001f\u007f]/.test(value);
+      });
+      if (invalidName) {
+        invalidField(q(`#${invalidName}`, elements.contactForm), 'Please enter a name of 120 characters or fewer.');
         return;
       }
 
       if (message.length < 20) {
-        showFormMessage('Add a bit more detail to help me understand your project (min 20 characters).', false);
-        q('#message', elements.contactForm)?.focus();
+        invalidField(q('#message', elements.contactForm), 'Add a bit more detail to help me understand your project (min 20 characters).');
+        return;
+      }
+      if (message.length > limits.message) {
+        invalidField(q('#message', elements.contactForm), 'Please keep your project details within 6,000 characters.');
+        return;
+      }
+      if (spamField.value.trim()) {
+        showFormMessage('Unable to send your message right now. Please try again or email me directly.', false);
+        return;
+      }
+      if (Date.now() - lastSubmittedAt < 30000) {
+        showFormMessage('Please wait a moment before sending another message, or email me directly.', false);
         return;
       }
 
       // Send via EmailJS
       // If EmailJS fails, we show the real error in console and a helpful UI message.
-      if (typeof emailjs === 'undefined' || !emailjs || typeof emailjs.send !== 'function') {
+      if (navigator.onLine === false || typeof emailjs === 'undefined' || !emailjs || typeof emailjs.send !== 'function') {
         showFormMessage('The contact service is unavailable. Please email me directly instead.', false);
         return;
       }
       const submitButton = q('button[type="submit"]', elements.contactForm);
+      const originalButtonMarkup = submitButton?.innerHTML;
       const fields = qa('input, textarea, select', elements.contactForm).filter(field => !field.disabled);
+      sending = true;
+      elements.contactForm.setAttribute('aria-busy', 'true');
       fields.forEach(field => { field.disabled = true; });
       if (submitButton) {
         submitButton.disabled = true;
         submitButton.textContent = 'Sending message…';
       }
+      const campaign = { ...campaignAttribution };
+      const campaignLines = CAMPAIGN_KEYS.filter(key => campaign[key]).map(key => `${key}: ${campaign[key]}`);
       const enquirySummary = [
         'NEW PROJECT ENQUIRY',
         '',
@@ -659,8 +761,10 @@ const setupInteractions = () => {
         '',
         'Project details:',
         message,
+        ...(campaignLines.length ? ['', 'Campaign attribution:', ...campaignLines] : []),
       ].join('\n');
-      Promise.resolve().then(() => emailjs.send(
+      // A single send: never retry an uncertain delivery automatically.
+      const delivery = Promise.resolve().then(() => emailjs.send(
           'service_qlu3o95',
           'template_ut7g5rl',
           {
@@ -669,12 +773,28 @@ const setupInteractions = () => {
             email: email,
             service: service || '',
             budget: budget || '',
+            ...campaign,
             // The EmailJS template currently displays {{message}}. Including the
             // structured summary here makes every detail visible without relying
             // on optional template variables.
             message: enquirySummary,
           }
-        ))
+        ));
+      pendingDelivery = delivery;
+      delivery.then(() => {
+        pendingDelivery = null;
+        lastSubmittedAt = Date.now();
+        try { sessionStorage.setItem(cooldownKey, String(lastSubmittedAt)); } catch {}
+        window.dispatchEvent(new CustomEvent('portfolio:inquiry-sent', { detail: { ...campaign } }));
+      }, () => { pendingDelivery = null; });
+      let deliveryTimer;
+      Promise.race([delivery, new Promise((resolve, reject) => {
+        deliveryTimer = setTimeout(() => {
+          const error = new Error('Delivery could not be confirmed');
+          error.deliveryUnconfirmed = true;
+          reject(error);
+        }, 20000);
+      })])
         .then(() => {
           showFormMessage('✓ Message sent successfully!', true);
 
@@ -682,13 +802,18 @@ const setupInteractions = () => {
         })
         .catch(error => {
           console.error('EmailJS send error:', error);
-          showFormMessage('Unable to send your message right now. Please try again or email me directly.', false);
+          showFormMessage(error?.deliveryUnconfirmed
+            ? 'Delivery could not be confirmed. Please email me directly before trying again.'
+            : 'Unable to send your message right now. Please try again or email me directly.', false);
         })
         .finally(() => {
+          clearTimeout(deliveryTimer);
+          sending = false;
+          elements.contactForm.removeAttribute('aria-busy');
           fields.forEach(field => { field.disabled = false; });
           if (submitButton) {
             submitButton.disabled = false;
-            submitButton.textContent = 'Send Message →';
+            submitButton.innerHTML = originalButtonMarkup;
           }
         });
     });
@@ -696,6 +821,8 @@ const setupInteractions = () => {
     // Clear the previous submission status when the enquiry changes.
     qa('input, textarea, select', elements.contactForm).forEach(input => {
       input.addEventListener('input', () => {
+        input.removeAttribute('aria-invalid');
+        input.removeAttribute('aria-describedby');
         elements.formStatus.classList.remove('visible');
       });
     });
@@ -855,12 +982,22 @@ const setupTapSounds = () => {
 };
 
 const init = () => {
+  setupCampaignAttribution();
   setupTapSounds();
   setupThemeToggle();
   renderServices();
   renderFilters();
   renderProjects();
   setupInteractions();
+  const sharedProject = projectFromUrl();
+  if (sharedProject) {
+    history.replaceState({ ...history.state, portfolioProject: sharedProject.id, portfolioProjectEntry: false }, '', location.href);
+    openProjectModal(sharedProject.id, true);
+    // A landing-page fragment can move focus after DOMContentLoaded.
+    window.addEventListener('load', () => requestAnimationFrame(() => {
+      if (state.projectId === sharedProject.id) elements.modalClose?.focus();
+    }), { once: true });
+  }
   setupMovableMusic();
   updateNavbarAndProgress();
   let scrollPending = false;
