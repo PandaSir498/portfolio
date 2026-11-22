@@ -192,6 +192,15 @@
   </div>
 </section>
 
+<!-- This section stays hidden until approved, genuine testimonials are provided. -->
+<section id="clientProof" hidden aria-labelledby="clientProofHeading">
+  <div class="container">
+    <p class="section-label">Client feedback</p>
+    <h2 class="services-heading" id="clientProofHeading">What clients say.</h2>
+    <div id="clientProofEntries"></div>
+  </div>
+</section>
+
 <div class="project-modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="projectTitle" aria-hidden="true" inert>
   <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
   <div class="modal-inner" id="modalInner"></div>
@@ -274,6 +283,11 @@
 
       <div class="reveal contact-form-wrap">
         <form class="contact-form" id="contactForm" novalidate>
+          <!-- Honeypot field: not shown to visitors, helps filter automated spam. -->
+          <div hidden aria-hidden="true">
+            <label for="websiteField">Website (leave blank)</label>
+            <input id="websiteField" name="websiteField" type="text" tabindex="-1" autocomplete="off" />
+          </div>
           <div class="form-row">
             <div class="form-group">
               <label for="fname">First Name</label>
